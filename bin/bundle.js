@@ -77,6 +77,10 @@ var config = {
     maxFrameOffset: 2,
     frameStep: 2
   },
+  WAIT: {
+    duration: 10,
+    spriteOrder: [1, 2]
+  },
   MOVE_TURN: {
     duration: 12,
     spriteOrder: [1, 2],
@@ -88,7 +92,7 @@ var config = {
     spriteOrder: [1, 2, 3, 4]
   },
   TIME_TRAVEL: {
-    duration: 6,
+    duration: 10,
     spriteOrder: [1, 2, 3, 4]
   },
   DIE: {
@@ -139,7 +143,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, agent) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../render/renderAgent":21,"../selectors/sprites":31,"../utils/vectors":82,"./makeEntity":7}],3:[function(require,module,exports){
+},{"../config":1,"../render/renderAgent":21,"../selectors/sprites":31,"../utils/vectors":83,"./makeEntity":7}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -193,7 +197,7 @@ var config = {
   width: 2,
   height: 2,
 
-  isHistorical: true,
+  // isHistorical: true,
 
   PRESS: {
     duration: 6,
@@ -204,7 +208,8 @@ var config = {
 var make = function make(game, position, doorID) {
   return _extends({}, makeEntity('BUTTON', position, config.width, config.height), config, {
     doorID: doorID,
-    isPressed: false
+    isPressed: false,
+    isStoodOn: false
   });
 };
 
@@ -333,6 +338,8 @@ module.exports = {
 },{"../config":1,"../selectors/sprites":31,"./makeEntity":7}],7:[function(require,module,exports){
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var makeEntity = function makeEntity(type, position, width, height) {
 	return {
 		id: -1, // NOTE: this is set by the reducer
@@ -344,8 +351,7 @@ var makeEntity = function makeEntity(type, position, width, height) {
 		theta: 0,
 		prevTheta: 0,
 
-		history: {},
-		reverseHistory: {}
+		history: [_extends({}, position)]
 	};
 };
 
@@ -442,7 +448,7 @@ function renderUI(store) {
     modal: state.modal
   }), document.getElementById('container'));
 }
-},{"./reducers/rootReducer":18,"./ui/Main.react":63,"react":118,"react-dom":115,"redux":119}],11:[function(require,module,exports){
+},{"./reducers/rootReducer":18,"./ui/Main.react":64,"react":119,"react-dom":116,"redux":120}],11:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":24},"width":25,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":22,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":1},"width":1,"height":14},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":22,"y":22},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":21},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":18},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":18},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":14},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":15},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":15},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":3},"width":1,"height":12},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":1},"width":1,"height":11},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":14},"width":1,"height":4}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":12},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":12},"width":1,"height":7},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":3},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":4},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":7},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":3},"width":1,"height":5},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":3},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":4},"width":2,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":3},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":4},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":5},"width":3,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":3},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":5},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":7},"width":4,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":3},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":9},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":12},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":13},"width":1,"height":6},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":19},"width":1,"height":3}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":21},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":13},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":15},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":3},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":9},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":6},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":1},"width":1,"height":1},"args":[2]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":7,"y":7},"width":1,"height":1},"args":[3]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":3},"width":1,"height":1},"args":[3,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":0},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":0},"width":1,"height":1},"args":[3,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":0},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":9,"y":0},"width":1,"height":1},"args":[1,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":9},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":9},"width":1,"height":1},"args":[2,"vertical"]}]};
 },{}],12:[function(require,module,exports){
 // @flow
@@ -480,7 +486,6 @@ var _require3 = require('../simulation/actionQueue'),
     makeAction = _require3.makeAction,
     isActionTypeQueued = _require3.isActionTypeQueued,
     isDoingAction = _require3.isDoingAction,
-    getNextActionInReverseHistory = _require3.getNextActionInReverseHistory,
     getDuration = _require3.getDuration;
 
 var _require4 = require('../utils/vectors'),
@@ -511,6 +516,9 @@ var _require9 = require('../entities/registry'),
     Entities = _require9.Entities;
 
 var globalConfig = require('../config');
+
+var _require10 = require('../thunks/reverseTimeThunks'),
+    doReverseTime = _require10.doReverseTime;
 
 var gameReducer = function gameReducer(game, action) {
   switch (action.type) {
@@ -575,40 +583,7 @@ var gameReducer = function gameReducer(game, action) {
       }
     case 'REVERSE_TIME':
       {
-        game.isTimeReversed = true;
-        game.numTimeReversals += 1;
-        if (game.controlledEntity != null) {
-          var nextPlayerChar = Entities.AGENT.make(game, _extends({}, game.controlledEntity.position));
-          nextPlayerChar.theta = game.controlledEntity.theta;
-
-          // the clear the action queues of all actors
-          for (var id in game.ACTOR) {
-            var actor = game.entities[id];
-            if (isDoingAction(game, actor) && actor.actions[0].type != 'TIME_TRAVEL') {
-              var actionToReverse = getNextActionInReverseHistory(game, actor);
-              var curAction = actor.actions[0];
-              actor.actions = [];
-              var proRatedAction = makeAction(game, actor, actionToReverse.type, actionToReverse.payload);
-              proRatedAction.duration = getDuration(game, actor, curAction.type) - curAction.duration;
-              queueAction(game, actor, proRatedAction);
-            } else {
-              actor.actions = [];
-            }
-          }
-
-          // add the time travel to the history
-          game.controlledEntity.history[game.time] = {
-            type: 'TIME_TRAVEL',
-            payload: { pos: null }
-          };
-          game.controlledEntity.reverseHistory[game.time + Entities.AGENT.config.TIME_TRAVEL.duration] = {
-            type: 'TIME_TRAVEL',
-            payload: { pos: _extends({}, game.controlledEntity.position) }
-          };
-
-          addEntity(game, nextPlayerChar);
-          game.controlledEntity = nextPlayerChar;
-        }
+        doReverseTime(game);
         return game;
       }
     case 'SET_PHEROMONE_VISIBILITY':
@@ -815,9 +790,9 @@ var gameReducer = function gameReducer(game, action) {
 
             try {
               for (var _iterator3 = ids[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                var _id = _step3.value;
+                var id = _step3.value;
 
-                var _entity4 = game.entities[_id];
+                var _entity4 = game.entities[id];
                 removeEntity(game, _entity4);
                 if (_entity4.notAnimated) {
                   game.viewImage.allStale = true;
@@ -948,7 +923,7 @@ function createEntitiesReducer(game, action) {
 }
 
 module.exports = { gameReducer: gameReducer };
-},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../simulation/pheromones":36,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],15:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../simulation/pheromones":36,"../thunks/reverseTimeThunks":46,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],15:[function(require,module,exports){
 'use strict';
 
 var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
@@ -1475,10 +1450,12 @@ function upgradeReducer(state, action) {
 }
 
 module.exports = { rootReducer: rootReducer };
-},{"../levels/levels":12,"../simulation/entityOperations":34,"../state/gameState":37,"../state/state":38,"../utils/helpers":78,"./gameReducer":14,"./hotKeysReducer":15,"./modalReducer":16,"./mouseReducer":17,"./tickReducer":19}],19:[function(require,module,exports){
+},{"../levels/levels":12,"../simulation/entityOperations":34,"../state/gameState":37,"../state/state":38,"../utils/helpers":79,"./gameReducer":14,"./hotKeysReducer":15,"./modalReducer":16,"./mouseReducer":17,"./tickReducer":19}],19:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+// const rotateEntity(game, entity, nextTheta);
 
 var _require = require('../simulation/pheromones'),
     fadeAllPheromones = _require.fadeAllPheromones,
@@ -1516,7 +1493,9 @@ var _require5 = require('../render/render'),
 var _require6 = require('../selectors/misc'),
     getPosBehind = _require6.getPosBehind,
     getPositionsInFront = _require6.getPositionsInFront,
-    onScreen = _require6.onScreen;
+    onScreen = _require6.onScreen,
+    canDoMove = _require6.canDoMove,
+    isFacing = _require6.isFacing;
 
 var _require7 = require('../utils/stochastic'),
     oneOf = _require7.oneOf;
@@ -1575,6 +1554,10 @@ var _require17 = require('../selectors/buildings'),
 var _require18 = require('../utils/slider'),
     slider = _require18.slider;
 
+var _require19 = require('../thunks/reverseTimeThunks'),
+    allAgentsDone = _require19.allAgentsDone,
+    doReverseTime = _require19.doReverseTime;
+
 var totalTime = 0;
 var tickReducer = function tickReducer(game, action) {
   switch (action.type) {
@@ -1620,8 +1603,10 @@ var doTick = function doTick(game) {
   } else {
     game.time -= 1;
   }
-  if (game.isTimeReversed && game.time == 1) {
+  if (game.isTimeReversed && (game.time == 1 || allAgentsDone(game))) {
     game.isTimeReversed = false;
+    game.actionIndex = 0;
+    game.time = 1;
     // close all doors and press all buttons only on the first time.
     // After the first time we expect the doors to be opened en route
     if (game.numTimeReversals == 1) {
@@ -1634,7 +1619,7 @@ var doTick = function doTick(game) {
           var id = _step.value;
 
           var button = game.entities[id];
-          queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: false, dontAdd: true }));
+          queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: false }));
         }
       } catch (err) {
         _didIteratorError = true;
@@ -1680,7 +1665,7 @@ var doTick = function doTick(game) {
         var _id2 = _step2.value;
 
         var _button = game.entities[_id2];
-        queueAction(game, _button, makeAction(game, _button, 'PRESS', { pressed: true, dontAdd: true }));
+        queueAction(game, _button, makeAction(game, _button, 'PRESS', { pressed: true }));
       }
 
       // set first agent to be the controlled entity
@@ -1733,9 +1718,9 @@ var doTick = function doTick(game) {
   game.timeSinceLastTick = 1;
 
   // these are the ECS "systems"
-  keepControlledMoving(game);
+  var doingMove = keepControlledMoving(game);
   updateButtons(game);
-  updateHistoricals(game);
+  updateHistoricals(game, doingMove);
   updateActors(game);
   updateAgents(game);
   updateTiledSprites(game);
@@ -1769,9 +1754,19 @@ var updateButtons = function updateButtons(game) {
       var button = game.entities[id];
       var collisions = collidesWith(game, button, ['AGENT']);
       if (collisions.length > 0) {
-        if (!isActionTypeQueued(game, button, 'PRESS') && !button.isPressed) {
-          queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: true }));
+        if (!game.isTimeReversed) {
+          if (!isActionTypeQueued(game, button, 'PRESS') && !button.isPressed) {
+            queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: true }));
+          }
+        } else {
+          button.isStoodOn = true;
         }
+      } else {
+        // unpress the button as the agent leaves it in reverse time
+        if (game.isTimeReversed && button.isStoodOn) {
+          queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: false }));
+        }
+        button.isStoodOn = false;
       }
     }
   } catch (err) {
@@ -1790,16 +1785,45 @@ var updateButtons = function updateButtons(game) {
   }
 };
 
-var updateHistoricals = function updateHistoricals(game) {
-  for (var id in game.HISTORICAL) {
-    var entity = game.entities[id];
-    var timedAction = entity.history[game.time];
-    if (game.isTimeReversed) {
-      timedAction = entity.reverseHistory[game.time];
-    }
-    if (timedAction == null) continue;
+// When going forward in time, have agents follow their histories whenever
+// the controlledEntity is doing a move
+var updateHistoricals = function updateHistoricals(game, doingMove) {
+  if (game.isTimeReversed) return;
 
-    queueAction(game, entity, makeAction(game, entity, timedAction.type, timedAction.payload));
+  // face next direction you'll move
+  if (!doingMove) {
+    for (var id in game.HISTORICAL) {
+      var entity = game.entities[id];
+      if (game.controlledEntity != null && game.controlledEntity.id == id) continue;
+      if (isActionTypeQueued(game, entity, 'MOVE')) continue;
+      var nextPos = entity.history[game.actionIndex + 1];
+      if (nextPos != null) {
+        if (!isFacing(game, entity, nextPos)) {
+          var nextTheta = vectorTheta(subtract(entity.position, nextPos));
+          rotateEntity(game, entity, nextTheta);
+        }
+      } else {
+        // TODO show preview of going back in time
+      }
+    }
+    return;
+  }
+
+  game.actionIndex++;
+
+  for (var _id3 in game.HISTORICAL) {
+    var _entity = game.entities[_id3];
+    if (game.controlledEntity != null && game.controlledEntity.id == _id3) continue;
+
+    var _nextPos = _entity.history[game.actionIndex];
+    if (_nextPos == null) {
+      // Time travel here
+      if (_entity.position != null) {
+        queueAction(game, _entity, makeAction(game, _entity, 'TIME_TRAVEL', { pos: _nextPos }));
+      }
+    } else {
+      queueAction(game, _entity, makeAction(game, _entity, 'MOVE', { nextPos: _nextPos }));
+    }
   }
 };
 
@@ -1834,8 +1858,8 @@ var updateActors = function updateActors(game) {
   // new entities can be added to the ACTOR queue inside of stepAction
   // (e.g. an explosive killing another explosive) and they need
   // to make it to the next time this function is called
-  for (var _id3 in notNextActors) {
-    delete game.ACTOR[_id3];
+  for (var _id4 in notNextActors) {
+    delete game.ACTOR[_id4];
   }
 };
 
@@ -1854,7 +1878,6 @@ var updateAgents = function updateAgents(game) {
         continue;
       }
       agent.age += game.timeSinceLastTick;
-      agent.timeOnTask += game.timeSinceLastTick;
       agent.prevHPAge += game.timeSinceLastTick;
 
       if (agent.actions.length == 0) {
@@ -1909,6 +1932,7 @@ var keepControlledMoving = function keepControlledMoving(game) {
     controlledEntity.timeOnMove = 0;
   }
 
+  var doingMove = false;
   if (!equals(moveDir, { x: 0, y: 0 }) && !isActionTypeQueued(game, controlledEntity, 'MOVE', true) && !isActionTypeQueued(game, controlledEntity, 'MOVE_TURN', true) && !isActionTypeQueued(game, controlledEntity, 'TURN') // enables turning in place
   ) {
       var nextPos = add(controlledEntity.position, moveDir);
@@ -1932,7 +1956,11 @@ var keepControlledMoving = function keepControlledMoving(game) {
       }
       controlledEntity.timeOnMove = 0;
       queueAction(game, controlledEntity, entityAction);
+      if (entityAction.type == 'MOVE' && canDoMove(game, controlledEntity, nextPos).result && !isActionTypeQueued(game, controlledEntity, 'TURN')) {
+        doingMove = true;
+      }
     }
+  return doingMove;
 };
 
 var updateViewPos = function updateViewPos(game, clampToGrid) {
@@ -2118,7 +2146,7 @@ var updateTicker = function updateTicker(game) {
 };
 
 module.exports = { tickReducer: tickReducer };
-},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/buildings":25,"../selectors/collisions":26,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../simulation/actionOperations":32,"../simulation/actionQueue.js":33,"../simulation/entityOperations":34,"../simulation/miscOperations":35,"../simulation/pheromones":36,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/slider":80,"../utils/stochastic":81,"../utils/vectors":82}],20:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/buildings":25,"../selectors/collisions":26,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../simulation/actionOperations":32,"../simulation/actionQueue.js":33,"../simulation/entityOperations":34,"../simulation/miscOperations":35,"../simulation/pheromones":36,"../thunks/reverseTimeThunks":46,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/slider":81,"../utils/stochastic":82,"../utils/vectors":83}],20:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2284,7 +2312,7 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
   // scale world to the canvas
   ctx.save();
   ctx.scale(pxWidth / viewWidth, pxHeight / viewHeight);
-  console.log(pxWidth, pxHeight, px, pxy);
+  // console.log(pxWidth, pxHeight, px, pxy);
   ctx.lineWidth = px;
   // translate to viewPos
   ctx.translate(-1 * viewPos.x, -1 * viewPos.y);
@@ -2391,8 +2419,14 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
         }
 
         if (!isLit && !neighborIsLit) {
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+          var opacity = 1;
+          if (game.grid[x][y].seenBefore) {
+            opacity = 0.8;
+          }
+          ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
           ctx.fillRect(x - px / 12, y - px / 12, 1 + px / 12, 1 + pxy / 12);
+        } else {
+          game.grid[x][y].seenBefore = true;
         }
       }
     }
@@ -2782,7 +2816,7 @@ var renderPheromones = function renderPheromones(ctx, game) {
 };
 
 module.exports = { render: render };
-},{"../config":1,"../entities/registry":8,"../selectors/misc":27,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82,"./renderMinimap":23}],21:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../selectors/misc":27,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83,"./renderMinimap":23}],21:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -2877,7 +2911,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82,"./renderHealthBar":22}],22:[function(require,module,exports){
+},{"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83,"./renderHealthBar":22}],22:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -2919,7 +2953,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":77,"../utils/vectors":82}],23:[function(require,module,exports){
+},{"../utils/gridHelpers":78,"../utils/vectors":83}],23:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3412,7 +3446,7 @@ var onMinimap = function onMinimap(dims, entity) {
 module.exports = {
   renderMinimap: renderMinimap
 };
-},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../utils/gridHelpers":77,"../utils/vectors":82,"./renderSegmented":24}],24:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../utils/gridHelpers":78,"../utils/vectors":83,"./renderSegmented":24}],24:[function(require,module,exports){
 'use strict';
 
 var _require = require('../selectors/sprites'),
@@ -3560,7 +3594,7 @@ module.exports = {
   renderSegmented: renderSegmented,
   renderWormCanvas: renderWormCanvas
 };
-},{"../selectors/misc":27,"../selectors/sprites":31,"../utils/vectors":82,"./renderHealthBar":22}],25:[function(require,module,exports){
+},{"../selectors/misc":27,"../selectors/sprites":31,"../utils/vectors":83,"./renderHealthBar":22}],25:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3661,7 +3695,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":77}],27:[function(require,module,exports){
+},{"../utils/gridHelpers":78}],27:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3862,7 +3896,7 @@ module.exports = {
   canDoMove: canDoMove,
   getControlledEntityInteraction: getControlledEntityInteraction
 };
-},{"../selectors/collisions":26,"../selectors/neighbors":29,"../simulation/actionQueue":33,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],28:[function(require,module,exports){
+},{"../selectors/collisions":26,"../selectors/neighbors":29,"../simulation/actionQueue":33,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],28:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3957,7 +3991,7 @@ module.exports = {
   isNeighboringColonyPher: isNeighboringColonyPher,
   isAboveSomething: isAboveSomething
 };
-},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],29:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],29:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -4224,7 +4258,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":26,"../utils/gridHelpers":77,"../utils/vectors":82}],30:[function(require,module,exports){
+},{"../selectors/collisions":26,"../utils/gridHelpers":78,"../utils/vectors":83}],30:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4451,7 +4485,7 @@ module.exports = {
   isPositionBlockingPheromone: isPositionBlockingPheromone,
   getAllPheromonesAtPosition: getAllPheromonesAtPosition
 };
-},{"../config":1,"../selectors/neighbors":29,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],31:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":29,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],31:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4807,8 +4841,10 @@ module.exports = {
   getBackgroundSprite: getBackgroundSprite,
   getMaxFrameOffset: getMaxFrameOffset
 };
-},{"../config":1,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],32:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],32:[function(require,module,exports){
 'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _require = require('../utils/vectors'),
     add = _require.add,
@@ -4862,26 +4898,11 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
   var curAction = entity.actions[0];
   curAction.effectDone = true;
 
-  var dontAdd = false;
-  if (curAction.payload.dontAdd) {
-    dontAdd = curAction.payload.dontAdd;
-  }
-  var wasSuccessful = true;
   switch (curAction.type) {
     case 'MOVE_TURN':
       // MOVE_TURN is turned off
       console.log("move turn");
       return;
-
-      if (entity.isHistorical && !game.isTimeReversed) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: {
-            nextPos: deepCopy(entity.position),
-            nextTheta: entity.theta
-          }
-        };
-      }
 
       if (!game.isTimeReversed) {
         if (!closeToTheta(entity.theta, curAction.payload.nextTheta)) {
@@ -4912,23 +4933,20 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
       }
 
       break;
+    case 'WAIT':
+      {
+        break;
+      }
     case 'MOVE':
       {
         if (equals(entity.position, curAction.payload.nextPos)) {
-          dontAdd = true;
           break;
         }
 
-        if (entity.isHistorical && !game.isTimeReversed) {
-          entity.reverseHistory[game.time + curAction.duration] = {
-            type: curAction.type,
-            payload: {
-              nextPos: deepCopy(entity.position)
-            }
-          };
+        var wasSuccessful = agentDoMove(game, entity, curAction.payload.nextPos);
+        if (wasSuccessful && entity.history.length <= game.actionIndex && !game.isTimeReversed) {
+          entity.history.push(_extends({}, curAction.payload.nextPos));
         }
-
-        wasSuccessful = agentDoMove(game, entity, curAction.payload.nextPos);
 
         var _getMaxFrameOffset3 = getMaxFrameOffset(entity),
             _maxFrameOffset2 = _getMaxFrameOffset3.maxFrameOffset,
@@ -4941,28 +4959,10 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
         break;
       }
     case 'TURN':
-      if (entity.isHistorical && !game.isTimeReversed) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: entity.theta
-        };
-        if (entity.theta == null) {
-          console.trace(game.isTimeReversed, entity.theta, entity);
-        }
-      }
-
       rotateEntity(game, entity, curAction.payload);
       break;
     case 'TIME_TRAVEL':
       {
-        if (entity.isHistorical && !game.isTimeReversed) {
-          entity.reverseHistory[game.time + curAction.duration] = {
-            type: curAction.type,
-            payload: {
-              pos: deepCopy(entity.position)
-            }
-          };
-        }
         if (curAction.payload.pos != null) {
           entity.position = curAction.payload.pos;
         }
@@ -4973,12 +4973,6 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
       entityDie(game, entity);
       break;
     case 'PRESS':
-      if (entity.isHistorical && !game.isTimeReversed && !dontAdd) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: { pressed: entity.isPressed }
-        };
-      }
       entity.isPressed = curAction.payload.pressed;
       // open corresponding doors
       var _iteratorNormalCompletion = true;
@@ -5017,14 +5011,6 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
 
       break;
   }
-
-  if (entity.isHistorical && !game.isTimeReversed && !dontAdd && entity.type != 'BUTTON') {
-    entity.history[game.time] = {
-      type: curAction.type,
-      payload: deepCopy(curAction.payload),
-      wasSuccessful: wasSuccessful
-    };
-  }
 };
 
 /**
@@ -5050,10 +5036,8 @@ var agentDoMove = function agentDoMove(game, entity, nextPos) {
 
   if (isMoveLegal.result == false && isMoveLegal.reason == 'BLOCKED') {
     if (game.controlledEntity == null || game.controlledEntity.id != entity.id) {
-      var curHistory = getCurrentHistoryEntry(game, entity);
-      if (curHistory != null && curHistory.wasSuccessful) {
-        console.log("TIME PARADOX");
-      }
+      console.log("TIME PARADOX FROM BLOCKED", entity.id);
+      entity.hitParadox = true;
     }
     cancelAction(game, entity);
     if (!isFacing(game, entity, nextPos)) {
@@ -5068,7 +5052,11 @@ var agentDoMove = function agentDoMove(game, entity, nextPos) {
   var thetaDiff = Math.abs(nextTheta - entity.theta) % (2 * Math.PI);
   if (!isFacing(game, entity, nextPos)) {
     // Rotating instantly now:
-    rotateEntity(game, entity, nextTheta);
+    if (!game.isTimeReversed) {
+      rotateEntity(game, entity, nextTheta);
+    } else {
+      rotateEntity(game, entity, nextTheta + Math.PI);
+    }
     // if (game.controlledEntity && game.controlledEntity.id == entity.id) {
     //   // enables turning in place off a single button press
     //   cancelAction(game, entity);
@@ -5100,7 +5088,7 @@ var entityDie = function entityDie(game, entity) {
 module.exports = {
   entityStartCurrentAction: entityStartCurrentAction
 };
-},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../utils/helpers":78,"../utils/vectors":82}],33:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../utils/helpers":79,"../utils/vectors":83}],33:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5139,10 +5127,10 @@ var cancelAction = function cancelAction(game, entity) {
       break;
   }
 
-  if (!game.isTimeReversed) {
-    delete entity.history[game.time];
-    delete entity.reverseHistory[game.time + curAction.duration];
-  }
+  // if (!game.isTimeReversed) {
+  //   delete entity.history[game.time];
+  //   delete entity.reverseHistory[game.time + curAction.duration];
+  // }
 
   entity.actions.shift();
 };
@@ -5340,20 +5328,6 @@ var isDoingAction = function isDoingAction(game, entity) {
   // return curAction.duration < getDuration(game, entity, curAction.type)
 };
 
-var getNextActionInReverseHistory = function getNextActionInReverseHistory(game, entity) {
-  for (var timeStamp in entity.reverseHistory) {
-    if (timeStamp <= game.time) continue;
-    return entity.reverseHistory[timeStamp];
-  }
-};
-
-var getCurrentHistoryEntry = function getCurrentHistoryEntry(game, entity) {
-  var timeStamp = game.time;
-  for (var _timeStamp = game.time; entity.history[_timeStamp] == null && _timeStamp > 0; _timeStamp--) {}
-
-  return entity.history[timeStamp];
-};
-
 module.exports = {
   cancelAction: cancelAction,
   stackAction: stackAction,
@@ -5362,11 +5336,9 @@ module.exports = {
   getDuration: getDuration,
   makeAction: makeAction,
   getFrame: getFrame,
-  isDoingAction: isDoingAction,
-  getNextActionInReverseHistory: getNextActionInReverseHistory,
-  getCurrentHistoryEntry: getCurrentHistoryEntry
+  isDoingAction: isDoingAction
 };
-},{"../selectors/pheromones":30,"../utils/helpers":78,"../utils/vectors":82}],34:[function(require,module,exports){
+},{"../selectors/pheromones":30,"../utils/helpers":79,"../utils/vectors":83}],34:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5800,7 +5772,10 @@ var moveEntity = function moveEntity(game, entity, nextPos) {
     entity.prevPosition = _extends({}, entity.contPos);
   }
 
-  removeEntityFromGrid(game, entity);
+  if (entity.position != null) {
+    removeEntityFromGrid(game, entity);
+  }
+
   if (nextPos == null) {
     entity.position = null;
     return game;
@@ -6037,7 +6012,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/pheromones":36,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],35:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/pheromones":36,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],35:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -6436,7 +6411,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],37:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],37:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/makeEntity'),
@@ -6511,6 +6486,8 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
       LIGHT: false
     },
     maxMinimap: false,
+
+    // fog
     showFog: true,
 
     sprites: {},
@@ -6581,7 +6558,8 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 
     // time travel-specific properties
     isTimeReversed: false,
-    numTimeReversals: 0
+    numTimeReversals: 0,
+    actionIndex: 0
   };
 
   // lookup for entityIDs by entityType
@@ -6597,7 +6575,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 };
 
 module.exports = { initBaseState: initBaseState, initPlayer: initPlayer };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../simulation/entityOperations":34,"../utils/gridHelpers":77,"../utils/stochastic":81,"../utils/vectors":82}],38:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../simulation/entityOperations":34,"../utils/gridHelpers":78,"../utils/stochastic":82,"../utils/vectors":83}],38:[function(require,module,exports){
 'use strict';
 
 var initState = function initState() {
@@ -6787,7 +6765,7 @@ var handleGameWon = function handleGameWon(store, dispatch, state, reason) {
 };
 
 module.exports = { initGameOverSystem: initGameOverSystem };
-},{"../render/render":20,"../ui/components/Button.react":67,"../ui/components/Divider.react":69,"../ui/components/Modal.react":72,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82,"axios":83,"react":118}],40:[function(require,module,exports){
+},{"../render/render":20,"../ui/components/Button.react":68,"../ui/components/Divider.react":70,"../ui/components/Modal.react":73,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83,"axios":84,"react":119}],40:[function(require,module,exports){
 'use strict';
 
 var initKeyboardControlsSystem = function initKeyboardControlsSystem(store) {
@@ -7155,7 +7133,7 @@ var getMousePixel = function getMousePixel(ev, canvas) {
 };
 
 module.exports = { initMouseControlsSystem: initMouseControlsSystem };
-},{"../config":1,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],42:[function(require,module,exports){
+},{"../config":1,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],42:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -7248,7 +7226,7 @@ var initPheromoneWorkerSystem = function initPheromoneWorkerSystem(store) {
 };
 
 module.exports = { initPheromoneWorkerSystem: initPheromoneWorkerSystem };
-},{"../entities/registry":8,"../utils/helpers":78,"../utils/vectors":82}],43:[function(require,module,exports){
+},{"../entities/registry":8,"../utils/helpers":79,"../utils/vectors":83}],43:[function(require,module,exports){
 'use strict';
 
 var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
@@ -7322,7 +7300,7 @@ function loadLevel(store, levelName, additionalUpgrades) {
 module.exports = {
   loadLevel: loadLevel
 };
-},{"../levels/levels":12,"../utils/proceduralLevel":79}],45:[function(require,module,exports){
+},{"../levels/levels":12,"../utils/proceduralLevel":80}],45:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -7452,7 +7430,79 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 };
 
 module.exports = { handleCollect: handleCollect, handlePlace: handlePlace };
-},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82}],46:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83}],46:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _require = require('../entities/registry'),
+    Entities = _require.Entities;
+
+var _require2 = require('../simulation/actionQueue'),
+    queueAction = _require2.queueAction,
+    makeAction = _require2.makeAction,
+    isActionTypeQueued = _require2.isActionTypeQueued;
+
+var _require3 = require('../simulation/entityOperations'),
+    addEntity = _require3.addEntity,
+    removeEntity = _require3.removeEntity;
+
+var doReverseTime = function doReverseTime(game) {
+  game.isTimeReversed = true;
+  game.numTimeReversals += 1;
+  game.actionIndex -= 1;
+
+  // create the new controlled entity
+  if (game.controlledEntity != null) {
+    var nextPlayerChar = Entities.AGENT.make(game, _extends({}, game.controlledEntity.position));
+    nextPlayerChar.theta = game.controlledEntity.theta;
+    addEntity(game, nextPlayerChar);
+    game.controlledEntity = nextPlayerChar;
+  }
+
+  // for each other agent, update its history reversals
+  for (var id in game.HISTORICAL) {
+    var entity = game.entities[id];
+    if (game.controlledEntity != null && game.controlledEntity.id == id) continue;
+
+    var didTimeTravel = false;
+    for (var i = game.actionIndex; i >= 0; i--) {
+      var nextPos = entity.history[i];
+
+      if (nextPos == null) {
+        queueAction(game, entity, makeAction(game, entity, 'WAIT', {}));
+        continue;
+      }
+
+      if (entity.position == null && !didTimeTravel) {
+        didTimeTravel = true;
+        queueAction(game, entity, makeAction(game, entity, 'TIME_TRAVEL', { pos: nextPos }));
+      }
+
+      queueAction(game, entity, makeAction(game, entity, 'MOVE', { nextPos: nextPos }));
+    }
+  }
+};
+
+var allAgentsDone = function allAgentsDone(game) {
+  for (var id in game.HISTORICAL) {
+    var entity = game.entities[id];
+    if (game.controlledEntity != null && game.controlledEntity.id == id) {
+      continue;
+    }
+
+    if (entity.actions.length > 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
+module.exports = {
+  doReverseTime: doReverseTime,
+  allAgentsDone: allAgentsDone
+};
+},{"../entities/registry":8,"../simulation/actionQueue":33,"../simulation/entityOperations":34}],47:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -7485,7 +7535,7 @@ var BottomBar = function BottomBar(props) {
 };
 
 module.exports = BottomBar;
-},{"./InfoHUD.react":60,"react":118}],47:[function(require,module,exports){
+},{"./InfoHUD.react":61,"react":119}],48:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -7624,7 +7674,7 @@ function withPropsChecker(WrappedComponent) {
 }
 
 module.exports = React.memo(Canvas);
-},{"../config":1,"react":118}],48:[function(require,module,exports){
+},{"../config":1,"react":119}],49:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -7712,7 +7762,7 @@ var AudioWidget = function AudioWidget(props) {
 };
 
 module.exports = AudioWidget;
-},{"./Button.react":49,"react":118}],49:[function(require,module,exports){
+},{"./Button.react":50,"react":119}],50:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7796,7 +7846,7 @@ function Button(props) {
 }
 
 module.exports = Button;
-},{"react":118}],50:[function(require,module,exports){
+},{"react":119}],51:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -7836,7 +7886,7 @@ function Checkbox(props) {
 }
 
 module.exports = Checkbox;
-},{"react":118}],51:[function(require,module,exports){
+},{"react":119}],52:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7856,7 +7906,7 @@ function Divider(props) {
 }
 
 module.exports = Divider;
-},{"react":118}],52:[function(require,module,exports){
+},{"react":119}],53:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -7897,7 +7947,7 @@ var Dropdown = function Dropdown(props) {
 };
 
 module.exports = Dropdown;
-},{"react":118}],53:[function(require,module,exports){
+},{"react":119}],54:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7927,7 +7977,7 @@ var InfoCard = function InfoCard(props) {
 };
 
 module.exports = InfoCard;
-},{"react":118}],54:[function(require,module,exports){
+},{"react":119}],55:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8001,7 +8051,7 @@ function Modal(props) {
 }
 
 module.exports = Modal;
-},{"../../utils/helpers":78,"./Button.react":49,"react":118}],55:[function(require,module,exports){
+},{"../../utils/helpers":79,"./Button.react":50,"react":119}],56:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8091,7 +8141,7 @@ var submitValue = function submitValue(onChange, nextVal, onlyInt) {
 };
 
 module.exports = NumberField;
-},{"react":118}],56:[function(require,module,exports){
+},{"react":119}],57:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -8180,7 +8230,7 @@ var RadioPicker = function (_React$Component) {
 }(React.Component);
 
 module.exports = RadioPicker;
-},{"react":118}],57:[function(require,module,exports){
+},{"react":119}],58:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8251,7 +8301,7 @@ function Slider(props) {
 }
 
 module.exports = Slider;
-},{"./NumberField.react":55,"react":118}],58:[function(require,module,exports){
+},{"./NumberField.react":56,"react":119}],59:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8430,7 +8480,7 @@ function ExperimentalSidebar(props) {
 }
 
 module.exports = ExperimentalSidebar;
-},{"./Components/Button.react":49,"./Components/Checkbox.react":50,"./Components/Divider.react":51,"./Components/Dropdown.react":52,"./Components/Slider.react":57,"react":118}],59:[function(require,module,exports){
+},{"./Components/Button.react":50,"./Components/Checkbox.react":51,"./Components/Divider.react":52,"./Components/Dropdown.react":53,"./Components/Slider.react":58,"react":119}],60:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8768,7 +8818,7 @@ function MiniTicker(props) {
 }
 
 module.exports = Game;
-},{"../config":1,"../render/render":20,"../selectors/misc":27,"../simulation/actionQueue":33,"../systems/gameOverSystem":39,"../systems/keyboardControlsSystem":40,"../systems/mouseControlsSystem":41,"../systems/pheromoneWorkerSystem":42,"../systems/spriteSheetSystem":43,"../thunks/mouseInteractions":45,"../utils/gridHelpers":77,"../utils/helpers":78,"../utils/vectors":82,"./BottomBar.react":46,"./Canvas.react":47,"./Components/Button.react":49,"./Components/Checkbox.react":50,"./Components/RadioPicker.react":56,"./ExperimentalSidebar.react":58,"./TopBar.react":65,"react":118}],60:[function(require,module,exports){
+},{"../config":1,"../render/render":20,"../selectors/misc":27,"../simulation/actionQueue":33,"../systems/gameOverSystem":39,"../systems/keyboardControlsSystem":40,"../systems/mouseControlsSystem":41,"../systems/pheromoneWorkerSystem":42,"../systems/spriteSheetSystem":43,"../thunks/mouseInteractions":45,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":83,"./BottomBar.react":47,"./Canvas.react":48,"./Components/Button.react":50,"./Components/Checkbox.react":51,"./Components/RadioPicker.react":57,"./ExperimentalSidebar.react":59,"./TopBar.react":66,"react":119}],61:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -9062,7 +9112,7 @@ var EntityInfoCard = function EntityInfoCard(props) {
 };
 
 module.exports = InfoHUD;
-},{"../config":1,"../entities/registry":8,"../selectors/pheromones":30,"../ui/components/InfoCard.react":71,"../utils/gridHelpers":77,"../utils/helpers":78,"react":118}],61:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../selectors/pheromones":30,"../ui/components/InfoCard.react":72,"../utils/gridHelpers":78,"../utils/helpers":79,"react":119}],62:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -9934,7 +9984,7 @@ function createEntityOptions(game, editor, setEditor) {
 }
 
 module.exports = LevelEditor;
-},{"../config":1,"../entities/registry":8,"../render/render":20,"../systems/mouseControlsSystem":41,"../utils/vectors":82,"./components/Button.react":67,"./components/Checkbox.react":68,"./components/Divider.react":69,"./components/Dropdown.react":70,"./components/NumberField.react":73,"./components/Slider.react":75,"react":118}],62:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":20,"../systems/mouseControlsSystem":41,"../utils/vectors":83,"./components/Button.react":68,"./components/Checkbox.react":69,"./components/Divider.react":70,"./components/Dropdown.react":71,"./components/NumberField.react":74,"./components/Slider.react":76,"react":119}],63:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10265,7 +10315,7 @@ function MadeBy(props) {
 function LevelEditor(props) {
   var dispatch = props.dispatch;
 
-  var _useState17 = useState('testLevel'),
+  var _useState17 = useState('adaptedLevel'),
       _useState18 = _slicedToArray(_useState17, 2),
       level = _useState18[0],
       setLevel = _useState18[1];
@@ -10356,7 +10406,7 @@ function playLevel(store, levelName, setLoadingProgress, setIsLoaded) {
 }
 
 module.exports = Lobby;
-},{"../config":1,"../levels/levels":12,"../systems/spriteSheetSystem":43,"../thunks/levelThunks":44,"../ui/components/Modal.react":72,"../ui/components/QuitButton.react":74,"../utils/helpers":78,"./components/AudioWidget.react":66,"./components/Button.react":67,"./components/Checkbox.react":68,"./components/Divider.react":69,"./components/Dropdown.react":70,"axios":83,"react":118}],63:[function(require,module,exports){
+},{"../config":1,"../levels/levels":12,"../systems/spriteSheetSystem":43,"../thunks/levelThunks":44,"../ui/components/Modal.react":73,"../ui/components/QuitButton.react":75,"../utils/helpers":79,"./components/AudioWidget.react":67,"./components/Button.react":68,"./components/Checkbox.react":69,"./components/Divider.react":70,"./components/Dropdown.react":71,"axios":84,"react":119}],64:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10406,7 +10456,7 @@ function Main(props) {
 }
 
 module.exports = Main;
-},{"./Game.react":59,"./LevelEditor.react":61,"./Lobby.react":62,"react":118}],64:[function(require,module,exports){
+},{"./Game.react":60,"./LevelEditor.react":62,"./Lobby.react":63,"react":119}],65:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10900,7 +10950,7 @@ function Resource(props) {
 }
 
 module.exports = PlacementPalette;
-},{"../config":1,"../entities/registry":8,"../selectors/buildings":25,"../ui/Components/InfoCard.react":53,"react":118}],65:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../selectors/buildings":25,"../ui/Components/InfoCard.react":54,"react":119}],66:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11183,23 +11233,23 @@ function dismissModal(dispatch) {
 }
 
 module.exports = TopBar;
-},{"../config":1,"../entities/registry":8,"../ui/PlacementPalette.react":64,"../ui/components/InfoCard.react":71,"../ui/components/QuitButton.react":74,"../utils/helpers":78,"./Components/AudioWidget.react":48,"./Components/Button.react":49,"./Components/Divider.react":51,"./Components/Modal.react":54,"react":118}],66:[function(require,module,exports){
-arguments[4][48][0].apply(exports,arguments)
-},{"./Button.react":67,"dup":48,"react":118}],67:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../ui/PlacementPalette.react":65,"../ui/components/InfoCard.react":72,"../ui/components/QuitButton.react":75,"../utils/helpers":79,"./Components/AudioWidget.react":49,"./Components/Button.react":50,"./Components/Divider.react":52,"./Components/Modal.react":55,"react":119}],67:[function(require,module,exports){
 arguments[4][49][0].apply(exports,arguments)
-},{"dup":49,"react":118}],68:[function(require,module,exports){
+},{"./Button.react":68,"dup":49,"react":119}],68:[function(require,module,exports){
 arguments[4][50][0].apply(exports,arguments)
-},{"dup":50,"react":118}],69:[function(require,module,exports){
+},{"dup":50,"react":119}],69:[function(require,module,exports){
 arguments[4][51][0].apply(exports,arguments)
-},{"dup":51,"react":118}],70:[function(require,module,exports){
+},{"dup":51,"react":119}],70:[function(require,module,exports){
 arguments[4][52][0].apply(exports,arguments)
-},{"dup":52,"react":118}],71:[function(require,module,exports){
+},{"dup":52,"react":119}],71:[function(require,module,exports){
 arguments[4][53][0].apply(exports,arguments)
-},{"dup":53,"react":118}],72:[function(require,module,exports){
+},{"dup":53,"react":119}],72:[function(require,module,exports){
 arguments[4][54][0].apply(exports,arguments)
-},{"../../utils/helpers":78,"./Button.react":67,"dup":54,"react":118}],73:[function(require,module,exports){
+},{"dup":54,"react":119}],73:[function(require,module,exports){
 arguments[4][55][0].apply(exports,arguments)
-},{"dup":55,"react":118}],74:[function(require,module,exports){
+},{"../../utils/helpers":79,"./Button.react":68,"dup":55,"react":119}],74:[function(require,module,exports){
+arguments[4][56][0].apply(exports,arguments)
+},{"dup":56,"react":119}],75:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11288,11 +11338,11 @@ var quitGameModal = function quitGameModal(dispatch) {
 };
 
 module.exports = QuitButton;
-},{"../../utils/helpers":78,"./Button.react":67,"./Modal.react":72,"react":118}],75:[function(require,module,exports){
-arguments[4][57][0].apply(exports,arguments)
-},{"./NumberField.react":73,"dup":57,"react":118}],76:[function(require,module,exports){
-arguments[4][57][0].apply(exports,arguments)
-},{"./NumberField.react":73,"dup":57,"react":118}],77:[function(require,module,exports){
+},{"../../utils/helpers":79,"./Button.react":68,"./Modal.react":73,"react":119}],76:[function(require,module,exports){
+arguments[4][58][0].apply(exports,arguments)
+},{"./NumberField.react":74,"dup":58,"react":119}],77:[function(require,module,exports){
+arguments[4][58][0].apply(exports,arguments)
+},{"./NumberField.react":74,"dup":58,"react":119}],78:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -11316,7 +11366,8 @@ var initGrid = function initGrid(gridWidth, gridHeight, numPlayers) {
     var col = [];
     for (var y = 0; y < gridHeight; y++) {
       var cell = {
-        entities: []
+        entities: [],
+        seenBefore: false
       };
       col.push(cell);
     }
@@ -11419,7 +11470,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":78,"../utils/vectors":82}],78:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":79,"../utils/vectors":83}],79:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -11589,7 +11640,7 @@ module.exports = {
   isElectron: isElectron,
   deepCopy: deepCopy
 };
-},{"./vectors":82}],79:[function(require,module,exports){
+},{"./vectors":83}],80:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -11714,7 +11765,7 @@ var clearOutPocket = function clearOutPocket(level, rect) {
 };
 
 module.exports = { getProceduralLevel: getProceduralLevel };
-},{"../config":1,"../utils/stochastic":81}],80:[function(require,module,exports){
+},{"../config":1,"../utils/stochastic":82}],81:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11791,7 +11842,7 @@ var slider = function slider(value, props) {
 window.values = allValues;
 
 module.exports = { slider: slider };
-},{"../ui/components/slider.react":76,"react":118,"react-dom":115}],81:[function(require,module,exports){
+},{"../ui/components/slider.react":77,"react":119,"react-dom":116}],82:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -11846,7 +11897,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -11891,6 +11942,8 @@ var add = function add() {
 };
 
 var equals = function equals(a, b) {
+  if (a == null && b == null) return true;
+  if (a == null || b == null) return false;
   return a.x == b.x && a.y == b.y;
 };
 
@@ -12053,9 +12106,9 @@ module.exports = {
   abs: abs,
   clampMagnitude: clampMagnitude
 };
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":85}],84:[function(require,module,exports){
+},{"./lib/axios":86}],85:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12236,7 +12289,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../core/buildFullPath":91,"../core/createError":92,"./../core/settle":96,"./../helpers/buildURL":100,"./../helpers/cookies":102,"./../helpers/isURLSameOrigin":105,"./../helpers/parseHeaders":107,"./../utils":109}],85:[function(require,module,exports){
+},{"../core/buildFullPath":92,"../core/createError":93,"./../core/settle":97,"./../helpers/buildURL":101,"./../helpers/cookies":103,"./../helpers/isURLSameOrigin":106,"./../helpers/parseHeaders":108,"./../utils":110}],86:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -12294,7 +12347,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":86,"./cancel/CancelToken":87,"./cancel/isCancel":88,"./core/Axios":89,"./core/mergeConfig":95,"./defaults":98,"./helpers/bind":99,"./helpers/isAxiosError":104,"./helpers/spread":108,"./utils":109}],86:[function(require,module,exports){
+},{"./cancel/Cancel":87,"./cancel/CancelToken":88,"./cancel/isCancel":89,"./core/Axios":90,"./core/mergeConfig":96,"./defaults":99,"./helpers/bind":100,"./helpers/isAxiosError":105,"./helpers/spread":109,"./utils":110}],87:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12315,7 +12368,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -12374,14 +12427,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":86}],88:[function(require,module,exports){
+},{"./Cancel":87}],89:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12478,7 +12531,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":100,"./../utils":109,"./InterceptorManager":90,"./dispatchRequest":93,"./mergeConfig":95}],90:[function(require,module,exports){
+},{"../helpers/buildURL":101,"./../utils":110,"./InterceptorManager":91,"./dispatchRequest":94,"./mergeConfig":96}],91:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12532,7 +12585,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":109}],91:[function(require,module,exports){
+},{"./../utils":110}],92:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -12554,7 +12607,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":101,"../helpers/isAbsoluteURL":103}],92:[function(require,module,exports){
+},{"../helpers/combineURLs":102,"../helpers/isAbsoluteURL":104}],93:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -12574,7 +12627,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":94}],93:[function(require,module,exports){
+},{"./enhanceError":95}],94:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12655,7 +12708,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":88,"../defaults":98,"./../utils":109,"./transformData":97}],94:[function(require,module,exports){
+},{"../cancel/isCancel":89,"../defaults":99,"./../utils":110,"./transformData":98}],95:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12699,7 +12752,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],95:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -12788,7 +12841,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":109}],96:[function(require,module,exports){
+},{"../utils":110}],97:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -12815,7 +12868,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":92}],97:[function(require,module,exports){
+},{"./createError":93}],98:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12837,7 +12890,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":109}],98:[function(require,module,exports){
+},{"./../utils":110}],99:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -12939,7 +12992,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this)}).call(this,require('_process'))
-},{"./adapters/http":84,"./adapters/xhr":84,"./helpers/normalizeHeaderName":106,"./utils":109,"_process":128}],99:[function(require,module,exports){
+},{"./adapters/http":85,"./adapters/xhr":85,"./helpers/normalizeHeaderName":107,"./utils":110,"_process":129}],100:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -12952,7 +13005,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],100:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13024,7 +13077,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":109}],101:[function(require,module,exports){
+},{"./../utils":110}],102:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13040,7 +13093,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13095,7 +13148,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":109}],103:[function(require,module,exports){
+},{"./../utils":110}],104:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13111,7 +13164,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],104:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13124,7 +13177,7 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],105:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13194,7 +13247,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":109}],106:[function(require,module,exports){
+},{"./../utils":110}],107:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -13208,7 +13261,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":109}],107:[function(require,module,exports){
+},{"../utils":110}],108:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13263,7 +13316,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":109}],108:[function(require,module,exports){
+},{"./../utils":110}],109:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13292,7 +13345,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],109:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -13645,7 +13698,7 @@ module.exports = {
   stripBOM: stripBOM
 };
 
-},{"./helpers/bind":99}],110:[function(require,module,exports){
+},{"./helpers/bind":100}],111:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -13737,7 +13790,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],111:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13843,7 +13896,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this)}).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":112,"_process":128}],112:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":113,"_process":129}],113:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -13857,7 +13910,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],113:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.14.0
  * react-dom.development.js
@@ -38873,7 +38926,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"object-assign":110,"prop-types/checkPropTypes":111,"react":118,"scheduler":124,"scheduler/tracing":125}],114:[function(require,module,exports){
+},{"_process":129,"object-assign":111,"prop-types/checkPropTypes":112,"react":119,"scheduler":125,"scheduler/tracing":126}],115:[function(require,module,exports){
 /** @license React v16.14.0
  * react-dom.production.min.js
  *
@@ -39167,7 +39220,7 @@ exports.flushSync=function(a,b){if((W&(fj|gj))!==V)throw Error(u(187));var c=W;W
 exports.unmountComponentAtNode=function(a){if(!gk(a))throw Error(u(40));return a._reactRootContainer?(Nj(function(){ik(null,null,a,!1,function(){a._reactRootContainer=null;a[Od]=null})}),!0):!1};exports.unstable_batchedUpdates=Mj;exports.unstable_createPortal=function(a,b){return kk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.14.0";
 
-},{"object-assign":110,"react":118,"scheduler":124}],115:[function(require,module,exports){
+},{"object-assign":111,"react":119,"scheduler":125}],116:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -39209,7 +39262,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":113,"./cjs/react-dom.production.min.js":114,"_process":128}],116:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":114,"./cjs/react-dom.production.min.js":115,"_process":129}],117:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.14.0
  * react.development.js
@@ -41125,7 +41178,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"object-assign":110,"prop-types/checkPropTypes":111}],117:[function(require,module,exports){
+},{"_process":129,"object-assign":111,"prop-types/checkPropTypes":112}],118:[function(require,module,exports){
 /** @license React v16.14.0
  * react.production.min.js
  *
@@ -41152,7 +41205,7 @@ key:d,ref:g,props:e,_owner:k}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:A,_ctor:a,_status:-1,_result:null}};exports.memo=function(a,b){return{$$typeof:z,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return Z().useCallback(a,b)};exports.useContext=function(a,b){return Z().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return Z().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return Z().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.14.0";
 
-},{"object-assign":110}],118:[function(require,module,exports){
+},{"object-assign":111}],119:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -41163,7 +41216,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":116,"./cjs/react.production.min.js":117,"_process":128}],119:[function(require,module,exports){
+},{"./cjs/react.development.js":117,"./cjs/react.production.min.js":118,"_process":129}],120:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -41841,7 +41894,7 @@ exports.compose = compose;
 exports.createStore = createStore;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"symbol-observable":126}],120:[function(require,module,exports){
+},{"_process":129,"symbol-observable":127}],121:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.19.1
  * scheduler-tracing.development.js
@@ -42194,7 +42247,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128}],121:[function(require,module,exports){
+},{"_process":129}],122:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler-tracing.production.min.js
  *
@@ -42206,7 +42259,7 @@ exports.unstable_wrap = unstable_wrap;
 
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.19.1
  * scheduler.development.js
@@ -43068,7 +43121,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128}],123:[function(require,module,exports){
+},{"_process":129}],124:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
@@ -43091,7 +43144,7 @@ exports.unstable_getCurrentPriorityLevel=function(){return R};exports.unstable_g
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();if("object"===typeof c&&null!==c){var e=c.delay;e="number"===typeof e&&0<e?d+e:d;c="number"===typeof c.timeout?c.timeout:Y(a)}else c=Y(a),e=d;c=e+c;a={id:P++,callback:b,priorityLevel:a,startTime:e,expirationTime:c,sortIndex:-1};e>d?(a.sortIndex=e,J(O,a),null===L(N)&&a===L(O)&&(U?h():U=!0,g(W,e-d))):(a.sortIndex=c,J(N,a),T||S||(T=!0,f(X)));return a};
 exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=L(N);return b!==Q&&null!==Q&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<Q.expirationTime||k()};exports.unstable_wrapCallback=function(a){var b=R;return function(){var c=R;R=b;try{return a.apply(this,arguments)}finally{R=c}}};
 
-},{}],124:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43102,7 +43155,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":122,"./cjs/scheduler.production.min.js":123,"_process":128}],125:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":123,"./cjs/scheduler.production.min.js":124,"_process":129}],126:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43113,7 +43166,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":120,"./cjs/scheduler-tracing.production.min.js":121,"_process":128}],126:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":121,"./cjs/scheduler-tracing.production.min.js":122,"_process":129}],127:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -43145,7 +43198,7 @@ if (typeof self !== 'undefined') {
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ponyfill.js":127}],127:[function(require,module,exports){
+},{"./ponyfill.js":128}],128:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43169,7 +43222,7 @@ function symbolObservablePonyfill(root) {
 
 	return result;
 };
-},{}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

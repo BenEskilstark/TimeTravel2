@@ -10,7 +10,7 @@ const config = {
   width: 2,
   height: 2,
 
-  isHistorical: true,
+  // isHistorical: true,
 
   PRESS: {
     duration: 6,
@@ -22,12 +22,13 @@ const make = (
   game: Game,
   position: Vector,
   doorID: number,
-): Stone => {
+): Button => {
 	return {
     ...makeEntity('BUTTON', position, config.width, config.height),
     ...config,
     doorID,
     isPressed: false,
+    isStoodOn: false,
   };
 };
 

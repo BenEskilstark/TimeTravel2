@@ -21,8 +21,7 @@ const makeEntity = (
 		theta: 0,
     prevTheta: 0,
 
-    history: {},
-    reverseHistory: {},
+    history: [{...position}],
 	};
 };
 

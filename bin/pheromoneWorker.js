@@ -77,6 +77,10 @@ var config = {
     maxFrameOffset: 2,
     frameStep: 2
   },
+  WAIT: {
+    duration: 10,
+    spriteOrder: [1, 2]
+  },
   MOVE_TURN: {
     duration: 12,
     spriteOrder: [1, 2],
@@ -88,7 +92,7 @@ var config = {
     spriteOrder: [1, 2, 3, 4]
   },
   TIME_TRAVEL: {
-    duration: 6,
+    duration: 10,
     spriteOrder: [1, 2, 3, 4]
   },
   DIE: {
@@ -193,7 +197,7 @@ var config = {
   width: 2,
   height: 2,
 
-  isHistorical: true,
+  // isHistorical: true,
 
   PRESS: {
     duration: 6,
@@ -204,7 +208,8 @@ var config = {
 var make = function make(game, position, doorID) {
   return _extends({}, makeEntity('BUTTON', position, config.width, config.height), config, {
     doorID: doorID,
-    isPressed: false
+    isPressed: false,
+    isStoodOn: false
   });
 };
 
@@ -333,6 +338,8 @@ module.exports = {
 },{"../config":1,"../selectors/sprites":17,"./makeEntity":7}],7:[function(require,module,exports){
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var makeEntity = function makeEntity(type, position, width, height) {
 	return {
 		id: -1, // NOTE: this is set by the reducer
@@ -344,8 +351,7 @@ var makeEntity = function makeEntity(type, position, width, height) {
 		theta: 0,
 		prevTheta: 0,
 
-		history: {},
-		reverseHistory: {}
+		history: [_extends({}, position)]
 	};
 };
 
@@ -2585,10 +2591,10 @@ var cancelAction = function cancelAction(game, entity) {
       break;
   }
 
-  if (!game.isTimeReversed) {
-    delete entity.history[game.time];
-    delete entity.reverseHistory[game.time + curAction.duration];
-  }
+  // if (!game.isTimeReversed) {
+  //   delete entity.history[game.time];
+  //   delete entity.reverseHistory[game.time + curAction.duration];
+  // }
 
   entity.actions.shift();
 };
@@ -2786,20 +2792,6 @@ var isDoingAction = function isDoingAction(game, entity) {
   // return curAction.duration < getDuration(game, entity, curAction.type)
 };
 
-var getNextActionInReverseHistory = function getNextActionInReverseHistory(game, entity) {
-  for (var timeStamp in entity.reverseHistory) {
-    if (timeStamp <= game.time) continue;
-    return entity.reverseHistory[timeStamp];
-  }
-};
-
-var getCurrentHistoryEntry = function getCurrentHistoryEntry(game, entity) {
-  var timeStamp = game.time;
-  for (var _timeStamp = game.time; entity.history[_timeStamp] == null && _timeStamp > 0; _timeStamp--) {}
-
-  return entity.history[timeStamp];
-};
-
 module.exports = {
   cancelAction: cancelAction,
   stackAction: stackAction,
@@ -2808,9 +2800,7 @@ module.exports = {
   getDuration: getDuration,
   makeAction: makeAction,
   getFrame: getFrame,
-  isDoingAction: isDoingAction,
-  getNextActionInReverseHistory: getNextActionInReverseHistory,
-  getCurrentHistoryEntry: getCurrentHistoryEntry
+  isDoingAction: isDoingAction
 };
 },{"../selectors/pheromones":16,"../utils/helpers":22,"../utils/vectors":24}],19:[function(require,module,exports){
 'use strict';
@@ -3246,7 +3236,10 @@ var moveEntity = function moveEntity(game, entity, nextPos) {
     entity.prevPosition = _extends({}, entity.contPos);
   }
 
-  removeEntityFromGrid(game, entity);
+  if (entity.position != null) {
+    removeEntityFromGrid(game, entity);
+  }
+
   if (nextPos == null) {
     entity.position = null;
     return game;
@@ -3879,7 +3872,8 @@ var initGrid = function initGrid(gridWidth, gridHeight, numPlayers) {
     var col = [];
     for (var y = 0; y < gridHeight; y++) {
       var cell = {
-        entities: []
+        entities: [],
+        seenBefore: false
       };
       col.push(cell);
     }
@@ -4252,6 +4246,8 @@ var add = function add() {
 };
 
 var equals = function equals(a, b) {
+  if (a == null && b == null) return true;
+  if (a == null || b == null) return false;
   return a.x == b.x && a.y == b.y;
 };
 

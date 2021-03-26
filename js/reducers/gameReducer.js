@@ -9,7 +9,7 @@ const {
 } = require('../utils/gridHelpers');
 const {
   queueAction, makeAction, isActionTypeQueued,
-  isDoingAction, getNextActionInReverseHistory,
+  isDoingAction,
   getDuration,
 } = require('../simulation/actionQueue');
 const {add, subtract, round, floor, ceil, equals} = require('../utils/vectors');
@@ -19,6 +19,7 @@ const {clamp, encodePosition, decodePosition} = require('../utils/helpers');
 const {getEntityPheromoneSources} = require('../selectors/pheromones');
 const {Entities} = require('../entities/registry');
 const globalConfig = require('../config');
+const {doReverseTime} = require('../thunks/reverseTimeThunks');
 
 import type {Game, Action} from '../types';
 
@@ -72,50 +73,7 @@ const gameReducer = (game: Game, action: Action): Game => {
       return game;
     }
     case 'REVERSE_TIME': {
-      game.isTimeReversed = true;
-      game.numTimeReversals += 1;
-      if (game.controlledEntity != null) {
-        const nextPlayerChar = Entities.AGENT.make(
-          game,
-          {...game.controlledEntity.position},
-        );
-        nextPlayerChar.theta = game.controlledEntity.theta;
-
-        // the clear the action queues of all actors
-        for (const id in game.ACTOR) {
-          const actor = game.entities[id];
-          if (isDoingAction(game, actor) && actor.actions[0].type != 'TIME_TRAVEL') {
-            const actionToReverse = getNextActionInReverseHistory(game, actor);
-            const curAction = actor.actions[0];
-            actor.actions = [];
-            const proRatedAction = makeAction(
-              game, actor,
-              actionToReverse.type,
-              actionToReverse.payload,
-            );
-            proRatedAction.duration =
-              getDuration(game, actor, curAction.type) - curAction.duration;
-            queueAction(game, actor, proRatedAction);
-          } else {
-            actor.actions = [];
-          }
-        }
-
-        // add the time travel to the history
-        game.controlledEntity.history[game.time] = {
-          type: 'TIME_TRAVEL',
-          payload: {pos: null},
-        };
-        game.controlledEntity.reverseHistory[
-          game.time + Entities.AGENT.config.TIME_TRAVEL.duration
-        ] = {
-          type: 'TIME_TRAVEL',
-          payload: {pos: {...game.controlledEntity.position}},
-        };
-
-        addEntity(game, nextPlayerChar);
-        game.controlledEntity = nextPlayerChar;
-      }
+      doReverseTime(game);
       return game;
     }
     case 'SET_PHEROMONE_VISIBILITY': {

@@ -287,7 +287,10 @@ const moveEntity = (game: Game, entity: Entity, nextPos: Vector): Game => {
     entity.prevPosition = {...entity.contPos};
   }
 
-  removeEntityFromGrid(game, entity);
+  if (entity.position != null) {
+    removeEntityFromGrid(game, entity);
+  }
+
   if (nextPos == null) {
     entity.position = null;
     return game;

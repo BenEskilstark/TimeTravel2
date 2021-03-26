@@ -33,26 +33,11 @@ const entityStartCurrentAction = (
   const curAction = entity.actions[0];
   curAction.effectDone = true;
 
-  let dontAdd = false;
-  if (curAction.payload.dontAdd) {
-    dontAdd = curAction.payload.dontAdd;
-  }
-  let wasSuccessful = true;
   switch (curAction.type) {
     case 'MOVE_TURN':
       // MOVE_TURN is turned off
       console.log("move turn");
       return;
-
-      if (entity.isHistorical && !game.isTimeReversed) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: {
-            nextPos: deepCopy(entity.position),
-            nextTheta: entity.theta,
-          },
-        };
-      }
 
       if (!game.isTimeReversed) {
         if (!closeToTheta(entity.theta, curAction.payload.nextTheta)) {
@@ -77,22 +62,21 @@ const entityStartCurrentAction = (
       }
 
       break;
+    case 'WAIT': {
+      break;
+    }
     case 'MOVE': {
       if (equals(entity.position, curAction.payload.nextPos)) {
-        dontAdd = true;
         break;
       }
 
-      if (entity.isHistorical && !game.isTimeReversed) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: {
-            nextPos: deepCopy(entity.position),
-          },
-        };
+      const wasSuccessful = agentDoMove(game, entity, curAction.payload.nextPos);
+      if (
+        wasSuccessful && entity.history.length <= game.actionIndex &&
+        !game.isTimeReversed
+      ) {
+        entity.history.push({...curAction.payload.nextPos});
       }
-
-      wasSuccessful = agentDoMove(game, entity, curAction.payload.nextPos);
       const {maxFrameOffset, frameStep} = getMaxFrameOffset(entity);
       if (maxFrameOffset != 0) {
         entity.frameOffset = (entity.frameOffset + maxFrameOffset)
@@ -102,27 +86,9 @@ const entityStartCurrentAction = (
       break;
     }
     case 'TURN':
-      if (entity.isHistorical && !game.isTimeReversed) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: entity.theta,
-        };
-        if (entity.theta == null) {
-          console.trace(game.isTimeReversed, entity.theta, entity);
-        }
-      }
-
       rotateEntity(game, entity, curAction.payload);
       break;
     case 'TIME_TRAVEL': {
-      if (entity.isHistorical && !game.isTimeReversed) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: {
-            pos: deepCopy(entity.position),
-          },
-        };
-      }
       if (curAction.payload.pos != null) {
         entity.position = curAction.payload.pos;
       }
@@ -133,12 +99,6 @@ const entityStartCurrentAction = (
       entityDie(game, entity);
       break;
     case 'PRESS':
-      if (entity.isHistorical && !game.isTimeReversed && !dontAdd) {
-        entity.reverseHistory[game.time + curAction.duration] = {
-          type: curAction.type,
-          payload: {pressed: entity.isPressed},
-        };
-      }
       entity.isPressed = curAction.payload.pressed;
       // open corresponding doors
       for (const id of game.DOOR) {
@@ -157,17 +117,6 @@ const entityStartCurrentAction = (
       rotateEntity(game, entity, entity.theta + mult * Math.PI / 2);
 
       break;
-  }
-
-  if (
-    entity.isHistorical && !game.isTimeReversed &&
-    !dontAdd && entity.type != 'BUTTON'
-  ) {
-    entity.history[game.time] = {
-      type: curAction.type,
-      payload: deepCopy(curAction.payload),
-      wasSuccessful,
-    };
   }
 };
 
@@ -196,10 +145,8 @@ const agentDoMove = (game: Game, entity: Entity, nextPos: Vector): boolean => {
     if (
       (game.controlledEntity == null || game.controlledEntity.id != entity.id)
     ) {
-      const curHistory = getCurrentHistoryEntry(game, entity);
-      if (curHistory != null && curHistory.wasSuccessful) {
-        console.log("TIME PARADOX");
-      }
+      console.log("TIME PARADOX FROM BLOCKED", entity.id );
+      entity.hitParadox = true;
     }
     cancelAction(game, entity);
     if (!isFacing(game, entity, nextPos)) {
@@ -214,7 +161,11 @@ const agentDoMove = (game: Game, entity: Entity, nextPos: Vector): boolean => {
   const thetaDiff = Math.abs(nextTheta - entity.theta) % (2 * Math.PI);
   if (!isFacing(game, entity, nextPos)) {
     // Rotating instantly now:
-    rotateEntity(game, entity, nextTheta);
+    if (!game.isTimeReversed) {
+      rotateEntity(game, entity, nextTheta);
+    } else {
+      rotateEntity(game, entity, nextTheta + Math.PI);
+    }
     // if (game.controlledEntity && game.controlledEntity.id == entity.id) {
     //   // enables turning in place off a single button press
     //   cancelAction(game, entity);

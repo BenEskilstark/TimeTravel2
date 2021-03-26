@@ -1,4 +1,5 @@
 // @flow
+// const rotateEntity(game, entity, nextTheta);
 
 const {
   fadeAllPheromones, computeAllPheromoneSteadyState,
@@ -21,6 +22,7 @@ const {
 const {render} = require('../render/render');
 const {
   getPosBehind, getPositionsInFront, onScreen,
+  canDoMove, isFacing,
 } = require('../selectors/misc');
 const {oneOf} = require('../utils/stochastic');
 const {collides, collidesWith} = require('../selectors/collisions');
@@ -45,6 +47,7 @@ const {dealDamageToEntity} = require('../simulation/miscOperations');
 const {Entities} = require('../entities/registry');
 const {canAffordBuilding} = require('../selectors/buildings');
 const {slider} = require('../utils/slider');
+const {allAgentsDone, doReverseTime} = require('../thunks/reverseTimeThunks');
 
 import type {
   Game, Entity, Action, Ant,
@@ -93,8 +96,10 @@ const doTick = (game: Game): Game => {
   } else {
     game.time -= 1;
   }
-  if (game.isTimeReversed && game.time == 1) {
+  if (game.isTimeReversed && (game.time == 1 || allAgentsDone(game))) {
     game.isTimeReversed = false;
+    game.actionIndex = 0;
+    game.time = 1;
     // close all doors and press all buttons only on the first time.
     // After the first time we expect the doors to be opened en route
     if (game.numTimeReversals == 1) {
@@ -102,7 +107,7 @@ const doTick = (game: Game): Game => {
         const button = game.entities[id];
         queueAction(
           game, button,
-          makeAction(game, button, 'PRESS', {pressed: false, dontAdd: true}),
+          makeAction(game, button, 'PRESS', {pressed: false}),
         );
       }
     }
@@ -131,7 +136,7 @@ const doTick = (game: Game): Game => {
       const button = game.entities[id];
         queueAction(
           game, button,
-          makeAction(game, button, 'PRESS', {pressed: true, dontAdd: true}),
+          makeAction(game, button, 'PRESS', {pressed: true,}),
         );
     }
 
@@ -149,9 +154,9 @@ const doTick = (game: Game): Game => {
   game.timeSinceLastTick = 1;
 
   // these are the ECS "systems"
-  keepControlledMoving(game);
+  const doingMove = keepControlledMoving(game);
   updateButtons(game);
-  updateHistoricals(game);
+  updateHistoricals(game, doingMove);
   updateActors(game);
   updateAgents(game);
   updateTiledSprites(game);
@@ -178,30 +183,75 @@ const updateButtons = (game): void => {
     const button = game.entities[id];
     const collisions = collidesWith(game, button, ['AGENT']);
     if (collisions.length > 0) {
-      if (!isActionTypeQueued(game, button, 'PRESS') && !button.isPressed) {
+      if (!game.isTimeReversed) {
+        if (!isActionTypeQueued(game, button, 'PRESS') && !button.isPressed) {
+          queueAction(
+            game, button,
+            makeAction(game, button, 'PRESS', {pressed: true}),
+          );
+        }
+      } else {
+        button.isStoodOn = true;
+      }
+    } else {
+      // unpress the button as the agent leaves it in reverse time
+      if (game.isTimeReversed && button.isStoodOn) {
         queueAction(
           game, button,
-          makeAction(game, button, 'PRESS', {pressed: true}),
+          makeAction(game, button, 'PRESS', {pressed: false}),
         );
       }
+      button.isStoodOn = false;
     }
+
   }
 };
 
-const updateHistoricals = (game): void => {
+// When going forward in time, have agents follow their histories whenever
+// the controlledEntity is doing a move
+const updateHistoricals = (game, doingMove): void => {
+  if (game.isTimeReversed) return;
+
+  // face next direction you'll move
+  if (!doingMove) {
+    for (const id in game.HISTORICAL) {
+      const entity = game.entities[id];
+      if (game.controlledEntity != null && game.controlledEntity.id == id) continue;
+      if (isActionTypeQueued(game, entity, 'MOVE')) continue;
+      const nextPos = entity.history[game.actionIndex + 1];
+      if (nextPos != null) {
+        if (!isFacing(game, entity, nextPos)) {
+          const nextTheta = vectorTheta(subtract(entity.position, nextPos));
+          rotateEntity(game, entity, nextTheta);
+        }
+      } else {
+        // TODO show preview of going back in time
+      }
+    }
+    return;
+  }
+
+  game.actionIndex++;
+
   for (const id in game.HISTORICAL) {
     const entity = game.entities[id];
-    let timedAction = entity.history[game.time];
-    if (game.isTimeReversed) {
-      timedAction = entity.reverseHistory[game.time];
+    if (game.controlledEntity != null && game.controlledEntity.id == id) continue;
+
+    let nextPos = entity.history[game.actionIndex];
+    if (nextPos == null) {
+      // Time travel here
+      if (entity.position != null) {
+        queueAction(
+          game, entity,
+          makeAction(game, entity, 'TIME_TRAVEL', {pos: nextPos}),
+        );
+      }
+    } else {
+      queueAction(
+        game, entity,
+        makeAction(game, entity, 'MOVE', {nextPos}),
+      );
     }
-    if (timedAction == null) continue;
-
-    queueAction(
-      game, entity,
-      makeAction(game, entity, timedAction.type, timedAction.payload),
-    );
-
   }
 }
 
@@ -253,7 +303,6 @@ const updateAgents = (game): void => {
       continue;
     }
     agent.age += game.timeSinceLastTick;
-    agent.timeOnTask += game.timeSinceLastTick;
     agent.prevHPAge += game.timeSinceLastTick;
 
     if (agent.actions.length == 0) {
@@ -270,7 +319,7 @@ const updateAgents = (game): void => {
  * If the queen isn't moving but you're still holding the key down,
  * then just put a move action back on the action queue
  */
-const keepControlledMoving = (game: Game): void => {
+const keepControlledMoving = (game: Game): boolean => {
   const controlledEntity = game.controlledEntity;
   if (!controlledEntity) return;
   const moveDir = {x: 0, y: 0};
@@ -294,6 +343,7 @@ const keepControlledMoving = (game: Game): void => {
     controlledEntity.timeOnMove = 0;
   }
 
+  let doingMove = false;
   if (
     !equals(moveDir, {x: 0, y: 0}) && !isActionTypeQueued(game, controlledEntity, 'MOVE', true)
     && !isActionTypeQueued(game, controlledEntity, 'MOVE_TURN', true)
@@ -328,7 +378,15 @@ const keepControlledMoving = (game: Game): void => {
     }
     controlledEntity.timeOnMove = 0;
     queueAction(game, controlledEntity, entityAction);
+    if (
+      entityAction.type == 'MOVE'
+      && canDoMove(game, controlledEntity, nextPos).result
+      && !isActionTypeQueued(game, controlledEntity, 'TURN')
+    ) {
+      doingMove = true;
+    }
   }
+  return doingMove;
 }
 
 const updateViewPos = (

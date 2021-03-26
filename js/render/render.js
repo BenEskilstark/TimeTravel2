@@ -142,7 +142,7 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
     pxWidth / viewWidth,
     pxHeight / viewHeight,
   );
-  console.log(pxWidth, pxHeight, px, pxy);
+  // console.log(pxWidth, pxHeight, px, pxy);
   ctx.lineWidth = px;
   // translate to viewPos
   ctx.translate(-1 * viewPos.x, -1 * viewPos.y);
@@ -225,8 +225,14 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
           }
         }
         if (!isLit && !neighborIsLit) {
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+          let opacity = 1;
+          if (game.grid[x][y].seenBefore) {
+            opacity = 0.8;
+          }
+          ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
           ctx.fillRect(x - px/12, y - px/12, 1 + px/12, 1 + pxy/12);
+        } else {
+          game.grid[x][y].seenBefore = true;
         }
       }
     }

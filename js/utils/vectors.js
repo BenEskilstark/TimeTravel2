@@ -12,6 +12,8 @@ const add = (...vectors: Array<Vector>): Vector => {
 }
 
 const equals = (a: Vector, b: Vector): boolean => {
+  if (a == null && b == null) return true;
+  if (a == null || b == null) return false;
   return a.x == b.x && a.y == b.y;
 };
 

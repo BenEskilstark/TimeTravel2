@@ -32,6 +32,10 @@ const config = {
     maxFrameOffset: 2,
     frameStep: 2,
   },
+  WAIT: {
+    duration: 10,
+    spriteOrder: [1, 2],
+  },
   MOVE_TURN: {
     duration: 12,
     spriteOrder: [1, 2],
@@ -43,7 +47,7 @@ const config = {
     spriteOrder: [1, 2, 3, 4],
   },
   TIME_TRAVEL: {
-    duration: 6,
+    duration: 10,
     spriteOrder: [1, 2, 3, 4],
   },
   DIE: {

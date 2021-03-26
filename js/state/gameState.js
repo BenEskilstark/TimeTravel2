@@ -62,6 +62,8 @@ const initBaseState = (
       LIGHT: false,
     },
     maxMinimap: false,
+
+    // fog
     showFog: true,
 
     sprites: {},
@@ -134,6 +136,7 @@ const initBaseState = (
     // time travel-specific properties
     isTimeReversed: false,
     numTimeReversals: 0,
+    actionIndex: 0,
   };
 
   // lookup for entityIDs by entityType

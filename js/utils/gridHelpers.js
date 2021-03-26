@@ -15,6 +15,7 @@ const initGrid = (gridWidth: number, gridHeight: number, numPlayers: number): Gr
     for (let y = 0; y < gridHeight; y++) {
       const cell = {
         entities: [],
+        seenBefore: false,
       };
       col.push(cell);
     }

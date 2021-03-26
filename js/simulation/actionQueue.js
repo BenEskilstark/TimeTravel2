@@ -32,10 +32,10 @@ const cancelAction = (game: Game, entity: Entity): void => {
       break;
   }
 
-  if (!game.isTimeReversed) {
-    delete entity.history[game.time];
-    delete entity.reverseHistory[game.time + curAction.duration];
-  }
+  // if (!game.isTimeReversed) {
+  //   delete entity.history[game.time];
+  //   delete entity.reverseHistory[game.time + curAction.duration];
+  // }
 
   entity.actions.shift();
 };
@@ -226,24 +226,6 @@ const isDoingAction = (game: Game, entity: Entity): boolean => {
   // return curAction.duration < getDuration(game, entity, curAction.type)
 };
 
-const getNextActionInReverseHistory = (game: Game, entity: Entity): boolean => {
-  for (const timeStamp in entity.reverseHistory) {
-    if (timeStamp <= game.time) continue;
-    return entity.reverseHistory[timeStamp];
-  }
-}
-
-const getCurrentHistoryEntry = (game: Game, entity: Entity): boolean => {
-  let timeStamp = game.time;
-  for (
-    let timeStamp = game.time;
-    entity.history[timeStamp] == null && timeStamp > 0;
-    timeStamp--
-  );
-
-  return entity.history[timeStamp];
-};
-
 module.exports = {
   cancelAction,
   stackAction,
@@ -253,6 +235,4 @@ module.exports = {
   makeAction,
   getFrame,
   isDoingAction,
-  getNextActionInReverseHistory,
-  getCurrentHistoryEntry,
 };
