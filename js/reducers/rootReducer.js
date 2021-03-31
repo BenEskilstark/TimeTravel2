@@ -107,7 +107,9 @@ const rootReducer = (state: State, action: Action): State => {
           game.isExperimental = true;
         }
         let sprites = null;
-        if (state.game != null && state.game.sprites != null && state.game.sprites['EGG1'] != null) {
+        if (
+          state.game != null && state.game.sprites != null && state.game.sprites['EGG1'] != null
+        ) {
           sprites = state.game.sprites;
         } else {
           sprites = state.sprites;
@@ -116,11 +118,13 @@ const rootReducer = (state: State, action: Action): State => {
         let viewWidth = 32;
         let viewHeight = 18;
         let hotKeys = {};
+        let pheromoneWorker = game.pheromoneWorker;
         if (state.game != null && state.game.viewPos != null) {
           viewPos = state.game.viewPos;
           viewWidth = state.game.viewWidth;
           viewHeight = state.game.viewHeight;
           hotKeys = state.game.hotKeys;
+          pheromoneWorker = state.game.pheromoneWorker;
         }
         state.game = game;
         state.game.sprites = sprites;
@@ -129,6 +133,7 @@ const rootReducer = (state: State, action: Action): State => {
         state.game.viewHeight = viewHeight;
         state.game.hotKeys = hotKeys;
         state.game.gameID = state.game.gameID != null ? state.game.gameID + 1 : 1;
+        state.game.pheromoneWorker = pheromoneWorker;
       }
       // keep track of these across level reload
       const {viewPos, viewWidth, viewHeight, isExperimental, sprites, keepMarquee} = state.game;
@@ -246,7 +251,10 @@ const rootReducer = (state: State, action: Action): State => {
 };
 
 function loadLevelReducer(prevState: State, action: {level: mixed}): State {
-  const {numPlayers, gridWidth, gridHeight, actions, upgrades} = action.level;
+  const {
+    numPlayers, gridWidth, gridHeight, actions, upgrades,
+    synchronous,
+  } = action.level;
   let game = prevState.game;
 
   // apply upgrades
@@ -268,13 +276,13 @@ function loadLevelReducer(prevState: State, action: {level: mixed}): State {
   }
 
   // apply game actions
-  if (state.screen != 'EDITOR') {
+  if (state.screen != 'EDITOR' && !synchronous) {
     asyncApplyLevelActions(game, [...actions], actions.length);
   } else {
     for (let i = 0; i < actions.length; i++) {
       const levelAction = actions[i];
       const progress = ((i/actions.length) * 100).toFixed(1);
-      console.log("loading: " + progress + "%");
+      // console.log("loading: " + progress + "%");
       game = gameReducer(game, levelAction);
     }
 

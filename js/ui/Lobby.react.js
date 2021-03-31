@@ -27,7 +27,7 @@ function Lobby(props: Props): React.Node {
   const {dispatch, store} = props;
   const state = store.getState();
 
-  const [level, setLevel] = useState('adapted');
+  const [level, setLevel] = useState('test');
   const [loading, setLoading] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -70,7 +70,7 @@ function Lobby(props: Props): React.Node {
       if (state.game != null) {
         progress = state.game.loadingProgress;
       }
-      let title = 'The Clock that Went Backward';
+      let title = 'The Grandfather Paradox';
       let body = 'Some Intro Text';
       if (isMobile()) {
         title = '~~Experimental~~ Mobile Mode';
@@ -145,7 +145,7 @@ function Lobby(props: Props): React.Node {
             src={''}
           />
         </div>
-        <h1>The Clock that Went Backward</h1>
+        <h1>The Grandfather Paradox</h1>
         <h3>~Alpha~</h3>
         <h2 style={{fontSize: '4em', marginBottom: 0}}>Play:</h2>
         <Button

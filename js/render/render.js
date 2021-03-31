@@ -232,6 +232,7 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
           ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
           ctx.fillRect(x - px/12, y - px/12, 1 + px/12, 1 + pxy/12);
         } else {
+          // HACK: we are updating the game inside of render!
           game.grid[x][y].seenBefore = true;
         }
       }

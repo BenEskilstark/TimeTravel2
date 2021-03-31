@@ -202,7 +202,6 @@ const gameReducer = (game: Game, action: Action): Game => {
     case 'SET_DIFFICULTY': {
       const {difficulty} = action;
       game.difficulty = difficulty;
-      game.missileFrequency = globalConfig.config.difficulty[difficulty].startFrequency;
       return game;
     }
     case 'SET_MOUSE_MODE': {

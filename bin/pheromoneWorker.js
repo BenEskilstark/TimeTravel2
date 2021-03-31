@@ -10,8 +10,8 @@ var config = {
   viewWidth: 35,
   viewHeight: 35,
   useFullScreen: true,
-  cellWidth: 20,
-  cellHeight: 16,
+  cellWidth: 35,
+  cellHeight: 35,
 
   doorColors: ['steelblue', 'purple', 'red', 'brown'],
 

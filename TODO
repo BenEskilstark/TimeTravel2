@@ -2,24 +2,32 @@
 
 - - - - - - TO THINK ABOUT - - - - - -
   - how to deal with aliasing in the fog
-  - behavior of enemy
+  - how to manage when doors close based on time travel
 
 
 - - - - - - ISSUES - - - - - -
-  - correct the canvas sizing when not in the level editor
-  - resetting the game breaks the pheromone worker
 
 
 - - - - - - TODO - - - - - -
   - UI
     - replace time miniticker with steps counter
+    - add topBar
+      - play/pause
+      - instructions
+      - quit
+      - label for which direction time is moving
 
   - add maxSteps
     - level property
     - level editor UI
     - loss condition
 
+  - other loss conditions
+    - make agents block each other
+    - detect being in the light of another agent and lose
+
   - get level progression working on main play
+    - add in action to win the level
     - add in more of the original levels
     - store level progress in local storage
 

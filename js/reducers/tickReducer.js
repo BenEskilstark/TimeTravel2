@@ -541,6 +541,10 @@ const stepAction = (
 const updateTiledSprites = (game): void => {
   for (const id of game.staleTiles) {
     const entity = game.entities[id];
+    if (entity == null) {
+      console.log(id);
+      continue;
+    }
     entity.dictIndexStr = getDictIndexStr(game, entity);
   }
   game.staleTiles = [];

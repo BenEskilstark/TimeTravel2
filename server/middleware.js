@@ -2,7 +2,7 @@ const {selectQuery, updateQuery, upsertQuery, writeQuery} = require('./dbUtils')
 
 const recordVisit = (req, res, next) => {
   const {hostname, path, map, isUnique} = req.body;
-  const table = 'ant_visits';
+  const table = 'site_visits';
   if (!isUnique) {
     upsertQuery(
       table,

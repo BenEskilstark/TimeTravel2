@@ -10,6 +10,14 @@ const {add} = require('../utils/vectors');
 const {render} = require('../render/render');
 const {getDisplayTime} = require('../utils/helpers');
 const {useState} = React;
+const levels = require('../levels/levels');
+const {loadLevel} = require('../thunks/levelThunks');
+
+
+const levelOrder = [
+  'testLevel',
+  'adaptedLevel',
+];
 
 /**
  * Checks the state every tick for game-over conditions, then orchestrates
@@ -34,6 +42,15 @@ const initGameOverSystem = (store) => {
       handleGameWon(store, dispatch, state, 'win');
     }
 
+    // handle level won
+    if (game.levelWon) {
+      const nextLevelName = levelOrder[state.campaign.level];
+      dispatch({type: 'STOP_TICK'});
+      dispatch({type: 'SET_CURRENT_LEVEL_WON'});
+      loadLevel(store, nextLevelName, [], true /* synchronous */);
+      dispatch({type: 'START_TICK'});
+    }
+
     // loss conditions
     let paradoxEntity = null;
     for (const id of game.AGENT) {
@@ -48,6 +65,7 @@ const initGameOverSystem = (store) => {
 
   });
 };
+
 
 const handleGameLoss = (store, dispatch, state, reason): void => {
   const {game} = state;
