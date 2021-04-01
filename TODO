@@ -12,9 +12,6 @@
 
 
 - - - - - - TODO - - - - - -
-  - set up dev and prod branches
-  - set up heroku for dev and prod
-
   - detect when you pass through an open door and flip a bit on the door
     - detect by doing a close rotation in place and checking for agents there
   - add grandfather entity
