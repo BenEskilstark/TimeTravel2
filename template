@@ -45,7 +45,7 @@ npm install express --save
 # npm install -g expo-cli
 
 # postgres
-# npm install pg
+npm install pg
 
 # clientside REST
 npm install axios
