@@ -12,6 +12,7 @@ const {getDisplayTime} = require('../utils/helpers');
 const {useState} = React;
 const levels = require('../levels/levels');
 const {loadLevel} = require('../thunks/levelThunks');
+const {inOtherLight} = require('../selectors/misc');
 
 
 const levelOrder = [
@@ -51,16 +52,29 @@ const initGameOverSystem = (store) => {
       dispatch({type: 'START_TICK'});
     }
 
-    // loss conditions
+    // LOSS CONDITIONS
+
+    // entity hit a paradox trying to go through a door
+    let reason = '';
     let paradoxEntity = null;
     for (const id of game.AGENT) {
       const agent = game.entities[id];
       if (agent.hitParadox) {
         paradoxEntity = agent;
+        reason = 'Your former self hit a paradox trying to go through a locked door';
       }
     }
-    if (paradoxEntity) {
-      handleGameLoss(store, dispatch, state, 'loss');
+
+    // controlled entity is in the light of another entity
+    let wasSeen = inOtherLight(game, game.controlledEntity) && !game.isTimeReversed;
+    if (wasSeen) reason = 'You hit a paradox because you were seen by your former self';
+
+    // run out of steps
+    let noMoreSteps = game.actionIndex > game.maxSteps;
+    if (noMoreSteps) reason = 'You ran out of steps';
+
+    if (paradoxEntity || wasSeen || noMoreSteps) {
+      handleGameLoss(store, dispatch, state, reason);
     }
 
   });
@@ -93,7 +107,7 @@ const handleGameLoss = (store, dispatch, state, reason): void => {
 
   const body = (
     <div>
-    {`Your base was destroyed! You survived ${game.missilesSurvived} missiles`}
+      {reason}
     </div>
   );
 

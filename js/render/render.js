@@ -9,6 +9,7 @@ const {clamp} = require('../utils/helpers');
 const {
   onScreen, getPositionsInFront,
   getControlledEntityInteraction,
+  isLit,
 } = require('../selectors/misc');
 const globalConfig = require('../config');
 const {
@@ -205,7 +206,7 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
   }
 
   // Fog:
-  if (game.showFog) {
+  if (game.showFog && game.controlledEntity) {
     for (
       let x = Math.max(0, Math.floor(game.viewPos.x));
       x < Math.min(game.viewPos.x + game.viewWidth, game.gridWidth);
@@ -217,23 +218,26 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
         y++
       ) {
         if (!onScreen(game, {position: {x, y}, width: 1, height: 1})) continue;
-        const isLit = getPheromoneAtPosition(game, {x,y}, 'LIGHT', 1) > 0;
-        let neighborIsLit = false;
-        for (const neighbor of getNeighborPositions(game, {position: {x,y}})) {
-          if (getPheromoneAtPosition(game, neighbor, 'LIGHT', 1)) {
-            neighborIsLit = true;
-          }
-        }
-        if (!isLit && !neighborIsLit) {
-          let opacity = 1;
+        let opacity = 1;
+        if (!isLit(game, {x, y})) {
           if (game.grid[x][y].seenBefore) {
             opacity = 0.8;
           }
-          ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
-          ctx.fillRect(x - px/12, y - px/12, 1 + px/12, 1 + pxy/12);
         } else {
+          // if we ARE lit, then adjust opacity if we are in the light of the
+          // controlledEntity
+          const cType = game.controlledEntity.pheromoneType;
+          if (getPheromoneAtPosition(game, {x, y}, cType, 1) > 0) {
+            opacity = 0;
+          } else {
+            opacity = 0.2;
+          }
           // HACK: we are updating the game inside of render!
           game.grid[x][y].seenBefore = true;
+        }
+        if (opacity != 0) {
+          ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
+          ctx.fillRect(x - px/12, y - px/12, 1 + px/12, 1 + pxy/12);
         }
       }
     }

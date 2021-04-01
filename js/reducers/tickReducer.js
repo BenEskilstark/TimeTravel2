@@ -95,7 +95,9 @@ const doTick = (game: Game): Game => {
 	  game.time += 1;
   } else {
     game.time -= 1;
+    game.actionIndex = game.prevControlledEntity.actions.length;
   }
+
   if (game.isTimeReversed && (game.time == 1 || allAgentsDone(game))) {
     game.isTimeReversed = false;
     game.actionIndex = 0;
@@ -111,12 +113,6 @@ const doTick = (game: Game): Game => {
         );
       }
     }
-  }
-
-  game.miniTicker = {
-    max: 6000,
-    time: 600,
-    message: "time: " + game.time,
   }
 
   // initializations:

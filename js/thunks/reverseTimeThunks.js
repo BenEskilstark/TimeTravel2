@@ -20,6 +20,7 @@ const doReverseTime = (game): void => {
     );
     nextPlayerChar.theta = game.controlledEntity.theta;
     addEntity(game, nextPlayerChar);
+    game.prevControlledEntity = game.controlledEntity;
     game.controlledEntity = nextPlayerChar;
   }
 

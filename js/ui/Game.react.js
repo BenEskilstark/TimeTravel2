@@ -107,26 +107,26 @@ function Game(props: Props): React.Node {
         innerHeight={dims.height}
         isExperimental={state.screen == 'EDITOR'}
         focusedEntity={game.focusedEntity}
+        levelName={state.campaign.level}
       />
       <Ticker ticker={game.ticker} />
       <MiniTicker miniTicker={game.miniTicker} />
+      <TopBar dispatch={dispatch}
+        isExperimental={props.isInLevelEditor}
+        tickInterval={state.game.tickInterval}
+        modal={state.modal}
+        canvasWidth={dims.width}
+        isMuted={state.isMuted}
+        steps={state.game.actionIndex}
+        maxSteps={state.game.maxSteps}
+      />
+      <BottomBar dispatch={dispatch}
+        game={game}
+        mousePos={game.mouse.curPos}
+      />
     </div>
   );
 
-      // <TopBar dispatch={dispatch}
-      //   upgradedAt={game.upgradedAt}
-      //   isExperimental={props.isInLevelEditor}
-      //   tickInterval={state.game.tickInterval}
-      //   modal={state.modal}
-      //   canvasWidth={dims.width}
-      //   isMuted={state.isMuted}
-      //   tick={game.time}
-      //   game={game}
-      // />
-      // <BottomBar dispatch={dispatch}
-      //   game={game}
-      //   mousePos={game.mouse.curPos}
-      // />
 }
 
 function registerHotkeys(dispatch) {

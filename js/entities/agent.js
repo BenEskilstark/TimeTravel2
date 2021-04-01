@@ -68,8 +68,8 @@ const make = (
     ...config,
 		playerID: 1,
     holdingTimeMachine: false,
-    pheromoneType: 'LIGHT',
-    quantity: globalConfig.pheromones.LIGHT.quantity,
+    pheromoneType: 'LIGHT_' + game.AGENT.length,
+    quantity: globalConfig.pheromones['LIGHT_' + game.AGENT.length].quantity,
     actions: [],
 
     // this frame offset allows iterating through spritesheets across

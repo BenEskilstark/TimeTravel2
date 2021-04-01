@@ -35,6 +35,11 @@ const gameReducer = (game: Game, action: Action): Game => {
       queueAction(game, entity, entityAction);
       return game;
     }
+    case 'SET_MAX_STEPS': {
+      const {maxSteps} = action;
+      game.maxSteps = maxSteps;
+      return game;
+    }
     case 'SET_VIEW_POS': {
       const {viewPos, viewWidth, viewHeight} = action;
       game.viewPos = viewPos;

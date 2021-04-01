@@ -25,7 +25,7 @@ type Props = {
 };
 
 function LevelEditor(props: Props): React.Node {
-  const {dispatch, state} = props;
+  const {dispatch, state, store} = props;
   const {game} = state;
 
   // position level editor to the right of the canvas
@@ -47,6 +47,7 @@ function LevelEditor(props: Props): React.Node {
     gridWidth: game.gridHeight,
     gridHeight: game.gridWidth,
     playerID: 0,
+    maxSteps: 20,
     paletteMode: 'CREATE ENTITIES',
 
     // entity creation mode
@@ -65,8 +66,8 @@ function LevelEditor(props: Props): React.Node {
     clipboardMode: 'COPY',
 
     // pheromone mode
-    selectedPheromone: 'LIGHT',
-    pheromoneQuantity: globalConfig.pheromones.LIGHT.quantity,
+    selectedPheromone: 'LIGHT_0',
+    pheromoneQuantity: globalConfig.pheromones['LIGHT_0'].quantity,
   });
 
   useEffect(() => {
@@ -204,6 +205,13 @@ function LevelEditor(props: Props): React.Node {
       />
     </div>
     <div>
+      Max Steps:
+      <NumberField
+        value={editor.maxSteps}
+        onChange={(maxSteps) => setEditor({...editor, maxSteps})}
+      />
+    </div>
+    <div>
       <Button
         label="Submit Changes"
         onClick={() => {
@@ -213,6 +221,7 @@ function LevelEditor(props: Props): React.Node {
             gridWidth: editor.gridWidth,
             gridHeight: editor.gridHeight,
           });
+          dispatch({type: 'SET_MAX_STEPS', maxSteps: editor.maxSteps});
           setEditor({
             ...editor,
             playerID: editor.playerID > editor.numPlayers
@@ -408,13 +417,16 @@ function LevelEditor(props: Props): React.Node {
             gridHeight: editor.importedLevel.gridHeight,
           });
           setTimeout(
-            () => setEditor({
-              ...editor,
-              numPlayers: editor.importedLevel.numPlayers,
-              gridWidth: editor.importedLevel.gridWidth,
-              gridHeight: editor.importedLevel.gridHeight,
-              version: editor.version + 1,
-            }),
+            () => {
+              setEditor({
+                ...editor,
+                numPlayers: editor.importedLevel.numPlayers,
+                gridWidth: editor.importedLevel.gridWidth,
+                gridHeight: editor.importedLevel.gridHeight,
+                maxSteps: store.getState().game.maxSteps,
+                version: editor.version + 1,
+              });
+            },
             1000,
           );
         }}
@@ -454,6 +466,7 @@ function LevelEditor(props: Props): React.Node {
               numPlayers: editor.importedGameState.numPlayers,
               gridWidth: editor.importedGameState.gridWidth,
               gridHeight: editor.importedGameState.gridHeight,
+              maxSteps: editor.importedLevel.maxSteps,
               version: editor.version + 1,
             }),
             1000,

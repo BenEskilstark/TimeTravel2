@@ -114,7 +114,7 @@ const rootReducer = (state: State, action: Action): State => {
         } else {
           sprites = state.sprites;
         }
-        let viewPos = {x: 0, y: 0};
+        let viewPos = {x: -5, y: -5};
         let viewWidth = 32;
         let viewHeight = 18;
         let hotKeys = {};
@@ -200,6 +200,7 @@ const rootReducer = (state: State, action: Action): State => {
     case 'FILL_PHEROMONE':
     case 'COPY_ENTITIES':
     case 'PASTE_ENTITIES':
+    case 'SET_MAX_STEPS':
       if (state.screen == 'EDITOR' && action.type != 'SET_SPRITE_SHEET') {
         state.editor.actions = state.editor.actions.slice(0, state.editor.index);
         state.editor.actions.push(action);

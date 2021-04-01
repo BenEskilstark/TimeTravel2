@@ -147,7 +147,6 @@ function Lobby(props: Props): React.Node {
         </div>
         <h1>The Grandfather Paradox</h1>
         <h3>~Alpha~</h3>
-        <h2 style={{fontSize: '4em', marginBottom: 0}}>Play:</h2>
         <Button
           style={{
             width: '60%',

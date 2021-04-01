@@ -9,8 +9,8 @@ const config = {
   viewWidth: 35,
   viewHeight: 35,
   useFullScreen: true,
-  cellWidth: 35,
-  cellHeight: 35,
+  cellWidth: 30,
+  cellHeight: 30,
 
   doorColors: [
     'steelblue',
@@ -28,8 +28,10 @@ const pheromoneBlockingTypes = [
   'WALL', 'DOODAD', 'DOOR',
 ];
 
-const pheromones = {
-  LIGHT: {
+// "dynamically" generate 100 sets of pheromones
+const pheromones = {};
+for (let i = 0; i < 100; i++) {
+  pheromones['LIGHT_'+i] = {
     quantity: 3,
     decayAmount: 1,
     color: 'rgb(155, 227, 90)',
@@ -37,7 +39,7 @@ const pheromones = {
 
     blockingTypes: pheromoneBlockingTypes,
     blockingPheromones: [],
-  },
-};
+  };
+}
 
 module.exports = {config, pheromones};

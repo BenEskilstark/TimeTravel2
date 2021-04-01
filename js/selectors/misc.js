@@ -13,6 +13,7 @@ const {
   containsVector, equals,
 } = require('../utils/vectors');
 const {makeAction} = require('../simulation/actionQueue');
+const {getPheromoneAtPosition} = require('../selectors/pheromones');
 
 import type {Game, PlayerID, Hill, Vector} from '../types';
 
@@ -163,7 +164,32 @@ const getControlledEntityInteraction = (game: Game, agent: Agent): EntityAction 
   return makeAction(game, agent, 'PICKUP', {pickup: null, position: positionsInFront[0]});
 };
 
+// a position is lit if it or any of its neighbors contain any of the LIGHT_ pheromones
+const isLit = (game: Game, position: Vector): boolean => {
+  for (let i = 0; i < game.AGENT.length; i++) {
+    const isInLight = getPheromoneAtPosition(game, position, 'LIGHT_' + i, 1) > 0;
+    if (isInLight) return true;
+    for (const neighbor of getNeighborPositions(game, {position})) {
+      if (getPheromoneAtPosition(game, neighbor, 'LIGHT_' + i, 1)) {
+        return true;
+      }
+    }
+  }
 
+  return false;
+};
+
+// returns true if an agent is in the light of another agent
+const inOtherLight = (game: Game, agent: Agent): boolean => {
+  for (const pos of getEntityPositions(game, agent)) {
+    for (let i = 0; i < game.AGENT.length; i++) {
+      if ('LIGHT_' + i == agent.pheromoneType) continue;
+      const isInLight = getPheromoneAtPosition(game, pos, 'LIGHT_' + i, 1) > 0;
+      if (isInLight) return true;
+    }
+  }
+  return false;
+}
 
 module.exports = {
   onScreen,
@@ -172,4 +198,6 @@ module.exports = {
   isFacing,
   canDoMove,
   getControlledEntityInteraction,
+  isLit,
+  inOtherLight,
 };

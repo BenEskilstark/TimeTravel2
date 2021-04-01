@@ -1,7 +1,6 @@
 // @flow
 
 const React = require('react');
-const InfoHUD = require('./InfoHUD.react');
 
 const BottomBar = (props): React.Node => {
   const {isExperimental, dispatch, game, mousePos} = props;
@@ -20,7 +19,6 @@ const BottomBar = (props): React.Node => {
         // textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff',
       }}
     >
-    <InfoHUD game={game} mousePos={mousePos} />
     </div>
   );
 };

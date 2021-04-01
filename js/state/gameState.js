@@ -88,6 +88,7 @@ const initBaseState = (
     // entities treated specially
     focusedEntity: null,
     controlledEntity: null,
+    prevControlledEntity: null,
 
     staleTiles: [],
     floodFillSources: [],
@@ -137,6 +138,7 @@ const initBaseState = (
     isTimeReversed: false,
     numTimeReversals: 0,
     actionIndex: 0,
+    maxSteps: 20,
   };
 
   // lookup for entityIDs by entityType

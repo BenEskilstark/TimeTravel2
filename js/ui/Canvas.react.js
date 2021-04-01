@@ -14,6 +14,7 @@ function Canvas(props: Props): React.Node {
     innerWidth, innerHeight,
     isExperimental,
     focusedEntity,
+    levelName,
   } = props;
 
   // calculate max canvas width (allows canvas sizing DOWN)
@@ -25,16 +26,16 @@ function Canvas(props: Props): React.Node {
     maxHeight = innerHeight;
     let sizeMult = 0.9;
     if (maxWidth < 600 || maxHeight < 800) {
-      sizeMult = 0.75;
+      sizeMult = 0.7;
     }
     if (maxWidth > 1000 || maxHeight > 1000) {
-      sizeMult = 1.25;
+      sizeMult = 1.1;
     }
     if (maxWidth > 1200 || maxHeight > 1200) {
       sizeMult = 1.3;
     }
     useEffect(() => {
-      let viewPos = {x:0, y: 0};
+      let viewPos = {x: -5, y: -5};
       const viewWidth = maxWidth / (config.cellWidth * sizeMult);
       const viewHeight = maxHeight / (config.cellHeight * sizeMult);
       if (focusedEntity != null) {
@@ -46,7 +47,7 @@ function Canvas(props: Props): React.Node {
       dispatch({type: 'SET_VIEW_POS',
         viewPos, viewWidth, viewHeight,
       });
-    }, [maxWidth, maxHeight]);
+    }, [innerWidth, innerHeight, levelName, sizeMult]);
 
     if (maxWidth != config.canvasWidth) {
       config.canvasWidth = maxWidth;

@@ -10,8 +10,8 @@ var config = {
   viewWidth: 35,
   viewHeight: 35,
   useFullScreen: true,
-  cellWidth: 35,
-  cellHeight: 35,
+  cellWidth: 30,
+  cellHeight: 30,
 
   doorColors: ['steelblue', 'purple', 'red', 'brown'],
 
@@ -20,8 +20,10 @@ var config = {
 
 var pheromoneBlockingTypes = ['WALL', 'DOODAD', 'DOOR'];
 
-var pheromones = {
-  LIGHT: {
+// "dynamically" generate 100 sets of pheromones
+var pheromones = {};
+for (var i = 0; i < 100; i++) {
+  pheromones['LIGHT_' + i] = {
     quantity: 3,
     decayAmount: 1,
     color: 'rgb(155, 227, 90)',
@@ -29,8 +31,8 @@ var pheromones = {
 
     blockingTypes: pheromoneBlockingTypes,
     blockingPheromones: []
-  }
-};
+  };
+}
 
 module.exports = { config: config, pheromones: pheromones };
 },{}],2:[function(require,module,exports){
@@ -105,8 +107,8 @@ var make = function make(game, position) {
   var agent = _extends({}, makeEntity('AGENT', position, config.width, config.height), config, {
     playerID: 1,
     holdingTimeMachine: false,
-    pheromoneType: 'LIGHT',
-    quantity: globalConfig.pheromones.LIGHT.quantity,
+    pheromoneType: 'LIGHT_' + game.AGENT.length,
+    quantity: globalConfig.pheromones['LIGHT_' + game.AGENT.length].quantity,
     actions: [],
 
     // this frame offset allows iterating through spritesheets across
@@ -1535,6 +1537,9 @@ var _require5 = require('../utils/vectors'),
 var _require6 = require('../simulation/actionQueue'),
     makeAction = _require6.makeAction;
 
+var _require7 = require('../selectors/pheromones'),
+    getPheromoneAtPosition = _require7.getPheromoneAtPosition;
+
 var onScreen = function onScreen(game, entity) {
   var viewPos = game.viewPos,
       viewWidth = game.viewWidth,
@@ -1694,15 +1699,87 @@ var getControlledEntityInteraction = function getControlledEntityInteraction(gam
   return makeAction(game, agent, 'PICKUP', { pickup: null, position: positionsInFront[0] });
 };
 
+// a position is lit if it or any of its neighbors contain any of the LIGHT_ pheromones
+var isLit = function isLit(game, position) {
+  for (var i = 0; i < game.AGENT.length; i++) {
+    var isInLight = getPheromoneAtPosition(game, position, 'LIGHT_' + i, 1) > 0;
+    if (isInLight) return true;
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = getNeighborPositions(game, { position: position })[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var neighbor = _step2.value;
+
+        if (getPheromoneAtPosition(game, neighbor, 'LIGHT_' + i, 1)) {
+          return true;
+        }
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+  }
+
+  return false;
+};
+
+// returns true if an agent is in the light of another agent
+var inOtherLight = function inOtherLight(game, agent) {
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
+
+  try {
+    for (var _iterator3 = getEntityPositions(game, agent)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var pos = _step3.value;
+
+      for (var i = 0; i < game.AGENT.length; i++) {
+        if ('LIGHT_' + i == agent.pheromoneType) continue;
+        var isInLight = getPheromoneAtPosition(game, pos, 'LIGHT_' + i, 1) > 0;
+        if (isInLight) return true;
+      }
+    }
+  } catch (err) {
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion3 && _iterator3.return) {
+        _iterator3.return();
+      }
+    } finally {
+      if (_didIteratorError3) {
+        throw _iteratorError3;
+      }
+    }
+  }
+
+  return false;
+};
+
 module.exports = {
   onScreen: onScreen,
   getPositionsInFront: getPositionsInFront,
   getPositionsBehind: getPositionsBehind,
   isFacing: isFacing,
   canDoMove: canDoMove,
-  getControlledEntityInteraction: getControlledEntityInteraction
+  getControlledEntityInteraction: getControlledEntityInteraction,
+  isLit: isLit,
+  inOtherLight: inOtherLight
 };
-},{"../selectors/collisions":13,"../selectors/neighbors":15,"../simulation/actionQueue":18,"../utils/gridHelpers":21,"../utils/helpers":22,"../utils/vectors":24}],15:[function(require,module,exports){
+},{"../selectors/collisions":13,"../selectors/neighbors":15,"../selectors/pheromones":16,"../simulation/actionQueue":18,"../utils/gridHelpers":21,"../utils/helpers":22,"../utils/vectors":24}],15:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }

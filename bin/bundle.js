@@ -10,8 +10,8 @@ var config = {
   viewWidth: 35,
   viewHeight: 35,
   useFullScreen: true,
-  cellWidth: 35,
-  cellHeight: 35,
+  cellWidth: 30,
+  cellHeight: 30,
 
   doorColors: ['steelblue', 'purple', 'red', 'brown'],
 
@@ -20,8 +20,10 @@ var config = {
 
 var pheromoneBlockingTypes = ['WALL', 'DOODAD', 'DOOR'];
 
-var pheromones = {
-  LIGHT: {
+// "dynamically" generate 100 sets of pheromones
+var pheromones = {};
+for (var i = 0; i < 100; i++) {
+  pheromones['LIGHT_' + i] = {
     quantity: 3,
     decayAmount: 1,
     color: 'rgb(155, 227, 90)',
@@ -29,8 +31,8 @@ var pheromones = {
 
     blockingTypes: pheromoneBlockingTypes,
     blockingPheromones: []
-  }
-};
+  };
+}
 
 module.exports = { config: config, pheromones: pheromones };
 },{}],2:[function(require,module,exports){
@@ -105,8 +107,8 @@ var make = function make(game, position) {
   var agent = _extends({}, makeEntity('AGENT', position, config.width, config.height), config, {
     playerID: 1,
     holdingTimeMachine: false,
-    pheromoneType: 'LIGHT',
-    quantity: globalConfig.pheromones.LIGHT.quantity,
+    pheromoneType: 'LIGHT_' + game.AGENT.length,
+    quantity: globalConfig.pheromones['LIGHT_' + game.AGENT.length].quantity,
     actions: [],
 
     // this frame offset allows iterating through spritesheets across
@@ -143,7 +145,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, agent) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../render/renderAgent":21,"../selectors/sprites":31,"../utils/vectors":82,"./makeEntity":7}],3:[function(require,module,exports){
+},{"../config":1,"../render/renderAgent":21,"../selectors/sprites":31,"../utils/vectors":78,"./makeEntity":7}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -448,7 +450,7 @@ function renderUI(store) {
     modal: state.modal
   }), document.getElementById('container'));
 }
-},{"./reducers/rootReducer":18,"./ui/Main.react":64,"react":118,"react-dom":115,"redux":119}],11:[function(require,module,exports){
+},{"./reducers/rootReducer":18,"./ui/Main.react":62,"react":114,"react-dom":111,"redux":115}],11:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":24},"width":25,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":22,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":1},"width":1,"height":14},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":22,"y":22},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":21},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":18},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":18},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":14},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":15},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":15},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":3},"width":1,"height":12},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":1},"width":1,"height":11},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":14},"width":1,"height":4}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":12},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":12},"width":1,"height":7},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":3},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":4},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":7},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":3},"width":1,"height":5},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":3},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":4},"width":2,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":3},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":4},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":5},"width":3,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":3},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":5},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":7},"width":4,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":3},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":9},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":12},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":13},"width":1,"height":6},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":19},"width":1,"height":3}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":21},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":13},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":15},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":3},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":9},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":6},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":1},"width":1,"height":1},"args":[2]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":7,"y":7},"width":1,"height":1},"args":[3]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":3},"width":1,"height":1},"args":[3,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":0},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":0},"width":1,"height":1},"args":[3,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":0},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":9,"y":0},"width":1,"height":1},"args":[1,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":9},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":9},"width":1,"height":1},"args":[2,"vertical"]}]};
 },{}],12:[function(require,module,exports){
 // @flow
@@ -539,6 +541,13 @@ var gameReducer = function gameReducer(game, action) {
             entity = action.entity;
 
         queueAction(game, entity, entityAction);
+        return game;
+      }
+    case 'SET_MAX_STEPS':
+      {
+        var maxSteps = action.maxSteps;
+
+        game.maxSteps = maxSteps;
         return game;
       }
     case 'SET_VIEW_POS':
@@ -925,7 +934,7 @@ function createEntitiesReducer(game, action) {
 }
 
 module.exports = { gameReducer: gameReducer };
-},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../simulation/pheromones":36,"../thunks/reverseTimeThunks":46,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],15:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../simulation/pheromones":36,"../thunks/reverseTimeThunks":46,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],15:[function(require,module,exports){
 'use strict';
 
 var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
@@ -1164,7 +1173,7 @@ var rootReducer = function rootReducer(state, action) {
           } else {
             _sprites = state.sprites;
           }
-          var _viewPos = { x: 0, y: 0 };
+          var _viewPos = { x: -5, y: -5 };
           var _viewWidth = 32;
           var _viewHeight = 18;
           var hotKeys = {};
@@ -1254,6 +1263,7 @@ var rootReducer = function rootReducer(state, action) {
     case 'FILL_PHEROMONE':
     case 'COPY_ENTITIES':
     case 'PASTE_ENTITIES':
+    case 'SET_MAX_STEPS':
       if (state.screen == 'EDITOR' && action.type != 'SET_SPRITE_SHEET') {
         state.editor.actions = state.editor.actions.slice(0, state.editor.index);
         state.editor.actions.push(action);
@@ -1456,7 +1466,7 @@ function upgradeReducer(state, action) {
 }
 
 module.exports = { rootReducer: rootReducer };
-},{"../levels/levels":12,"../simulation/entityOperations":34,"../state/gameState":37,"../state/state":38,"../utils/helpers":79,"./gameReducer":14,"./hotKeysReducer":15,"./modalReducer":16,"./mouseReducer":17,"./tickReducer":19}],19:[function(require,module,exports){
+},{"../levels/levels":12,"../simulation/entityOperations":34,"../state/gameState":37,"../state/state":38,"../utils/helpers":75,"./gameReducer":14,"./hotKeysReducer":15,"./modalReducer":16,"./mouseReducer":17,"./tickReducer":19}],19:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1608,7 +1618,9 @@ var doTick = function doTick(game) {
     game.time += 1;
   } else {
     game.time -= 1;
+    game.actionIndex = game.prevControlledEntity.actions.length;
   }
+
   if (game.isTimeReversed && (game.time == 1 || allAgentsDone(game))) {
     game.isTimeReversed = false;
     game.actionIndex = 0;
@@ -1644,13 +1656,8 @@ var doTick = function doTick(game) {
     }
   }
 
-  game.miniTicker = {
-    max: 6000,
-    time: 600,
-    message: "time: " + game.time
-
-    // initializations:
-  };if (game.time == 1 && game.numTimeReversals == 0) {
+  // initializations:
+  if (game.time == 1 && game.numTimeReversals == 0) {
     game.prevTickTime = new Date().getTime();
     game.viewImage.allStale = true;
     computeAllPheromoneSteadyState(game);
@@ -2156,7 +2163,7 @@ var updateTicker = function updateTicker(game) {
 };
 
 module.exports = { tickReducer: tickReducer };
-},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/buildings":25,"../selectors/collisions":26,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../simulation/actionOperations":32,"../simulation/actionQueue.js":33,"../simulation/entityOperations":34,"../simulation/miscOperations":35,"../simulation/pheromones":36,"../thunks/reverseTimeThunks":46,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/slider":80,"../utils/stochastic":81,"../utils/vectors":82}],20:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":20,"../selectors/buildings":25,"../selectors/collisions":26,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../simulation/actionOperations":32,"../simulation/actionQueue.js":33,"../simulation/entityOperations":34,"../simulation/miscOperations":35,"../simulation/pheromones":36,"../thunks/reverseTimeThunks":46,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/slider":76,"../utils/stochastic":77,"../utils/vectors":78}],20:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2181,7 +2188,8 @@ var _require3 = require('../utils/helpers'),
 var _require4 = require('../selectors/misc'),
     onScreen = _require4.onScreen,
     getPositionsInFront = _require4.getPositionsInFront,
-    getControlledEntityInteraction = _require4.getControlledEntityInteraction;
+    getControlledEntityInteraction = _require4.getControlledEntityInteraction,
+    isLit = _require4.isLit;
 
 var globalConfig = require('../config');
 
@@ -2395,49 +2403,30 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
   }
 
   // Fog:
-  if (game.showFog) {
+  if (game.showFog && game.controlledEntity) {
     for (var x = Math.max(0, Math.floor(game.viewPos.x)); x < Math.min(game.viewPos.x + game.viewWidth, game.gridWidth); x++) {
       for (var y = Math.max(0, Math.floor(game.viewPos.y)); y < Math.min(game.viewPos.y + game.viewHeight, game.gridHeight); y++) {
         if (!onScreen(game, { position: { x: x, y: y }, width: 1, height: 1 })) continue;
-        var isLit = getPheromoneAtPosition(game, { x: x, y: y }, 'LIGHT', 1) > 0;
-        var neighborIsLit = false;
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = getNeighborPositions(game, { position: { x: x, y: y } })[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var neighbor = _step2.value;
-
-            if (getPheromoneAtPosition(game, neighbor, 'LIGHT', 1)) {
-              neighborIsLit = true;
-            }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
-        }
-
-        if (!isLit && !neighborIsLit) {
-          var opacity = 1;
+        var opacity = 1;
+        if (!isLit(game, { x: x, y: y })) {
           if (game.grid[x][y].seenBefore) {
             opacity = 0.8;
           }
-          ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
-          ctx.fillRect(x - px / 12, y - px / 12, 1 + px / 12, 1 + pxy / 12);
         } else {
+          // if we ARE lit, then adjust opacity if we are in the light of the
+          // controlledEntity
+          var cType = game.controlledEntity.pheromoneType;
+          if (getPheromoneAtPosition(game, { x: x, y: y }, cType, 1) > 0) {
+            opacity = 0;
+          } else {
+            opacity = 0.2;
+          }
           // HACK: we are updating the game inside of render!
           game.grid[x][y].seenBefore = true;
+        }
+        if (opacity != 0) {
+          ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
+          ctx.fillRect(x - px / 12, y - px / 12, 1 + px / 12, 1 + pxy / 12);
         }
       }
     }
@@ -2527,13 +2516,13 @@ var refreshStaleImage = function refreshStaleImage(game, dims) {
         ctx.drawImage(_obj.img, _obj.x, _obj.y, _obj.width, _obj.height, pos.x, pos.y, 1, 1);
         ctx.globalAlpha = 1;
       }
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator3 = lookupInGrid(game.grid, pos)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var entityID = _step3.value;
+        for (var _iterator2 = lookupInGrid(game.grid, pos)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var entityID = _step2.value;
 
           var entity = game.entities[entityID];
           if (!entity) {
@@ -2551,16 +2540,16 @@ var refreshStaleImage = function refreshStaleImage(game, dims) {
           staleEntities[entity.type][entityID] = entity;
         }
       } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
           }
         } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
@@ -2646,15 +2635,53 @@ var renderEntity = function renderEntity(ctx, game, entity, alwaysOnScreen) {
   // render positions in front
   if (game.showPositionsInFront) {
     var positionsInFront = getPositionsInFront(game, entity);
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+      for (var _iterator3 = positionsInFront[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        var pos = _step3.value;
+        var x = pos.x,
+            y = pos.y;
+
+        ctx.strokeStyle = 'red';
+        ctx.strokeRect(x, y, 1, 1);
+      }
+    } catch (err) {
+      _didIteratorError3 = true;
+      _iteratorError3 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+          _iterator3.return();
+        }
+      } finally {
+        if (_didIteratorError3) {
+          throw _iteratorError3;
+        }
+      }
+    }
+  }
+
+  // render true position
+  if (game.showTruePositions) {
+    ctx.fillStyle = 'rgba(200, 0, 0, 0.4)';
+    ctx.fillRect(entity.position.x, entity.position.y, 1, 1);
+  }
+
+  // render hitbox
+  if (game.showHitboxes) {
+    var positionsInHitbox = getEntityPositions(game, entity);
     var _iteratorNormalCompletion4 = true;
     var _didIteratorError4 = false;
     var _iteratorError4 = undefined;
 
     try {
-      for (var _iterator4 = positionsInFront[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-        var pos = _step4.value;
-        var x = pos.x,
-            y = pos.y;
+      for (var _iterator4 = positionsInHitbox[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+        var _pos = _step4.value;
+        var x = _pos.x,
+            y = _pos.y;
 
         ctx.strokeStyle = 'red';
         ctx.strokeRect(x, y, 1, 1);
@@ -2675,85 +2702,47 @@ var renderEntity = function renderEntity(ctx, game, entity, alwaysOnScreen) {
     }
   }
 
-  // render true position
-  if (game.showTruePositions) {
-    ctx.fillStyle = 'rgba(200, 0, 0, 0.4)';
-    ctx.fillRect(entity.position.x, entity.position.y, 1, 1);
-  }
-
-  // render hitbox
-  if (game.showHitboxes) {
-    var positionsInHitbox = getEntityPositions(game, entity);
-    var _iteratorNormalCompletion5 = true;
-    var _didIteratorError5 = false;
-    var _iteratorError5 = undefined;
-
-    try {
-      for (var _iterator5 = positionsInHitbox[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-        var _pos = _step5.value;
-        var x = _pos.x,
-            y = _pos.y;
-
-        ctx.strokeStyle = 'red';
-        ctx.strokeRect(x, y, 1, 1);
-      }
-    } catch (err) {
-      _didIteratorError5 = true;
-      _iteratorError5 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion5 && _iterator5.return) {
-          _iterator5.return();
-        }
-      } finally {
-        if (_didIteratorError5) {
-          throw _iteratorError5;
-        }
-      }
-    }
-  }
-
   // render true hitbox
   if (game.showTrueHitboxes) {
     var entityPositions = [];
     for (var x = 0; x < game.gridWidth; x++) {
       for (var y = 0; y < game.gridHeight; y++) {
         var entitiesAtPos = lookupInGrid(game.grid, { x: x, y: y });
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
+        var _iteratorNormalCompletion5 = true;
+        var _didIteratorError5 = false;
+        var _iteratorError5 = undefined;
 
         try {
-          for (var _iterator6 = entitiesAtPos[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            var id = _step6.value;
+          for (var _iterator5 = entitiesAtPos[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+            var id = _step5.value;
 
             if (id == entity.id) {
               entityPositions.push({ x: x, y: y });
             }
           }
         } catch (err) {
-          _didIteratorError6 = true;
-          _iteratorError6 = err;
+          _didIteratorError5 = true;
+          _iteratorError5 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion6 && _iterator6.return) {
-              _iterator6.return();
+            if (!_iteratorNormalCompletion5 && _iterator5.return) {
+              _iterator5.return();
             }
           } finally {
-            if (_didIteratorError6) {
-              throw _iteratorError6;
+            if (_didIteratorError5) {
+              throw _iteratorError5;
             }
           }
         }
       }
     }
-    var _iteratorNormalCompletion7 = true;
-    var _didIteratorError7 = false;
-    var _iteratorError7 = undefined;
+    var _iteratorNormalCompletion6 = true;
+    var _didIteratorError6 = false;
+    var _iteratorError6 = undefined;
 
     try {
-      for (var _iterator7 = entityPositions[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-        var _pos2 = _step7.value;
+      for (var _iterator6 = entityPositions[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+        var _pos2 = _step6.value;
         var _x = _pos2.x,
             _y = _pos2.y;
 
@@ -2761,16 +2750,16 @@ var renderEntity = function renderEntity(ctx, game, entity, alwaysOnScreen) {
         ctx.strokeRect(_x, _y, 1, 1);
       }
     } catch (err) {
-      _didIteratorError7 = true;
-      _iteratorError7 = err;
+      _didIteratorError6 = true;
+      _iteratorError6 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion7 && _iterator7.return) {
-          _iterator7.return();
+        if (!_iteratorNormalCompletion6 && _iterator6.return) {
+          _iterator6.return();
         }
       } finally {
-        if (_didIteratorError7) {
-          throw _iteratorError7;
+        if (_didIteratorError6) {
+          throw _iteratorError6;
         }
       }
     }
@@ -2827,7 +2816,7 @@ var renderPheromones = function renderPheromones(ctx, game) {
 };
 
 module.exports = { render: render };
-},{"../config":1,"../entities/registry":8,"../selectors/misc":27,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"./renderMinimap":23}],21:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../selectors/misc":27,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../selectors/sprites":31,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78,"./renderMinimap":23}],21:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -2922,7 +2911,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"./renderHealthBar":22}],22:[function(require,module,exports){
+},{"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78,"./renderHealthBar":22}],22:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -2964,7 +2953,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":78,"../utils/vectors":82}],23:[function(require,module,exports){
+},{"../utils/gridHelpers":74,"../utils/vectors":78}],23:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3457,7 +3446,7 @@ var onMinimap = function onMinimap(dims, entity) {
 module.exports = {
   renderMinimap: renderMinimap
 };
-},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../utils/gridHelpers":78,"../utils/vectors":82,"./renderSegmented":24}],24:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../utils/gridHelpers":74,"../utils/vectors":78,"./renderSegmented":24}],24:[function(require,module,exports){
 'use strict';
 
 var _require = require('../selectors/sprites'),
@@ -3605,7 +3594,7 @@ module.exports = {
   renderSegmented: renderSegmented,
   renderWormCanvas: renderWormCanvas
 };
-},{"../selectors/misc":27,"../selectors/sprites":31,"../utils/vectors":82,"./renderHealthBar":22}],25:[function(require,module,exports){
+},{"../selectors/misc":27,"../selectors/sprites":31,"../utils/vectors":78,"./renderHealthBar":22}],25:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3706,7 +3695,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":78}],27:[function(require,module,exports){
+},{"../utils/gridHelpers":74}],27:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3739,6 +3728,9 @@ var _require5 = require('../utils/vectors'),
 
 var _require6 = require('../simulation/actionQueue'),
     makeAction = _require6.makeAction;
+
+var _require7 = require('../selectors/pheromones'),
+    getPheromoneAtPosition = _require7.getPheromoneAtPosition;
 
 var onScreen = function onScreen(game, entity) {
   var viewPos = game.viewPos,
@@ -3899,15 +3891,87 @@ var getControlledEntityInteraction = function getControlledEntityInteraction(gam
   return makeAction(game, agent, 'PICKUP', { pickup: null, position: positionsInFront[0] });
 };
 
+// a position is lit if it or any of its neighbors contain any of the LIGHT_ pheromones
+var isLit = function isLit(game, position) {
+  for (var i = 0; i < game.AGENT.length; i++) {
+    var isInLight = getPheromoneAtPosition(game, position, 'LIGHT_' + i, 1) > 0;
+    if (isInLight) return true;
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = getNeighborPositions(game, { position: position })[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var neighbor = _step2.value;
+
+        if (getPheromoneAtPosition(game, neighbor, 'LIGHT_' + i, 1)) {
+          return true;
+        }
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+  }
+
+  return false;
+};
+
+// returns true if an agent is in the light of another agent
+var inOtherLight = function inOtherLight(game, agent) {
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
+
+  try {
+    for (var _iterator3 = getEntityPositions(game, agent)[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var pos = _step3.value;
+
+      for (var i = 0; i < game.AGENT.length; i++) {
+        if ('LIGHT_' + i == agent.pheromoneType) continue;
+        var isInLight = getPheromoneAtPosition(game, pos, 'LIGHT_' + i, 1) > 0;
+        if (isInLight) return true;
+      }
+    }
+  } catch (err) {
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion3 && _iterator3.return) {
+        _iterator3.return();
+      }
+    } finally {
+      if (_didIteratorError3) {
+        throw _iteratorError3;
+      }
+    }
+  }
+
+  return false;
+};
+
 module.exports = {
   onScreen: onScreen,
   getPositionsInFront: getPositionsInFront,
   getPositionsBehind: getPositionsBehind,
   isFacing: isFacing,
   canDoMove: canDoMove,
-  getControlledEntityInteraction: getControlledEntityInteraction
+  getControlledEntityInteraction: getControlledEntityInteraction,
+  isLit: isLit,
+  inOtherLight: inOtherLight
 };
-},{"../selectors/collisions":26,"../selectors/neighbors":29,"../simulation/actionQueue":33,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],28:[function(require,module,exports){
+},{"../selectors/collisions":26,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],28:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4002,7 +4066,7 @@ module.exports = {
   isNeighboringColonyPher: isNeighboringColonyPher,
   isAboveSomething: isAboveSomething
 };
-},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],29:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],29:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -4269,7 +4333,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":26,"../utils/gridHelpers":78,"../utils/vectors":82}],30:[function(require,module,exports){
+},{"../selectors/collisions":26,"../utils/gridHelpers":74,"../utils/vectors":78}],30:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4496,7 +4560,7 @@ module.exports = {
   isPositionBlockingPheromone: isPositionBlockingPheromone,
   getAllPheromonesAtPosition: getAllPheromonesAtPosition
 };
-},{"../config":1,"../selectors/neighbors":29,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],31:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":29,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],31:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4852,7 +4916,7 @@ module.exports = {
   getBackgroundSprite: getBackgroundSprite,
   getMaxFrameOffset: getMaxFrameOffset
 };
-},{"../config":1,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],32:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":27,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/actionQueue":33,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],32:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5099,7 +5163,7 @@ var entityDie = function entityDie(game, entity) {
 module.exports = {
   entityStartCurrentAction: entityStartCurrentAction
 };
-},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../utils/helpers":79,"../utils/vectors":82}],33:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/misc":27,"../selectors/sprites":31,"../simulation/actionQueue":33,"../simulation/entityOperations":34,"../utils/helpers":75,"../utils/vectors":78}],33:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5349,7 +5413,7 @@ module.exports = {
   getFrame: getFrame,
   isDoingAction: isDoingAction
 };
-},{"../selectors/pheromones":30,"../utils/helpers":79,"../utils/vectors":82}],34:[function(require,module,exports){
+},{"../selectors/pheromones":30,"../utils/helpers":75,"../utils/vectors":78}],34:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6023,7 +6087,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/pheromones":36,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],35:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":29,"../selectors/pheromones":30,"../simulation/pheromones":36,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],35:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -6422,7 +6486,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],37:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],37:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/makeEntity'),
@@ -6523,6 +6587,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
     // entities treated specially
     focusedEntity: null,
     controlledEntity: null,
+    prevControlledEntity: null,
 
     staleTiles: [],
     floodFillSources: [],
@@ -6570,7 +6635,8 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
     // time travel-specific properties
     isTimeReversed: false,
     numTimeReversals: 0,
-    actionIndex: 0
+    actionIndex: 0,
+    maxSteps: 20
   };
 
   // lookup for entityIDs by entityType
@@ -6586,7 +6652,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 };
 
 module.exports = { initBaseState: initBaseState, initPlayer: initPlayer };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../simulation/entityOperations":34,"../utils/gridHelpers":78,"../utils/stochastic":81,"../utils/vectors":82}],38:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../simulation/entityOperations":34,"../utils/gridHelpers":74,"../utils/stochastic":77,"../utils/vectors":78}],38:[function(require,module,exports){
 'use strict';
 
 var initState = function initState() {
@@ -6629,6 +6695,9 @@ var levels = require('../levels/levels');
 var _require5 = require('../thunks/levelThunks'),
     loadLevel = _require5.loadLevel;
 
+var _require6 = require('../selectors/misc'),
+    inOtherLight = _require6.inOtherLight;
+
 var levelOrder = ['testLevel', 'adaptedLevel'];
 
 /**
@@ -6665,7 +6734,10 @@ var initGameOverSystem = function initGameOverSystem(store) {
       dispatch({ type: 'START_TICK' });
     }
 
-    // loss conditions
+    // LOSS CONDITIONS
+
+    // entity hit a paradox trying to go through a door
+    var reason = '';
     var paradoxEntity = null;
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -6678,8 +6750,11 @@ var initGameOverSystem = function initGameOverSystem(store) {
         var agent = game.entities[id];
         if (agent.hitParadox) {
           paradoxEntity = agent;
+          reason = 'Your former self hit a paradox trying to go through a locked door';
         }
       }
+
+      // controlled entity is in the light of another entity
     } catch (err) {
       _didIteratorError = true;
       _iteratorError = err;
@@ -6695,8 +6770,15 @@ var initGameOverSystem = function initGameOverSystem(store) {
       }
     }
 
-    if (paradoxEntity) {
-      handleGameLoss(store, dispatch, state, 'loss');
+    var wasSeen = inOtherLight(game, game.controlledEntity) && !game.isTimeReversed;
+    if (wasSeen) reason = 'You hit a paradox because you were seen by your former self';
+
+    // run out of steps
+    var noMoreSteps = game.actionIndex > game.maxSteps;
+    if (noMoreSteps) reason = 'You ran out of steps';
+
+    if (paradoxEntity || wasSeen || noMoreSteps) {
+      handleGameLoss(store, dispatch, state, reason);
     }
   });
 };
@@ -6729,7 +6811,7 @@ var handleGameLoss = function handleGameLoss(store, dispatch, state, reason) {
   var body = React.createElement(
     'div',
     null,
-    'Your base was destroyed! You survived ' + game.missilesSurvived + ' missiles'
+    reason
   );
 
   dispatch({ type: 'SET_MODAL',
@@ -6791,7 +6873,7 @@ var handleGameWon = function handleGameWon(store, dispatch, state, reason) {
 };
 
 module.exports = { initGameOverSystem: initGameOverSystem };
-},{"../levels/levels":12,"../render/render":20,"../thunks/levelThunks":44,"../ui/components/Button.react":68,"../ui/components/Divider.react":70,"../ui/components/Modal.react":73,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"axios":83,"react":118}],40:[function(require,module,exports){
+},{"../levels/levels":12,"../render/render":20,"../selectors/misc":27,"../thunks/levelThunks":44,"../ui/components/Button.react":65,"../ui/components/Divider.react":67,"../ui/components/Modal.react":69,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78,"axios":79,"react":114}],40:[function(require,module,exports){
 'use strict';
 
 var initKeyboardControlsSystem = function initKeyboardControlsSystem(store) {
@@ -7159,7 +7241,7 @@ var getMousePixel = function getMousePixel(ev, canvas) {
 };
 
 module.exports = { initMouseControlsSystem: initMouseControlsSystem };
-},{"../config":1,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],42:[function(require,module,exports){
+},{"../config":1,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],42:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -7252,7 +7334,7 @@ var initPheromoneWorkerSystem = function initPheromoneWorkerSystem(store) {
 };
 
 module.exports = { initPheromoneWorkerSystem: initPheromoneWorkerSystem };
-},{"../entities/registry":8,"../utils/helpers":79,"../utils/vectors":82}],43:[function(require,module,exports){
+},{"../entities/registry":8,"../utils/helpers":75,"../utils/vectors":78}],43:[function(require,module,exports){
 'use strict';
 
 var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
@@ -7448,7 +7530,7 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 };
 
 module.exports = { handleCollect: handleCollect, handlePlace: handlePlace };
-},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],46:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/buildings":25,"../selectors/mouseInteractionSelectors":28,"../selectors/neighbors":29,"../selectors/pheromones":30,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78}],46:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7475,6 +7557,7 @@ var doReverseTime = function doReverseTime(game) {
     var nextPlayerChar = Entities.AGENT.make(game, _extends({}, game.controlledEntity.position));
     nextPlayerChar.theta = game.controlledEntity.theta;
     addEntity(game, nextPlayerChar);
+    game.prevControlledEntity = game.controlledEntity;
     game.controlledEntity = nextPlayerChar;
   }
 
@@ -7524,7 +7607,6 @@ module.exports = {
 'use strict';
 
 var React = require('react');
-var InfoHUD = require('./InfoHUD.react');
 
 var BottomBar = function BottomBar(props) {
   var isExperimental = props.isExperimental,
@@ -7535,25 +7617,21 @@ var BottomBar = function BottomBar(props) {
 
   var height = 150;
   var bottomPadding = 8;
-  return React.createElement(
-    'div',
-    {
-      style: {
-        position: 'absolute',
-        top: window.innerHeight - height - bottomPadding,
-        height: height,
-        width: '100%',
-        zIndex: 2,
-        pointerEvents: 'none'
-        // textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff',
-      }
-    },
-    React.createElement(InfoHUD, { game: game, mousePos: mousePos })
-  );
+  return React.createElement('div', {
+    style: {
+      position: 'absolute',
+      top: window.innerHeight - height - bottomPadding,
+      height: height,
+      width: '100%',
+      zIndex: 2,
+      pointerEvents: 'none'
+      // textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff',
+    }
+  });
 };
 
 module.exports = BottomBar;
-},{"./InfoHUD.react":61,"react":118}],48:[function(require,module,exports){
+},{"react":114}],48:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -7580,7 +7658,8 @@ function Canvas(props) {
       innerWidth = props.innerWidth,
       innerHeight = props.innerHeight,
       isExperimental = props.isExperimental,
-      focusedEntity = props.focusedEntity;
+      focusedEntity = props.focusedEntity,
+      levelName = props.levelName;
 
   // calculate max canvas width (allows canvas sizing DOWN)
 
@@ -7592,16 +7671,16 @@ function Canvas(props) {
     maxHeight = innerHeight;
     var sizeMult = 0.9;
     if (maxWidth < 600 || maxHeight < 800) {
-      sizeMult = 0.75;
+      sizeMult = 0.7;
     }
     if (maxWidth > 1000 || maxHeight > 1000) {
-      sizeMult = 1.25;
+      sizeMult = 1.1;
     }
     if (maxWidth > 1200 || maxHeight > 1200) {
       sizeMult = 1.3;
     }
     useEffect(function () {
-      var viewPos = { x: 0, y: 0 };
+      var viewPos = { x: -5, y: -5 };
       var viewWidth = maxWidth / (config.cellWidth * sizeMult);
       var viewHeight = maxHeight / (config.cellHeight * sizeMult);
       if (focusedEntity != null) {
@@ -7613,7 +7692,7 @@ function Canvas(props) {
       dispatch({ type: 'SET_VIEW_POS',
         viewPos: viewPos, viewWidth: viewWidth, viewHeight: viewHeight
       });
-    }, [maxWidth, maxHeight]);
+    }, [innerWidth, innerHeight, levelName, sizeMult]);
 
     if (maxWidth != config.canvasWidth) {
       config.canvasWidth = maxWidth;
@@ -7692,7 +7771,7 @@ function withPropsChecker(WrappedComponent) {
 }
 
 module.exports = React.memo(Canvas);
-},{"../config":1,"react":118}],49:[function(require,module,exports){
+},{"../config":1,"react":114}],49:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -7780,7 +7859,7 @@ var AudioWidget = function AudioWidget(props) {
 };
 
 module.exports = AudioWidget;
-},{"./Button.react":50,"react":118}],50:[function(require,module,exports){
+},{"./Button.react":50,"react":114}],50:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7864,7 +7943,7 @@ function Button(props) {
 }
 
 module.exports = Button;
-},{"react":118}],51:[function(require,module,exports){
+},{"react":114}],51:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -7904,7 +7983,7 @@ function Checkbox(props) {
 }
 
 module.exports = Checkbox;
-},{"react":118}],52:[function(require,module,exports){
+},{"react":114}],52:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7924,7 +8003,7 @@ function Divider(props) {
 }
 
 module.exports = Divider;
-},{"react":118}],53:[function(require,module,exports){
+},{"react":114}],53:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -7965,37 +8044,7 @@ var Dropdown = function Dropdown(props) {
 };
 
 module.exports = Dropdown;
-},{"react":118}],54:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var React = require('react');
-
-var InfoCard = function InfoCard(props) {
-  var overrideStyle = props.overrideStyle || {};
-  var underrideStyle = props.underrideStyle || {};
-  return React.createElement(
-    'div',
-    {
-      style: _extends({}, underrideStyle, {
-        border: props.border != null ? props.border : '1px solid black',
-        backgroundColor: 'white',
-        opacity: props.opacity != null ? props.opacity : 1,
-        // width: 200,
-        // height: 148,
-        verticalAlign: 'top',
-        marginLeft: 4,
-        display: 'inline-block',
-        padding: 4
-      }, overrideStyle)
-    },
-    props.children
-  );
-};
-
-module.exports = InfoCard;
-},{"react":118}],55:[function(require,module,exports){
+},{"react":114}],54:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8069,7 +8118,7 @@ function Modal(props) {
 }
 
 module.exports = Modal;
-},{"../../utils/helpers":79,"./Button.react":50,"react":118}],56:[function(require,module,exports){
+},{"../../utils/helpers":75,"./Button.react":50,"react":114}],55:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8159,7 +8208,7 @@ var submitValue = function submitValue(onChange, nextVal, onlyInt) {
 };
 
 module.exports = NumberField;
-},{"react":118}],57:[function(require,module,exports){
+},{"react":114}],56:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -8248,7 +8297,7 @@ var RadioPicker = function (_React$Component) {
 }(React.Component);
 
 module.exports = RadioPicker;
-},{"react":118}],58:[function(require,module,exports){
+},{"react":114}],57:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8319,7 +8368,7 @@ function Slider(props) {
 }
 
 module.exports = Slider;
-},{"./NumberField.react":56,"react":118}],59:[function(require,module,exports){
+},{"./NumberField.react":55,"react":114}],58:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8498,7 +8547,7 @@ function ExperimentalSidebar(props) {
 }
 
 module.exports = ExperimentalSidebar;
-},{"./Components/Button.react":50,"./Components/Checkbox.react":51,"./Components/Divider.react":52,"./Components/Dropdown.react":53,"./Components/Slider.react":58,"react":118}],60:[function(require,module,exports){
+},{"./Components/Button.react":50,"./Components/Checkbox.react":51,"./Components/Divider.react":52,"./Components/Dropdown.react":53,"./Components/Slider.react":57,"react":114}],59:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8634,26 +8683,25 @@ function Game(props) {
       innerWidth: dims.width,
       innerHeight: dims.height,
       isExperimental: state.screen == 'EDITOR',
-      focusedEntity: game.focusedEntity
+      focusedEntity: game.focusedEntity,
+      levelName: state.campaign.level
     }),
     React.createElement(Ticker, { ticker: game.ticker }),
-    React.createElement(MiniTicker, { miniTicker: game.miniTicker })
+    React.createElement(MiniTicker, { miniTicker: game.miniTicker }),
+    React.createElement(TopBar, { dispatch: dispatch,
+      isExperimental: props.isInLevelEditor,
+      tickInterval: state.game.tickInterval,
+      modal: state.modal,
+      canvasWidth: dims.width,
+      isMuted: state.isMuted,
+      steps: state.game.actionIndex,
+      maxSteps: state.game.maxSteps
+    }),
+    React.createElement(BottomBar, { dispatch: dispatch,
+      game: game,
+      mousePos: game.mouse.curPos
+    })
   );
-
-  // <TopBar dispatch={dispatch}
-  //   upgradedAt={game.upgradedAt}
-  //   isExperimental={props.isInLevelEditor}
-  //   tickInterval={state.game.tickInterval}
-  //   modal={state.modal}
-  //   canvasWidth={dims.width}
-  //   isMuted={state.isMuted}
-  //   tick={game.time}
-  //   game={game}
-  // />
-  // <BottomBar dispatch={dispatch}
-  //   game={game}
-  //   mousePos={game.mouse.curPos}
-  // />
 }
 
 function registerHotkeys(dispatch) {
@@ -8836,301 +8884,7 @@ function MiniTicker(props) {
 }
 
 module.exports = Game;
-},{"../config":1,"../render/render":20,"../selectors/misc":27,"../simulation/actionQueue":33,"../systems/gameOverSystem":39,"../systems/keyboardControlsSystem":40,"../systems/mouseControlsSystem":41,"../systems/pheromoneWorkerSystem":42,"../systems/spriteSheetSystem":43,"../thunks/mouseInteractions":45,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"./BottomBar.react":47,"./Canvas.react":48,"./Components/Button.react":50,"./Components/Checkbox.react":51,"./Components/RadioPicker.react":57,"./ExperimentalSidebar.react":59,"./TopBar.react":66,"react":118}],61:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-var _require = require('../entities/registry'),
-    Entities = _require.Entities;
-
-var _require2 = require('../config'),
-    pheromones = _require2.pheromones;
-
-var _require3 = require('../utils/helpers'),
-    encodePosition = _require3.encodePosition;
-
-var InfoCard = require('../ui/components/InfoCard.react');
-
-var _require4 = require('../utils/gridHelpers'),
-    lookupInGrid = _require4.lookupInGrid;
-
-var _require5 = require('../selectors/pheromones'),
-    getPheromoneAtPosition = _require5.getPheromoneAtPosition,
-    getTemperature = _require5.getTemperature,
-    getAllPheromonesAtPosition = _require5.getAllPheromonesAtPosition;
-
-var InfoHUD = function InfoHUD(props) {
-  var mousePos = props.mousePos,
-      game = props.game;
-
-
-  var pheromoneInfoCards = [];
-  var pherInCell = getAllPheromonesAtPosition(game, mousePos, game.gaiaID);
-  var sunLight = 0;
-  for (var pherType in pherInCell) {
-    if (pherType == 'HEAT' || pherType == 'COLD') continue;
-    if (pherType == 'LIGHT') {
-      sunLight = pherInCell[pherType];
-      continue;
-    }
-    if (pherInCell[pherType] > 0) {
-      pheromoneInfoCards.push(React.createElement(PheromoneInfoCard, {
-        key: 'pherInfo_' + pherType + encodePosition(mousePos) + pherInCell[pherType],
-        pheromoneType: pherType,
-        quantity: pherInCell[pherType]
-      }));
-    }
-  }
-
-  var entityInfoCards = lookupInGrid(game.grid, mousePos).map(function (id) {
-    return game.entities[id];
-  }).filter(function (e) {
-    return e != null && e.type != 'BACKGROUND';
-  }).map(function (e) {
-    return React.createElement(EntityInfoCard, { key: 'info_' + e.id, entity: e });
-  });
-
-  var temp = getTemperature(game, mousePos);
-  var maxLight = pheromones.LIGHT.quantity;
-
-  return React.createElement(
-    'div',
-    {
-      style: {}
-    },
-    React.createElement(
-      InfoCard,
-      null,
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Position: '
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        'x: ',
-        mousePos.x,
-        ' y: ',
-        mousePos.y
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Temperature'
-        ),
-        ': ',
-        temp
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Sun Light'
-        ),
-        ': ',
-        (sunLight / maxLight * 100).toFixed(0),
-        '%'
-      )
-    ),
-    entityInfoCards,
-    pheromoneInfoCards
-  );
-};
-
-var PheromoneInfoCard = function PheromoneInfoCard(props) {
-  var pheromoneType = props.pheromoneType,
-      quantity = props.quantity;
-
-  var config = pheromones[pheromoneType];
-  return React.createElement(
-    InfoCard,
-    null,
-    React.createElement(
-      'div',
-      { style: { textAlign: 'center' } },
-      React.createElement(
-        'b',
-        null,
-        pheromoneType
-      )
-    ),
-    React.createElement(
-      'div',
-      null,
-      'Concentration: ',
-      Math.round(quantity),
-      '/',
-      config.quantity,
-      config.heatPoint ? React.createElement(
-        'div',
-        null,
-        'Boil Temp: ',
-        config.heatPoint
-      ) : null,
-      config.heatsTo ? React.createElement(
-        'div',
-        null,
-        'Boils To: ',
-        config.heatsTo
-      ) : null,
-      config.combustionPoint ? React.createElement(
-        'div',
-        null,
-        'Combustion Temp: ',
-        config.combustionPoint
-      ) : null,
-      config.combustsTo ? React.createElement(
-        'div',
-        null,
-        'Combusts To: ',
-        config.combustsTo
-      ) : null,
-      config.coolPoint ? React.createElement(
-        'div',
-        null,
-        'Cools At: ',
-        config.coolPoint
-      ) : null,
-      config.coolsTo ? React.createElement(
-        'div',
-        null,
-        'Cools To: ',
-        config.coolsTo
-      ) : null,
-      config.coolConcentration ? React.createElement(
-        'div',
-        null,
-        'Concentration to Cool: ',
-        config.coolConcentration
-      ) : null
-    )
-  );
-};
-
-var EntityInfoCard = function EntityInfoCard(props) {
-  var entity = props.entity;
-
-  var entityType = entity.type != 'AGENT' ? entity.type : entity.collectedAs;
-  var config = Entities[entityType].config;
-  var launchCost = [];
-  if (entity.launchCost != null) {
-    for (var type in entity.launchCost) {
-      launchCost.push(React.createElement(
-        'div',
-        { key: "launchCost_" + entityType + "_" + type },
-        type,
-        ': ',
-        entity.launchCost[type]
-      ));
-    }
-  }
-
-  return React.createElement(
-    InfoCard,
-    null,
-    React.createElement(
-      'div',
-      { style: { textAlign: 'center' } },
-      React.createElement(
-        'b',
-        null,
-        entityType
-      )
-    ),
-    entity.hp ? React.createElement(
-      'div',
-      null,
-      'HP: ',
-      entity.hp,
-      '/',
-      config.hp
-    ) : null,
-    entity.fuel ? React.createElement(
-      'div',
-      null,
-      'Fuel (seconds): ',
-      Math.round(entity.fuel / 1000),
-      '/',
-      Math.round(config.fuel / 1000)
-    ) : null,
-    entity.onFire != null ? React.createElement(
-      'div',
-      null,
-      'On Fire: ',
-      entity.onFire ? 'Yes' : 'No'
-    ) : null,
-    entity.combustionTemp != null ? React.createElement(
-      'div',
-      null,
-      'Combustion Temp: ',
-      entity.combustionTemp
-    ) : null,
-    entity.combustionTemp != null ? React.createElement(
-      'div',
-      null,
-      'Fire Temp: ',
-      entity.heatQuantity
-    ) : null,
-    entity.powerConsumed != null ? React.createElement(
-      'div',
-      null,
-      'Power Needed: ',
-      entity.powerConsumed
-    ) : null,
-    entity.isPowered != null ? React.createElement(
-      'div',
-      null,
-      'Is Powered: ',
-      entity.isPowered ? 'Yes' : 'No'
-    ) : null,
-    entity.meltTemp != null ? React.createElement(
-      'div',
-      null,
-      'Melts To: ',
-      entity.meltType ? entity.meltType : entity.pheromoneType
-    ) : null,
-    entity.meltTemp != null ? React.createElement(
-      'div',
-      null,
-      'Melt Temp: ',
-      entity.meltTemp
-    ) : null,
-    entity.damage ? React.createElement(
-      'div',
-      null,
-      'Damage: ',
-      entity.damage
-    ) : null,
-    entity.powerGenerated != null ? React.createElement(
-      'div',
-      null,
-      'Power Generated: ',
-      entity.powerGenerated.toFixed(2),
-      '/',
-      config.powerGenerated
-    ) : null,
-    launchCost.length > 0 ? React.createElement(
-      'div',
-      null,
-      'Cost Per Launch: ',
-      launchCost
-    ) : null
-  );
-};
-
-module.exports = InfoHUD;
-},{"../config":1,"../entities/registry":8,"../selectors/pheromones":30,"../ui/components/InfoCard.react":72,"../utils/gridHelpers":78,"../utils/helpers":79,"react":118}],62:[function(require,module,exports){
+},{"../config":1,"../render/render":20,"../selectors/misc":27,"../simulation/actionQueue":33,"../systems/gameOverSystem":39,"../systems/keyboardControlsSystem":40,"../systems/mouseControlsSystem":41,"../systems/pheromoneWorkerSystem":42,"../systems/spriteSheetSystem":43,"../thunks/mouseInteractions":45,"../utils/gridHelpers":74,"../utils/helpers":75,"../utils/vectors":78,"./BottomBar.react":47,"./Canvas.react":48,"./Components/Button.react":50,"./Components/Checkbox.react":51,"./Components/RadioPicker.react":56,"./ExperimentalSidebar.react":58,"./TopBar.react":63,"react":114}],60:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -9171,7 +8925,8 @@ var _require4 = require('../entities/registry'),
 
 function LevelEditor(props) {
   var dispatch = props.dispatch,
-      state = props.state;
+      state = props.state,
+      store = props.store;
   var game = state.game;
 
   // position level editor to the right of the canvas
@@ -9195,6 +8950,7 @@ function LevelEditor(props) {
     gridWidth: game.gridHeight,
     gridHeight: game.gridWidth,
     playerID: 0,
+    maxSteps: 20,
     paletteMode: 'CREATE ENTITIES',
 
     // entity creation mode
@@ -9213,8 +8969,8 @@ function LevelEditor(props) {
     clipboardMode: 'COPY',
 
     // pheromone mode
-    selectedPheromone: 'LIGHT',
-    pheromoneQuantity: globalConfig.pheromones.LIGHT.quantity
+    selectedPheromone: 'LIGHT_0',
+    pheromoneQuantity: globalConfig.pheromones['LIGHT_0'].quantity
   }),
       _useState2 = _slicedToArray(_useState, 2),
       editor = _useState2[0],
@@ -9371,6 +9127,17 @@ function LevelEditor(props) {
     React.createElement(
       'div',
       null,
+      'Max Steps:',
+      React.createElement(NumberField, {
+        value: editor.maxSteps,
+        onChange: function onChange(maxSteps) {
+          return setEditor(_extends({}, editor, { maxSteps: maxSteps }));
+        }
+      })
+    ),
+    React.createElement(
+      'div',
+      null,
       React.createElement(Button, {
         label: 'Submit Changes',
         onClick: function onClick() {
@@ -9380,6 +9147,7 @@ function LevelEditor(props) {
             gridWidth: editor.gridWidth,
             gridHeight: editor.gridHeight
           });
+          dispatch({ type: 'SET_MAX_STEPS', maxSteps: editor.maxSteps });
           setEditor(_extends({}, editor, {
             playerID: editor.playerID > editor.numPlayers ? editor.numPlayers : editor.playerID,
             version: editor.version + 1
@@ -9614,10 +9382,11 @@ function LevelEditor(props) {
             gridHeight: editor.importedLevel.gridHeight
           }));
           setTimeout(function () {
-            return setEditor(_extends({}, editor, {
+            setEditor(_extends({}, editor, {
               numPlayers: editor.importedLevel.numPlayers,
               gridWidth: editor.importedLevel.gridWidth,
               gridHeight: editor.importedLevel.gridHeight,
+              maxSteps: store.getState().game.maxSteps,
               version: editor.version + 1
             }));
           }, 1000);
@@ -9660,6 +9429,7 @@ function LevelEditor(props) {
               numPlayers: editor.importedGameState.numPlayers,
               gridWidth: editor.importedGameState.gridWidth,
               gridHeight: editor.importedGameState.gridHeight,
+              maxSteps: editor.importedLevel.maxSteps,
               version: editor.version + 1
             }));
           }, 1000);
@@ -10002,7 +9772,7 @@ function createEntityOptions(game, editor, setEditor) {
 }
 
 module.exports = LevelEditor;
-},{"../config":1,"../entities/registry":8,"../render/render":20,"../systems/mouseControlsSystem":41,"../utils/vectors":82,"./components/Button.react":68,"./components/Checkbox.react":69,"./components/Divider.react":70,"./components/Dropdown.react":71,"./components/NumberField.react":74,"./components/Slider.react":76,"react":118}],63:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":20,"../systems/mouseControlsSystem":41,"../utils/vectors":78,"./components/Button.react":65,"./components/Checkbox.react":66,"./components/Divider.react":67,"./components/Dropdown.react":68,"./components/NumberField.react":70,"./components/Slider.react":72,"react":114}],61:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10198,11 +9968,6 @@ function Lobby(props) {
         'h3',
         null,
         '~Alpha~'
-      ),
-      React.createElement(
-        'h2',
-        { style: { fontSize: '4em', marginBottom: 0 } },
-        'Play:'
       ),
       React.createElement(Button, {
         style: {
@@ -10424,7 +10189,7 @@ function playLevel(store, levelName, setLoadingProgress, setIsLoaded) {
 }
 
 module.exports = Lobby;
-},{"../config":1,"../levels/levels":12,"../systems/spriteSheetSystem":43,"../thunks/levelThunks":44,"../ui/components/Modal.react":73,"../ui/components/QuitButton.react":75,"../utils/helpers":79,"./components/AudioWidget.react":67,"./components/Button.react":68,"./components/Checkbox.react":69,"./components/Divider.react":70,"./components/Dropdown.react":71,"axios":83,"react":118}],64:[function(require,module,exports){
+},{"../config":1,"../levels/levels":12,"../systems/spriteSheetSystem":43,"../thunks/levelThunks":44,"../ui/components/Modal.react":69,"../ui/components/QuitButton.react":71,"../utils/helpers":75,"./components/AudioWidget.react":64,"./components/Button.react":65,"./components/Checkbox.react":66,"./components/Divider.react":67,"./components/Dropdown.react":68,"axios":79,"react":114}],62:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10474,501 +10239,7 @@ function Main(props) {
 }
 
 module.exports = Main;
-},{"./Game.react":60,"./LevelEditor.react":62,"./Lobby.react":63,"react":118}],65:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var InfoCard = require('../ui/Components/InfoCard.react');
-var globalConfig = require('../config');
-
-var _require = require('../entities/registry'),
-    Entities = _require.Entities;
-
-var _require2 = require('../selectors/buildings'),
-    canAffordBuilding = _require2.canAffordBuilding,
-    getModifiedCost = _require2.getModifiedCost;
-
-var useMemo = React.useMemo,
-    useEffect = React.useEffect;
-
-
-function PlacementPalette(props) {
-  var dispatch = props.dispatch,
-      game = props.game,
-      base = props.base,
-      placeType = props.placeType;
-
-
-  var placeEntityCards = [];
-  for (var entityType in Entities) {
-    var config = Entities[entityType].config;
-    if (!config.isCollectable) continue;
-    placeEntityCards.push(React.createElement(PlaceEntityCard, { key: "placeEntityCard_" + entityType,
-      dispatch: dispatch,
-      entityType: entityType,
-      quantity: base.resources[entityType] || 0,
-      isSelected: entityType == placeType
-    }));
-    if (entityType == 'COAL') {
-      placeEntityCards.push(React.createElement(PlaceEntityCard, { key: "placeEntityCard_HOT_COAL",
-        dispatch: dispatch,
-        entityType: 'HOT COAL',
-        quantity: base.resources.COAL || 0,
-        isSelected: 'HOT COAL' == placeType
-      }));
-    }
-  }
-  var placeBuildingCards = [];
-  for (var _entityType in Entities) {
-    var _config = Entities[_entityType].config;
-    if (_config.cost == null) continue;
-    placeBuildingCards.push(React.createElement(PlaceBuildingCard, { key: "placeEntityCard_" + _entityType,
-      dispatch: dispatch,
-      base: base,
-      entityType: _entityType,
-      cost: getModifiedCost(game, _entityType),
-      isSelected: _entityType == placeType
-    }));
-  }
-
-  return React.createElement(
-    'span',
-    null,
-    React.createElement(
-      'div',
-      { style: { marginBottom: 6 } },
-      placeEntityCards
-    ),
-    React.createElement(
-      'div',
-      null,
-      placeBuildingCards
-    )
-  );
-}
-
-function PlaceEntityCard(props) {
-  var dispatch = props.dispatch,
-      entityType = props.entityType,
-      quantity = props.quantity,
-      isSelected = props.isSelected;
-
-
-  var hover = useMemo(function () {
-    return React.createElement(HoverCard, { entityType: entityType, depth: 0 });
-  }, []);
-  return React.createElement(
-    'div',
-    {
-      style: {
-        display: 'inline-block',
-        position: 'relative'
-      },
-      className: 'displayChildOnHover',
-      onClick: function onClick() {
-        return dispatch({ type: 'SET_PLACE_TYPE', placeType: entityType });
-      }
-    },
-    React.createElement(
-      InfoCard,
-      {
-        border: isSelected ? '2px solid orange' : null,
-        opacity: quantity != null && quantity > 0 ? null : 0.5
-      },
-      React.createElement(
-        'div',
-        null,
-        React.createElement(Resource, { resource: entityType })
-      ),
-      React.createElement(
-        'div',
-        null,
-        quantity.toFixed(1)
-      )
-    ),
-    hover
-  );
-}
-
-function PlaceBuildingCard(props) {
-  var dispatch = props.dispatch,
-      entityType = props.entityType,
-      cost = props.cost,
-      isSelected = props.isSelected,
-      base = props.base;
-
-
-  var costBreakdown = [];
-  for (var type in cost) {
-    costBreakdown.push(React.createElement(
-      'div',
-      { key: "cost_" + entityType + "_" + type },
-      type,
-      ': ',
-      cost[type]
-    ));
-  }
-
-  var hover = useMemo(function () {
-    return React.createElement(HoverCard, { entityType: entityType, depth: 0 });
-  }, []);
-
-  return React.createElement(
-    'div',
-    {
-      style: {
-        display: 'inline-block',
-        position: 'relative'
-      },
-      className: 'displayChildOnHover',
-      onClick: function onClick() {
-        return dispatch({ type: 'SET_PLACE_TYPE', placeType: entityType });
-      }
-    },
-    React.createElement(
-      InfoCard,
-      {
-        border: isSelected ? '2px solid orange' : null,
-        opacity: canAffordBuilding(base, cost) ? null : 0.5
-      },
-      React.createElement(Resource, { resource: entityType }),
-      React.createElement(
-        'div',
-        null,
-        'Cost:'
-      ),
-      costBreakdown
-    ),
-    hover
-  );
-}
-
-function HoverCard(props) {
-  var entityType = props.entityType,
-      depth = props.depth;
-
-  var allDescriptions = globalConfig.config.descriptions;
-  var _allDescriptions$enti = allDescriptions[entityType],
-      description = _allDescriptions$enti.description,
-      howToMake = _allDescriptions$enti.howToMake;
-
-
-  var hoverableDescription = [];
-  var hoverableHowToMake = [];
-  if (depth < 4) {
-    var splitDescription = description.split(' ');
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = splitDescription[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var term = _step.value;
-
-        if (term == 'HOT_COAL') term = 'HOT COAL';
-        if (allDescriptions[term] != null) {
-          hoverableDescription.push(React.createElement(
-            'div',
-            {
-              style: {
-                display: 'inline'
-              },
-              key: "hoverDesc_" + entityType + "_" + term + depth,
-              className: 'displayChildOnHover'
-            },
-            React.createElement(Resource, { resource: term }),
-            React.createElement(HoverCard, { entityType: term, depth: depth + 1 })
-          ));
-          hoverableDescription.push(' ');
-        } else {
-          hoverableDescription.push(term + ' ');
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
-    var splitHowToMake = [];
-    if (howToMake != null) {
-      splitHowToMake = howToMake.split(' ');
-    }
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-      for (var _iterator2 = splitHowToMake[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var _term = _step2.value;
-
-        if (_term == 'HOT_COAL') _term = 'HOT COAL';
-        if (allDescriptions[_term] != null) {
-          hoverableHowToMake.push(React.createElement(
-            'div',
-            {
-              style: {
-                display: 'inline'
-              },
-              key: "hoverHowTo_" + entityType + "_" + _term + depth,
-              className: 'displayChildOnHover'
-            },
-            React.createElement(Resource, { resource: _term }),
-            React.createElement(HoverCard, { entityType: _term, depth: depth + 1 })
-          ));
-          hoverableHowToMake.push(' ');
-        } else {
-          hoverableHowToMake.push(_term + ' ');
-        }
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
-    }
-  } else {
-    hoverableDescription = description;
-    hoverableHowToMake = howToMake;
-  }
-
-  return React.createElement(
-    'div',
-    {
-      className: 'hidden',
-      style: {
-        position: 'absolute',
-        top: 35,
-        left: 35,
-        width: 300,
-        zIndex: depth + 5
-      }
-    },
-    React.createElement(
-      InfoCard,
-      null,
-      React.createElement(
-        'div',
-        { style: { textAlign: 'center' } },
-        React.createElement(
-          'b',
-          null,
-          depth == 0 ? "Details" : entityType
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        hoverableDescription
-      ),
-      howToMake != null ? React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Made From: '
-        ),
-        hoverableHowToMake
-      ) : null
-    )
-  );
-}
-
-function Resource(props) {
-  var resource = props.resource;
-
-  if (resource == 'HOT COAL') {
-    resource = 'HOT_COAL';
-  }
-
-  var image = null;
-  switch (resource) {
-    case 'DIRT':
-    case 'STONE':
-    case 'COAL':
-    case 'HOT_COAL':
-    case 'IRON':
-    case 'STEEL':
-    case 'SULPHUR':
-    case 'ICE':
-    case 'URANIUM':
-      image = React.createElement(
-        'div',
-        {
-          style: {
-            display: 'inline-block',
-            position: 'relative',
-            overflow: 'hidden',
-            width: 16,
-            height: 16
-          }
-        },
-        React.createElement('img', {
-          style: {
-            position: 'absolute',
-            top: 0,
-            left: -64
-          },
-          src: "./img/" + resource + ".png"
-        })
-      );
-      break;
-    case 'TURBINE':
-    case 'SOLAR_PANEL':
-      image = React.createElement('img', {
-        width: 16,
-        height: 16,
-        src: "./img/" + resource + ".png"
-      });
-      break;
-    case 'BASIC_TURRET':
-    case 'FAST_TURRET':
-    case 'MISSILE_TURRET':
-    case 'LASER_TURRET':
-      image = React.createElement('img', {
-        width: 16,
-        height: 16,
-        src: "./img/TURRET.png"
-      });
-      break;
-    case 'SAND':
-    case 'MOLTEN_SAND':
-    case 'MOLTEN_IRON':
-    case 'MOLTEN_STEEL':
-    case 'WATER':
-    case 'STEAM':
-    case 'SULPHUR_DIOXIDE':
-    case 'OIL':
-    case 'HOT_OIL':
-    case 'HEAT':
-    case 'COLD':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones[resource].color
-        }
-      });
-      break;
-    case 'POWER':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones.SAND.color
-        }
-      });
-      break;
-    case 'FLUID':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones.WATER.color
-        }
-      });
-      break;
-    case 'GAS':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones.STEAM.color
-        }
-      });
-      break;
-    case 'SILICON':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          backgroundColor: '#006400'
-        }
-      });
-      break;
-    case 'GLASS':
-      image = React.createElement(
-        'div',
-        {
-          style: {
-            display: 'inline-block',
-            position: 'relative',
-            overflow: 'hidden',
-            width: 16,
-            height: 16
-          }
-        },
-        React.createElement('img', {
-          style: {
-            position: 'absolute',
-            top: 0,
-            left: -64,
-            opacity: 0.7
-          },
-          src: "./img/STEEL.png"
-        })
-      );
-      break;
-  }
-
-  return React.createElement(
-    'div',
-    {
-      style: {
-        display: 'inline-block'
-      }
-    },
-    React.createElement(
-      'b',
-      null,
-      React.createElement(
-        'span',
-        { style: { color: 'steelblue' } },
-        resource
-      )
-    ),
-    React.createElement(
-      'div',
-      { style: {
-          display: 'inline-block',
-          marginLeft: 2,
-          verticalAlign: 'top'
-        }
-      },
-      image
-    )
-  );
-}
-
-module.exports = PlacementPalette;
-},{"../config":1,"../entities/registry":8,"../selectors/buildings":25,"../ui/Components/InfoCard.react":54,"react":118}],66:[function(require,module,exports){
+},{"./Game.react":59,"./LevelEditor.react":60,"./Lobby.react":61,"react":114}],63:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10983,8 +10254,6 @@ var _require = require('../utils/helpers'),
     getDisplayTime = _require.getDisplayTime,
     isElectron = _require.isElectron;
 
-var InfoCard = require('../ui/components/InfoCard.react');
-var PlacementPalette = require('../ui/PlacementPalette.react');
 var memo = React.memo;
 
 var _require2 = require('../entities/registry'),
@@ -10996,9 +10265,7 @@ function TopBar(props) {
       modal = props.modal,
       tickInterval = props.tickInterval,
       canvasWidth = props.canvasWidth,
-      isMuted = props.isMuted,
-      placeType = props.placeType,
-      game = props.game;
+      isMuted = props.isMuted;
 
 
   if (isExperimental && tickInterval == null) {
@@ -11008,44 +10275,6 @@ function TopBar(props) {
   var height = 100;
   var topPadding = 8;
   var leftPadding = canvasWidth / 2 - 100;
-  var powerStuff = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'b',
-        null,
-        'Power Generated: '
-      ),
-      (totalPowerGenerated || 0).toFixed(1)
-    ),
-    React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'b',
-        null,
-        'Power Consumed: '
-      ),
-      (totalPowerNeeded || 0).toFixed(1)
-    ),
-    React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'b',
-        null,
-        'Power Available: '
-      ),
-      React.createElement(
-        'span',
-        { style: { color: powerMargin > 0 ? 'green' : 'red' } },
-        (powerMargin || 0).toFixed(1)
-      )
-    )
-  );
 
   return React.createElement(
     'div',
@@ -11060,98 +10289,79 @@ function TopBar(props) {
         textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'
       }
     },
+    React.createElement(ButtonStack, props),
+    React.createElement(InfoStack, props)
+  );
+}
+
+function InfoStack(props) {
+  var dispatch = props.dispatch,
+      isExperimental = props.isExperimental,
+      modal = props.modal,
+      tickInterval = props.tickInterval,
+      canvasWidth = props.canvasWidth,
+      isMuted = props.isMuted,
+      steps = props.steps,
+      maxSteps = props.maxSteps;
+
+
+  return React.createElement(
+    'div',
+    {
+      style: {
+        display: 'inline-block',
+        verticalAlign: 'top'
+      }
+    },
+    'Steps Remaining: ',
+    maxSteps - steps
+  );
+}
+
+function ButtonStack(props) {
+  var dispatch = props.dispatch,
+      isExperimental = props.isExperimental,
+      modal = props.modal,
+      tickInterval = props.tickInterval,
+      canvasWidth = props.canvasWidth,
+      isMuted = props.isMuted;
+
+
+  return React.createElement(
+    'div',
+    {
+      style: {
+        // float: 'left',
+        paddingLeft: 8,
+        display: 'inline-block',
+        color: 'black'
+      }
+    },
+    React.createElement(QuitButton, { isInGame: true, dispatch: dispatch }),
     React.createElement(
       'div',
-      {
-        style: {
-          // float: 'left',
-          paddingLeft: 8,
-          display: 'inline-block',
-          color: 'black'
+      null,
+      React.createElement(Button, {
+        label: 'Instructions',
+        onClick: function onClick() {
+          instructionsModal(dispatch);
         }
-      },
-      React.createElement(QuitButton, { isInGame: true, dispatch: dispatch }),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(Button, {
-          label: 'Instructions',
-          onClick: function onClick() {
-            instructionsModal(dispatch);
-          }
-        })
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(Button, {
-          label: tickInterval ? 'Pause' : 'Play',
-          disabled: modal != null,
-          onClick: function onClick() {
-            if (tickInterval != null) {
-              dispatch({ type: 'STOP_TICK' });
-            } else {
-              dispatch({ type: 'START_TICK' });
-            }
-          }
-        })
-      ),
-      game.difficulty == 'EASY' ? React.createElement(
-        'div',
-        null,
-        React.createElement(Button, {
-          label: game.pauseMissiles ? 'Send Missiles' : 'Pause Missiles',
-          onClick: function onClick() {
-            return dispatch({ type: 'PAUSE_MISSILES', pauseMissiles: !game.pauseMissiles });
-          }
-        })
-      ) : null
-    ),
-    React.createElement(
-      'div',
-      {
-        style: {
-          display: 'inline-block',
-          verticalAlign: 'top'
-        }
-      },
-      React.createElement(PlacementPalette, {
-        game: game,
-        dispatch: dispatch,
-        base: base,
-        placeType: placeType
       })
     ),
     React.createElement(
       'div',
-      {
-        style: {
-          // left: leftPadding,
-          width: 200,
-          marginLeft: 10,
-          display: 'inline-block'
-          // position: 'absolute',
+      null,
+      React.createElement(Button, {
+        label: tickInterval ? 'Pause' : 'Play',
+        disabled: modal != null,
+        onClick: function onClick() {
+          if (tickInterval != null) {
+            dispatch({ type: 'STOP_TICK' });
+          } else {
+            dispatch({ type: 'START_TICK' });
+          }
         }
-      },
-      powerStuff
-    ),
-    React.createElement(
-      'div',
-      {
-        style: {
-          width: 200,
-          marginLeft: 10,
-          fontSize: '1.5em',
-          display: 'inline-block'
-        }
-      },
-      React.createElement(
-        'b',
-        null,
-        'Missiles Survived'
-      ),
-      ': ',
-      game.missilesSurvived
+      })
     )
   );
 }
@@ -11187,24 +10397,18 @@ function instructionsModal(dispatch) {
           React.createElement(
             'div',
             null,
-            'Arrow Keys: move screen'
+            'Arrow Keys: move character'
           ),
           React.createElement(
             'div',
             null,
-            'Left Click: collect non-fluid resource'
-          ),
-          React.createElement(
-            'div',
-            null,
-            'Right Click: place selected resource or building'
-          ),
-          React.createElement(
-            'div',
-            null,
-            'NOTE: resources can only be collected/placed if there is a path to the base. A red cursor means collection/placement is blocked, green cursor means it is possible'
+            'Space bar: go back in time'
           )
         ),
+        React.createElement(Divider, { style: {
+            marginTop: 6,
+            marginBottom: 6
+          } }),
         React.createElement(
           'div',
           null,
@@ -11220,17 +10424,8 @@ function instructionsModal(dispatch) {
           React.createElement(
             'div',
             null,
-            'Survive as long as you can!'
+            'TBD'
           )
-        ),
-        React.createElement(Divider, { style: {
-            marginTop: 6,
-            marginBottom: 6
-          } }),
-        React.createElement(
-          'div',
-          null,
-          'Additional information about how resources interact can be displayed by hovering over each resource in the selector at the top of the screen'
         )
       ),
       buttons: [{ label: 'Dismiss (Enter)', onClick: function onClick() {
@@ -11251,23 +10446,21 @@ function dismissModal(dispatch) {
 }
 
 module.exports = TopBar;
-},{"../config":1,"../entities/registry":8,"../ui/PlacementPalette.react":65,"../ui/components/InfoCard.react":72,"../ui/components/QuitButton.react":75,"../utils/helpers":79,"./Components/AudioWidget.react":49,"./Components/Button.react":50,"./Components/Divider.react":52,"./Components/Modal.react":55,"react":118}],67:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../ui/components/QuitButton.react":71,"../utils/helpers":75,"./Components/AudioWidget.react":49,"./Components/Button.react":50,"./Components/Divider.react":52,"./Components/Modal.react":54,"react":114}],64:[function(require,module,exports){
 arguments[4][49][0].apply(exports,arguments)
-},{"./Button.react":68,"dup":49,"react":118}],68:[function(require,module,exports){
+},{"./Button.react":65,"dup":49,"react":114}],65:[function(require,module,exports){
 arguments[4][50][0].apply(exports,arguments)
-},{"dup":50,"react":118}],69:[function(require,module,exports){
+},{"dup":50,"react":114}],66:[function(require,module,exports){
 arguments[4][51][0].apply(exports,arguments)
-},{"dup":51,"react":118}],70:[function(require,module,exports){
+},{"dup":51,"react":114}],67:[function(require,module,exports){
 arguments[4][52][0].apply(exports,arguments)
-},{"dup":52,"react":118}],71:[function(require,module,exports){
+},{"dup":52,"react":114}],68:[function(require,module,exports){
 arguments[4][53][0].apply(exports,arguments)
-},{"dup":53,"react":118}],72:[function(require,module,exports){
+},{"dup":53,"react":114}],69:[function(require,module,exports){
 arguments[4][54][0].apply(exports,arguments)
-},{"dup":54,"react":118}],73:[function(require,module,exports){
+},{"../../utils/helpers":75,"./Button.react":65,"dup":54,"react":114}],70:[function(require,module,exports){
 arguments[4][55][0].apply(exports,arguments)
-},{"../../utils/helpers":79,"./Button.react":68,"dup":55,"react":118}],74:[function(require,module,exports){
-arguments[4][56][0].apply(exports,arguments)
-},{"dup":56,"react":118}],75:[function(require,module,exports){
+},{"dup":55,"react":114}],71:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11356,11 +10549,11 @@ var quitGameModal = function quitGameModal(dispatch) {
 };
 
 module.exports = QuitButton;
-},{"../../utils/helpers":79,"./Button.react":68,"./Modal.react":73,"react":118}],76:[function(require,module,exports){
-arguments[4][58][0].apply(exports,arguments)
-},{"./NumberField.react":74,"dup":58,"react":118}],77:[function(require,module,exports){
-arguments[4][58][0].apply(exports,arguments)
-},{"./NumberField.react":74,"dup":58,"react":118}],78:[function(require,module,exports){
+},{"../../utils/helpers":75,"./Button.react":65,"./Modal.react":69,"react":114}],72:[function(require,module,exports){
+arguments[4][57][0].apply(exports,arguments)
+},{"./NumberField.react":70,"dup":57,"react":114}],73:[function(require,module,exports){
+arguments[4][57][0].apply(exports,arguments)
+},{"./NumberField.react":70,"dup":57,"react":114}],74:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -11488,7 +10681,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":79,"../utils/vectors":82}],79:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":75,"../utils/vectors":78}],75:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -11658,7 +10851,7 @@ module.exports = {
   isElectron: isElectron,
   deepCopy: deepCopy
 };
-},{"./vectors":82}],80:[function(require,module,exports){
+},{"./vectors":78}],76:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11735,7 +10928,7 @@ var slider = function slider(value, props) {
 window.values = allValues;
 
 module.exports = { slider: slider };
-},{"../ui/components/slider.react":77,"react":118,"react-dom":115}],81:[function(require,module,exports){
+},{"../ui/components/slider.react":73,"react":114,"react-dom":111}],77:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -11790,7 +10983,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],82:[function(require,module,exports){
+},{}],78:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -11999,9 +11192,9 @@ module.exports = {
   abs: abs,
   clampMagnitude: clampMagnitude
 };
-},{}],83:[function(require,module,exports){
+},{}],79:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":85}],84:[function(require,module,exports){
+},{"./lib/axios":81}],80:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12182,7 +11375,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../core/buildFullPath":91,"../core/createError":92,"./../core/settle":96,"./../helpers/buildURL":100,"./../helpers/cookies":102,"./../helpers/isURLSameOrigin":105,"./../helpers/parseHeaders":107,"./../utils":109}],85:[function(require,module,exports){
+},{"../core/buildFullPath":87,"../core/createError":88,"./../core/settle":92,"./../helpers/buildURL":96,"./../helpers/cookies":98,"./../helpers/isURLSameOrigin":101,"./../helpers/parseHeaders":103,"./../utils":105}],81:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -12240,7 +11433,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":86,"./cancel/CancelToken":87,"./cancel/isCancel":88,"./core/Axios":89,"./core/mergeConfig":95,"./defaults":98,"./helpers/bind":99,"./helpers/isAxiosError":104,"./helpers/spread":108,"./utils":109}],86:[function(require,module,exports){
+},{"./cancel/Cancel":82,"./cancel/CancelToken":83,"./cancel/isCancel":84,"./core/Axios":85,"./core/mergeConfig":91,"./defaults":94,"./helpers/bind":95,"./helpers/isAxiosError":100,"./helpers/spread":104,"./utils":105}],82:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12261,7 +11454,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],87:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -12320,14 +11513,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":86}],88:[function(require,module,exports){
+},{"./Cancel":82}],84:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],89:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12424,7 +11617,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":100,"./../utils":109,"./InterceptorManager":90,"./dispatchRequest":93,"./mergeConfig":95}],90:[function(require,module,exports){
+},{"../helpers/buildURL":96,"./../utils":105,"./InterceptorManager":86,"./dispatchRequest":89,"./mergeConfig":91}],86:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12478,7 +11671,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":109}],91:[function(require,module,exports){
+},{"./../utils":105}],87:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -12500,7 +11693,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":101,"../helpers/isAbsoluteURL":103}],92:[function(require,module,exports){
+},{"../helpers/combineURLs":97,"../helpers/isAbsoluteURL":99}],88:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -12520,7 +11713,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":94}],93:[function(require,module,exports){
+},{"./enhanceError":90}],89:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12601,7 +11794,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":88,"../defaults":98,"./../utils":109,"./transformData":97}],94:[function(require,module,exports){
+},{"../cancel/isCancel":84,"../defaults":94,"./../utils":105,"./transformData":93}],90:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12645,7 +11838,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],95:[function(require,module,exports){
+},{}],91:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -12734,7 +11927,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":109}],96:[function(require,module,exports){
+},{"../utils":105}],92:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -12761,7 +11954,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":92}],97:[function(require,module,exports){
+},{"./createError":88}],93:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12783,7 +11976,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":109}],98:[function(require,module,exports){
+},{"./../utils":105}],94:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -12885,7 +12078,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this)}).call(this,require('_process'))
-},{"./adapters/http":84,"./adapters/xhr":84,"./helpers/normalizeHeaderName":106,"./utils":109,"_process":128}],99:[function(require,module,exports){
+},{"./adapters/http":80,"./adapters/xhr":80,"./helpers/normalizeHeaderName":102,"./utils":105,"_process":124}],95:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -12898,7 +12091,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],100:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12970,7 +12163,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":109}],101:[function(require,module,exports){
+},{"./../utils":105}],97:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12986,7 +12179,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],102:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13041,7 +12234,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":109}],103:[function(require,module,exports){
+},{"./../utils":105}],99:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13057,7 +12250,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],104:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13070,7 +12263,7 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],105:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13140,7 +12333,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":109}],106:[function(require,module,exports){
+},{"./../utils":105}],102:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -13154,7 +12347,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":109}],107:[function(require,module,exports){
+},{"../utils":105}],103:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13209,7 +12402,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":109}],108:[function(require,module,exports){
+},{"./../utils":105}],104:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13238,7 +12431,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],109:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -13591,7 +12784,7 @@ module.exports = {
   stripBOM: stripBOM
 };
 
-},{"./helpers/bind":99}],110:[function(require,module,exports){
+},{"./helpers/bind":95}],106:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -13683,7 +12876,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],111:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13789,7 +12982,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this)}).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":112,"_process":128}],112:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":108,"_process":124}],108:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -13803,7 +12996,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],113:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.14.0
  * react-dom.development.js
@@ -38819,7 +38012,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"object-assign":110,"prop-types/checkPropTypes":111,"react":118,"scheduler":124,"scheduler/tracing":125}],114:[function(require,module,exports){
+},{"_process":124,"object-assign":106,"prop-types/checkPropTypes":107,"react":114,"scheduler":120,"scheduler/tracing":121}],110:[function(require,module,exports){
 /** @license React v16.14.0
  * react-dom.production.min.js
  *
@@ -39113,7 +38306,7 @@ exports.flushSync=function(a,b){if((W&(fj|gj))!==V)throw Error(u(187));var c=W;W
 exports.unmountComponentAtNode=function(a){if(!gk(a))throw Error(u(40));return a._reactRootContainer?(Nj(function(){ik(null,null,a,!1,function(){a._reactRootContainer=null;a[Od]=null})}),!0):!1};exports.unstable_batchedUpdates=Mj;exports.unstable_createPortal=function(a,b){return kk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.14.0";
 
-},{"object-assign":110,"react":118,"scheduler":124}],115:[function(require,module,exports){
+},{"object-assign":106,"react":114,"scheduler":120}],111:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -39155,7 +38348,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":113,"./cjs/react-dom.production.min.js":114,"_process":128}],116:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":109,"./cjs/react-dom.production.min.js":110,"_process":124}],112:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.14.0
  * react.development.js
@@ -41071,7 +40264,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"object-assign":110,"prop-types/checkPropTypes":111}],117:[function(require,module,exports){
+},{"_process":124,"object-assign":106,"prop-types/checkPropTypes":107}],113:[function(require,module,exports){
 /** @license React v16.14.0
  * react.production.min.js
  *
@@ -41098,7 +40291,7 @@ key:d,ref:g,props:e,_owner:k}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:A,_ctor:a,_status:-1,_result:null}};exports.memo=function(a,b){return{$$typeof:z,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return Z().useCallback(a,b)};exports.useContext=function(a,b){return Z().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return Z().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return Z().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.14.0";
 
-},{"object-assign":110}],118:[function(require,module,exports){
+},{"object-assign":106}],114:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -41109,7 +40302,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":116,"./cjs/react.production.min.js":117,"_process":128}],119:[function(require,module,exports){
+},{"./cjs/react.development.js":112,"./cjs/react.production.min.js":113,"_process":124}],115:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -41787,7 +40980,7 @@ exports.compose = compose;
 exports.createStore = createStore;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"symbol-observable":126}],120:[function(require,module,exports){
+},{"_process":124,"symbol-observable":122}],116:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.19.1
  * scheduler-tracing.development.js
@@ -42140,7 +41333,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128}],121:[function(require,module,exports){
+},{"_process":124}],117:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler-tracing.production.min.js
  *
@@ -42152,7 +41345,7 @@ exports.unstable_wrap = unstable_wrap;
 
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],122:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.19.1
  * scheduler.development.js
@@ -43014,7 +42207,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128}],123:[function(require,module,exports){
+},{"_process":124}],119:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
@@ -43037,7 +42230,7 @@ exports.unstable_getCurrentPriorityLevel=function(){return R};exports.unstable_g
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();if("object"===typeof c&&null!==c){var e=c.delay;e="number"===typeof e&&0<e?d+e:d;c="number"===typeof c.timeout?c.timeout:Y(a)}else c=Y(a),e=d;c=e+c;a={id:P++,callback:b,priorityLevel:a,startTime:e,expirationTime:c,sortIndex:-1};e>d?(a.sortIndex=e,J(O,a),null===L(N)&&a===L(O)&&(U?h():U=!0,g(W,e-d))):(a.sortIndex=c,J(N,a),T||S||(T=!0,f(X)));return a};
 exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=L(N);return b!==Q&&null!==Q&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<Q.expirationTime||k()};exports.unstable_wrapCallback=function(a){var b=R;return function(){var c=R;R=b;try{return a.apply(this,arguments)}finally{R=c}}};
 
-},{}],124:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43048,7 +42241,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":122,"./cjs/scheduler.production.min.js":123,"_process":128}],125:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":118,"./cjs/scheduler.production.min.js":119,"_process":124}],121:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43059,7 +42252,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":120,"./cjs/scheduler-tracing.production.min.js":121,"_process":128}],126:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":116,"./cjs/scheduler-tracing.production.min.js":117,"_process":124}],122:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -43091,7 +42284,7 @@ if (typeof self !== 'undefined') {
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ponyfill.js":127}],127:[function(require,module,exports){
+},{"./ponyfill.js":123}],123:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43115,7 +42308,7 @@ function symbolObservablePonyfill(root) {
 
 	return result;
 };
-},{}],128:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
