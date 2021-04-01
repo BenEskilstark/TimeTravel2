@@ -38,6 +38,9 @@
     - show preview of going back in time if prev agent is about to do that
     - upon hitting a loss condition, need to animate before popping modal, etc
 
+  - deployment:
+    - set up unique player tracking (and per level)
+
 
 - - - - - - NICE-TO-HAVE - - - - - - - -
   - way to apply all entities w/ histories directly into game in order to repro bugs
