@@ -126,20 +126,33 @@ var render = function render(ctx, game, agent) {
 };
 
 var spriteRenderFn = function spriteRenderFn(ctx, game, agent) {
-  var sprite = getAntSpriteAndOffset(game, agent);
-  if (sprite.img != null) {
-    ctx.save();
-    ctx.translate(agent.width / 2, agent.height / 2);
-    ctx.rotate(-1 * Math.PI / 2);
-    ctx.translate(-agent.width / 2, -agent.height / 2);
+  // const sprite = getAntSpriteAndOffset(game, agent);
+  // if (sprite.img != null) {
+  //   ctx.save();
+  //   ctx.translate(
+  //     agent.width / 2, agent.height / 2,
+  //   );
+  //   ctx.rotate(-1 * Math.PI / 2);
+  //   ctx.translate(-agent.width / 2, -agent.height / 2);
 
-    if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
-      ctx.globalAlpha = 0.5;
-    }
+  //   if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
+  //     ctx.globalAlpha = 0.5;
+  //   }
 
-    ctx.drawImage(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, agent.width, agent.height);
-    ctx.restore();
+  //   ctx.drawImage(
+  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
+  //     0, 0, agent.width, agent.height,
+  //   );
+  //   ctx.restore();
+  // }
+
+  var img = game.sprites.CHARACTER;
+  ctx.save();
+  if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
+    ctx.globalAlpha = 0.5;
   }
+  ctx.drawImage(img, 0, 0, agent.width, agent.height);
+  ctx.restore();
 };
 
 module.exports = {
@@ -7345,6 +7358,7 @@ var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
 
   loadSprite(dispatch, state, 'ANT', './img/Ant2.png');
   loadSprite(dispatch, state, 'WALL', './img/Wall1.png');
+  loadSprite(dispatch, state, 'CHARACTER', './img/character10.jpg');
 
   loadSprite(dispatch, state, 'PHEROMONE', './img/Pheromones.png');
 };

@@ -87,25 +87,35 @@ const render = (ctx, game: Game, agent: Agent): void => {
 }
 
 const spriteRenderFn = (ctx, game, agent) => {
-  const sprite = getAntSpriteAndOffset(game, agent);
-  if (sprite.img != null) {
-    ctx.save();
-    ctx.translate(
-      agent.width / 2, agent.height / 2,
-    );
-    ctx.rotate(-1 * Math.PI / 2);
-    ctx.translate(-agent.width / 2, -agent.height / 2);
+  // const sprite = getAntSpriteAndOffset(game, agent);
+  // if (sprite.img != null) {
+  //   ctx.save();
+  //   ctx.translate(
+  //     agent.width / 2, agent.height / 2,
+  //   );
+  //   ctx.rotate(-1 * Math.PI / 2);
+  //   ctx.translate(-agent.width / 2, -agent.height / 2);
 
-    if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
-      ctx.globalAlpha = 0.5;
-    }
+  //   if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
+  //     ctx.globalAlpha = 0.5;
+  //   }
 
-    ctx.drawImage(
-      sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-      0, 0, agent.width, agent.height,
-    );
-    ctx.restore();
+  //   ctx.drawImage(
+  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
+  //     0, 0, agent.width, agent.height,
+  //   );
+  //   ctx.restore();
+  // }
+
+  const img = game.sprites.CHARACTER;
+  ctx.save();
+  if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
+    ctx.globalAlpha = 0.5;
   }
+  ctx.drawImage(
+    img, 0, 0, agent.width, agent.height,
+  );
+  ctx.restore();
 }
 
 module.exports = {
