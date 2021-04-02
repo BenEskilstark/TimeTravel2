@@ -14,18 +14,20 @@
               3. door now closes at a later step than it did the first time so 2 becomes
                  impossible
   - grandfather? / what is the goal in the maze?
+  - doodads:
+    - lanterns that have their own light
 
 
 - - - - - - ISSUES - - - - - -
   - doors on the edge of the map opening/closing in fog is briefly visible
   - don't register arrow keys outside of editor (on game loss, modals that pause the game)
   - add restart level button to game over modal
+  - winning the level in levelEditor breaks down
+  - playtesting:
+    - hard to tell when you're gonna run out of steps or hit a door
 
 
 - - - - - - TODO - - - - - -
-  - add grandfather entity
-    - placeholder sprite
-
   - get level progression working on main play
     - add in more of the original levels
     - add in action to win the level
@@ -46,9 +48,12 @@
   - animations:
     - show preview of going back in time if prev agent is about to do that
     - upon hitting a loss condition, need to animate before popping modal, etc
+      - can make these actions with high effectIndex
 
   - deployment:
     - set up unique player tracking (and per level)
+
+  - tutorials:
 
 
 - - - - - - NICE-TO-HAVE - - - - - - - -

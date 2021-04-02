@@ -688,8 +688,8 @@ function createEntities(game, dispatch, editor, rect): void {
     case 'DOOR':
       args = [editor.doorID, editor.doorDir];
       break;
-    case 'TIME_MACHINE':
-    case 'AGENT':
+    case 'TARGET':
+      args = [];
       break;
     default:
       console.error("no entity palette for ", editor.entityType);

@@ -118,6 +118,9 @@ const entityStartCurrentAction = (
       rotateEntity(game, entity, entity.theta + mult * Math.PI / 2);
       if (entity.isOpen && !curAction.payload.firstTime) entity.wasOpened = true;
       break;
+    case 'REACHED':
+      game.levelWon = true;
+      break;
   }
 };
 

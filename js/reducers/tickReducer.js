@@ -163,6 +163,9 @@ const doTick = (game: Game): Game => {
   updateButtons(game);
   updateDoors(game);
   updateHistoricals(game, doingMove);
+
+  updateTargets(game);
+
   updateActors(game);
   updateAgents(game);
   updateTiledSprites(game);
@@ -183,6 +186,16 @@ const doTick = (game: Game): Game => {
 //////////////////////////////////////////////////////////////////////////
 // Update Buttons/Historicals
 //////////////////////////////////////////////////////////////////////////
+
+const updateTargets = (game): void => {
+  for (const id of game.TARGET) {
+    const target = game.entities[id];
+    const collisions = collidesWith(game, target, ['AGENT']);
+    if (collisions.length > 0) {
+      queueAction(game, target, makeAction(game, target, 'REACHED', {}));
+    }
+  }
+};
 
 const updateButtons = (game): void => {
   for (const id of game.BUTTON) {

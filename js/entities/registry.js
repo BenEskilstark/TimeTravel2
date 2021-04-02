@@ -22,6 +22,7 @@ const Entities = {
   DOOR: require('./door.js'),
 
   AGENT: require('./agent.js'),
+  TARGET: require('./target.js'),
 };
 
 module.exports = {
