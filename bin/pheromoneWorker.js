@@ -224,7 +224,8 @@ var make = function make(game, position, doorID) {
   return _extends({}, makeEntity('BUTTON', position, config.width, config.height), config, {
     doorID: doorID,
     isPressed: false,
-    isStoodOn: false
+    isStoodOn: false,
+    wasPressed: false
   });
 };
 
@@ -317,7 +318,9 @@ var make = function make(game, position, doorID, orientation) {
     width: width, height: height,
     orientation: orientation,
     doorID: doorID,
-    isOpen: false
+    isOpen: false,
+    wasOpened: false,
+    passedThrough: false
   });
 };
 
@@ -2936,7 +2939,7 @@ var _require7 = require('../simulation/pheromones'),
 var _require8 = require('../entities/registry'),
     Entities = _require8.Entities;
 
-var insertEntityInGrid = function insertEntityInGrid(game, entity) {
+var insertEntityInGrid = function insertEntityInGrid(game, entity, noPheromone) {
   var dir = thetaToDir(entity.theta);
   for (var x = 0; x < entity.width; x++) {
     for (var y = 0; y < entity.height; y++) {
@@ -2953,7 +2956,7 @@ var insertEntityInGrid = function insertEntityInGrid(game, entity) {
   }
 
   // for the worker
-  if (!game.pheromoneWorker) return;
+  if (!game.pheromoneWorker || noPheromone) return;
   if (game.time > 1) {
     game.pheromoneWorker.postMessage({ type: 'INSERT_IN_GRID', entity: entity });
   }
@@ -3070,7 +3073,7 @@ var insertEntityInGrid = function insertEntityInGrid(game, entity) {
   }
 };
 
-var removeEntityFromGrid = function removeEntityFromGrid(game, entity) {
+var removeEntityFromGrid = function removeEntityFromGrid(game, entity, noPheromone) {
   var position = entity.position;
   var dir = thetaToDir(entity.theta);
   if (entity.segmented) {
@@ -3117,7 +3120,7 @@ var removeEntityFromGrid = function removeEntityFromGrid(game, entity) {
   }
 
   // for the worker
-  if (!game.pheromoneWorker) return;
+  if (!game.pheromoneWorker || noPheromone) return;
   if (game.time > 1) {
     game.pheromoneWorker.postMessage({ type: 'REMOVE_FROM_GRID', entity: entity });
   }
@@ -3348,14 +3351,14 @@ var moveEntity = function moveEntity(game, entity, nextPos) {
   return game;
 };
 
-var rotateEntity = function rotateEntity(game, entity, nextTheta) {
+var rotateEntity = function rotateEntity(game, entity, nextTheta, noPheromone) {
   if (entity.width != entity.height) {
-    removeEntityFromGrid(game, entity);
+    removeEntityFromGrid(game, entity, noPheromone);
   }
   entity.prevTheta = entity.theta;
   entity.theta = nextTheta;
   if (entity.width != entity.height) {
-    insertEntityInGrid(game, entity);
+    insertEntityInGrid(game, entity, noPheromone);
   }
   return game;
 };

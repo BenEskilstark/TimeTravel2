@@ -100,22 +100,23 @@ const entityStartCurrentAction = (
       break;
     case 'PRESS':
       entity.isPressed = curAction.payload.pressed;
+      if (!curAction.payload.firstTime) entity.wasPressed = true;
       // open corresponding doors
       for (const id of game.DOOR) {
         const door = game.entities[id];
         if (door.doorID == entity.doorID) {
           queueAction(
             game, door,
-            makeAction(game, door, 'OPEN', curAction.payload.pressed),
+            makeAction(game, door, 'OPEN', curAction.payload),
           );
         }
       }
       break;
     case 'OPEN':
-      entity.isOpen = curAction.payload;
+      entity.isOpen = curAction.payload.pressed;
       const mult = entity.isOpen ? 1 : -1;
       rotateEntity(game, entity, entity.theta + mult * Math.PI / 2);
-
+      if (entity.isOpen && !curAction.payload.firstTime) entity.wasOpened = true;
       break;
   }
 };

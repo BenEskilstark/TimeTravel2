@@ -29,6 +29,7 @@ const make = (
     doorID,
     isPressed: false,
     isStoodOn: false,
+    wasPressed: false,
   };
 };
 

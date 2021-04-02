@@ -23,7 +23,7 @@ const {Entities} = require('../entities/registry');
 import type {Game, Entity} from '../types';
 
 
-const insertEntityInGrid = (game: Game, entity: Entity): void => {
+const insertEntityInGrid = (game: Game, entity: Entity, noPheromone: boolean): void => {
   const dir = thetaToDir(entity.theta);
   for (let x = 0; x < entity.width; x++) {
     for (let y = 0; y < entity.height; y++) {
@@ -40,7 +40,7 @@ const insertEntityInGrid = (game: Game, entity: Entity): void => {
   }
 
   // for the worker
-  if (!game.pheromoneWorker) return;
+  if (!game.pheromoneWorker || noPheromone) return;
   if (game.time > 1) {
     game.pheromoneWorker.postMessage({type: 'INSERT_IN_GRID', entity});
   }
@@ -104,7 +104,7 @@ const insertEntityInGrid = (game: Game, entity: Entity): void => {
 }
 
 
-const removeEntityFromGrid = (game: Game, entity: Entity): void => {
+const removeEntityFromGrid = (game: Game, entity: Entity, noPheromone: boolean): void => {
   const position = entity.position;
   const dir = thetaToDir(entity.theta);
   if (entity.segmented) {
@@ -129,7 +129,7 @@ const removeEntityFromGrid = (game: Game, entity: Entity): void => {
   }
 
   // for the worker
-  if (!game.pheromoneWorker) return;
+  if (!game.pheromoneWorker || noPheromone) return;
   if (game.time > 1) {
     game.pheromoneWorker.postMessage({type: 'REMOVE_FROM_GRID', entity});
   }
@@ -312,14 +312,15 @@ const moveEntity = (game: Game, entity: Entity, nextPos: Vector): Game => {
 
 const rotateEntity = (
   game: Game, entity: Entity, nextTheta: number,
+  noPheromone: boolean,
 ): Game => {
   if (entity.width != entity.height) {
-    removeEntityFromGrid(game, entity);
+    removeEntityFromGrid(game, entity, noPheromone);
   }
   entity.prevTheta = entity.theta;
   entity.theta = nextTheta;
   if (entity.width != entity.height) {
-    insertEntityInGrid(game, entity);
+    insertEntityInGrid(game, entity, noPheromone);
   }
   return game;
 };

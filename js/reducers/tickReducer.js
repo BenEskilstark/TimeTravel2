@@ -102,17 +102,26 @@ const doTick = (game: Game): Game => {
     game.isTimeReversed = false;
     game.actionIndex = 0;
     game.time = 1;
-    // close all doors and press all buttons only on the first time.
-    // After the first time we expect the doors to be opened en route
-    if (game.numTimeReversals == 1) {
-      for (const id of game.BUTTON) {
-        const button = game.entities[id];
-        queueAction(
-          game, button,
-          makeAction(game, button, 'PRESS', {pressed: false}),
-        );
+    // close all doors and press all buttons that have already been passed through
+    // BUT only if they haven't had their button pressed, as that in-game pressing
+    // will deal with closing the door from now on
+    for (const id of game.DOOR) {
+      const door = game.entities[id];
+      if (door.passedThrough) {
+        for (const id of game.BUTTON) {
+          const button = game.entities[id];
+          if (button.doorID == door.doorID) {
+            if (!button.wasPressed) {
+              queueAction(
+                game, button,
+                makeAction(game, button, 'PRESS', {pressed: false}),
+              );
+            }
+          }
+        }
       }
     }
+
   }
 
   // initializations:
@@ -132,7 +141,7 @@ const doTick = (game: Game): Game => {
       const button = game.entities[id];
         queueAction(
           game, button,
-          makeAction(game, button, 'PRESS', {pressed: true,}),
+          makeAction(game, button, 'PRESS', {pressed: true, firstTime: true}),
         );
     }
 
@@ -152,6 +161,7 @@ const doTick = (game: Game): Game => {
   // these are the ECS "systems"
   const doingMove = keepControlledMoving(game);
   updateButtons(game);
+  updateDoors(game);
   updateHistoricals(game, doingMove);
   updateActors(game);
   updateAgents(game);
@@ -202,6 +212,28 @@ const updateButtons = (game): void => {
 
   }
 };
+
+const updateDoors = (game): void => {
+  for (const id of game.DOOR) {
+    const door = game.entities[id];
+    // if the door has not been opened before, then check if an agent is passing through
+    // it now.
+    // Do this by closing the door and seeing if it collides with any agents, then
+    // re-opening the door
+    if (door.isOpen && !door.wasOpened) {
+      let mult = -1;
+      rotateEntity(game, door, door.theta + mult * Math.PI / 2, true /* no pheromone */);
+
+      const collisions = collidesWith(game, door, ['AGENT']);
+      if (collisions.length > 0) {
+        door.passedThrough = true;
+      }
+
+      mult = 1;
+      rotateEntity(game, door, door.theta + mult * Math.PI / 2, true /* no pheromone */);
+    }
+  }
+}
 
 // When going forward in time, have agents follow their histories whenever
 // the controlledEntity is doing a move

@@ -3,17 +3,26 @@
 - - - - - - TO THINK ABOUT - - - - - -
   - how to manage when doors close based on time travel
     - how to explain this in game?
+      - you can forget you went through a door
+        - need to indicate buttons that need to be pressed?
+      - can't tell the difference between an open door and a closed door
+      - can hit issues going through the closed path of a door since it opens
+        at a different tick on the next run through
+        - ie: 1. go through open door
+              2. door closes at step 1 and you go through the path it blocked when open
+                 and then press the button to open the door
+              3. door now closes at a later step than it did the first time so 2 becomes
+                 impossible
   - grandfather? / what is the goal in the maze?
 
 
 - - - - - - ISSUES - - - - - -
   - doors on the edge of the map opening/closing in fog is briefly visible
   - don't register arrow keys outside of editor (on game loss, modals that pause the game)
+  - add restart level button to game over modal
 
 
 - - - - - - TODO - - - - - -
-  - detect when you pass through an open door and flip a bit on the door
-    - detect by doing a close rotation in place and checking for agents there
   - add grandfather entity
     - placeholder sprite
 
@@ -63,6 +72,9 @@
 
 
 - - - - - - - REFACTORS - - - - - - -
+  - tickReducer "systems" are checking waaay more often than they need to
+  - instead of checking for existence of pheromoneWorker in insert/removeFromGrid
+    entity functions, instead just rely on the noPheromone flag
 
 
 - - - - - - - WON'T FIX - - - - - -

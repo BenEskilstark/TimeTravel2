@@ -224,7 +224,8 @@ var make = function make(game, position, doorID) {
   return _extends({}, makeEntity('BUTTON', position, config.width, config.height), config, {
     doorID: doorID,
     isPressed: false,
-    isStoodOn: false
+    isStoodOn: false,
+    wasPressed: false
   });
 };
 
@@ -317,7 +318,9 @@ var make = function make(game, position, doorID, orientation) {
     width: width, height: height,
     orientation: orientation,
     doorID: doorID,
-    isOpen: false
+    isOpen: false,
+    wasOpened: false,
+    passedThrough: false
   });
 };
 
@@ -1638,32 +1641,61 @@ var doTick = function doTick(game) {
     game.isTimeReversed = false;
     game.actionIndex = 0;
     game.time = 1;
-    // close all doors and press all buttons only on the first time.
-    // After the first time we expect the doors to be opened en route
-    if (game.numTimeReversals == 1) {
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
+    // close all doors and press all buttons that have already been passed through
+    // BUT only if they haven't had their button pressed, as that in-game pressing
+    // will deal with closing the door from now on
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
-      try {
-        for (var _iterator = game.BUTTON[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var id = _step.value;
+    try {
+      for (var _iterator = game.DOOR[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var id = _step.value;
 
-          var button = game.entities[id];
-          queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: false }));
+        var door = game.entities[id];
+        if (door.passedThrough) {
+          var _iteratorNormalCompletion2 = true;
+          var _didIteratorError2 = false;
+          var _iteratorError2 = undefined;
+
+          try {
+            for (var _iterator2 = game.BUTTON[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+              var _id = _step2.value;
+
+              var button = game.entities[_id];
+              if (button.doorID == door.doorID) {
+                if (!button.wasPressed) {
+                  queueAction(game, button, makeAction(game, button, 'PRESS', { pressed: false }));
+                }
+              }
+            }
+          } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+              }
+            } finally {
+              if (_didIteratorError2) {
+                throw _iteratorError2;
+              }
+            }
+          }
         }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
       } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
+        if (_didIteratorError) {
+          throw _iteratorError;
         }
       }
     }
@@ -1682,57 +1714,57 @@ var doTick = function doTick(game) {
     });
 
     // open all doors and press all buttons
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
 
     try {
-      for (var _iterator2 = game.BUTTON[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var _id2 = _step2.value;
+      for (var _iterator3 = game.BUTTON[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        var _id3 = _step3.value;
 
-        var _button = game.entities[_id2];
-        queueAction(game, _button, makeAction(game, _button, 'PRESS', { pressed: true }));
+        var _button = game.entities[_id3];
+        queueAction(game, _button, makeAction(game, _button, 'PRESS', { pressed: true, firstTime: true }));
       }
 
       // set first agent to be the controlled entity
     } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
+      _didIteratorError3 = true;
+      _iteratorError3 = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
+        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+          _iterator3.return();
         }
       } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
+        if (_didIteratorError3) {
+          throw _iteratorError3;
         }
       }
     }
 
     if (game.controlledEntity == null) {
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
 
       try {
-        for (var _iterator3 = game.AGENT[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var _id = _step3.value;
+        for (var _iterator4 = game.AGENT[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var _id2 = _step4.value;
 
-          var agent = game.entities[_id];
+          var agent = game.entities[_id2];
           game.controlledEntity = agent;
         }
       } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
           }
         } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
+          if (_didIteratorError4) {
+            throw _iteratorError4;
           }
         }
       }
@@ -1746,6 +1778,7 @@ var doTick = function doTick(game) {
   // these are the ECS "systems"
   var doingMove = keepControlledMoving(game);
   updateButtons(game);
+  updateDoors(game);
   updateHistoricals(game, doingMove);
   updateActors(game);
   updateAgents(game);
@@ -1769,13 +1802,13 @@ var doTick = function doTick(game) {
 //////////////////////////////////////////////////////////////////////////
 
 var updateButtons = function updateButtons(game) {
-  var _iteratorNormalCompletion4 = true;
-  var _didIteratorError4 = false;
-  var _iteratorError4 = undefined;
+  var _iteratorNormalCompletion5 = true;
+  var _didIteratorError5 = false;
+  var _iteratorError5 = undefined;
 
   try {
-    for (var _iterator4 = game.BUTTON[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-      var id = _step4.value;
+    for (var _iterator5 = game.BUTTON[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+      var id = _step5.value;
 
       var button = game.entities[id];
       var collisions = collidesWith(game, button, ['AGENT']);
@@ -1796,16 +1829,59 @@ var updateButtons = function updateButtons(game) {
       }
     }
   } catch (err) {
-    _didIteratorError4 = true;
-    _iteratorError4 = err;
+    _didIteratorError5 = true;
+    _iteratorError5 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion4 && _iterator4.return) {
-        _iterator4.return();
+      if (!_iteratorNormalCompletion5 && _iterator5.return) {
+        _iterator5.return();
       }
     } finally {
-      if (_didIteratorError4) {
-        throw _iteratorError4;
+      if (_didIteratorError5) {
+        throw _iteratorError5;
+      }
+    }
+  }
+};
+
+var updateDoors = function updateDoors(game) {
+  var _iteratorNormalCompletion6 = true;
+  var _didIteratorError6 = false;
+  var _iteratorError6 = undefined;
+
+  try {
+    for (var _iterator6 = game.DOOR[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+      var id = _step6.value;
+
+      var door = game.entities[id];
+      // if the door has not been opened before, then check if an agent is passing through
+      // it now.
+      // Do this by closing the door and seeing if it collides with any agents, then
+      // re-opening the door
+      if (door.isOpen && !door.wasOpened) {
+        var mult = -1;
+        rotateEntity(game, door, door.theta + mult * Math.PI / 2, true /* no pheromone */);
+
+        var collisions = collidesWith(game, door, ['AGENT']);
+        if (collisions.length > 0) {
+          door.passedThrough = true;
+        }
+
+        mult = 1;
+        rotateEntity(game, door, door.theta + mult * Math.PI / 2, true /* no pheromone */);
+      }
+    }
+  } catch (err) {
+    _didIteratorError6 = true;
+    _iteratorError6 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion6 && _iterator6.return) {
+        _iterator6.return();
+      }
+    } finally {
+      if (_didIteratorError6) {
+        throw _iteratorError6;
       }
     }
   }
@@ -1837,9 +1913,9 @@ var updateHistoricals = function updateHistoricals(game, doingMove) {
 
   game.actionIndex++;
 
-  for (var _id3 in game.HISTORICAL) {
-    var _entity = game.entities[_id3];
-    if (game.controlledEntity != null && game.controlledEntity.id == _id3) continue;
+  for (var _id4 in game.HISTORICAL) {
+    var _entity = game.entities[_id4];
+    if (game.controlledEntity != null && game.controlledEntity.id == _id4) continue;
 
     var _nextPos = _entity.history[game.actionIndex];
     if (_nextPos == null) {
@@ -1884,19 +1960,19 @@ var updateActors = function updateActors(game) {
   // new entities can be added to the ACTOR queue inside of stepAction
   // (e.g. an explosive killing another explosive) and they need
   // to make it to the next time this function is called
-  for (var _id4 in notNextActors) {
-    delete game.ACTOR[_id4];
+  for (var _id5 in notNextActors) {
+    delete game.ACTOR[_id5];
   }
 };
 
 var updateAgents = function updateAgents(game) {
-  var _iteratorNormalCompletion5 = true;
-  var _didIteratorError5 = false;
-  var _iteratorError5 = undefined;
+  var _iteratorNormalCompletion7 = true;
+  var _didIteratorError7 = false;
+  var _iteratorError7 = undefined;
 
   try {
-    for (var _iterator5 = game.AGENT[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-      var id = _step5.value;
+    for (var _iterator7 = game.AGENT[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+      var id = _step7.value;
 
       var agent = game.entities[id];
       if (agent == null) {
@@ -1911,16 +1987,16 @@ var updateAgents = function updateAgents(game) {
       }
     }
   } catch (err) {
-    _didIteratorError5 = true;
-    _iteratorError5 = err;
+    _didIteratorError7 = true;
+    _iteratorError7 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion5 && _iterator5.return) {
-        _iterator5.return();
+      if (!_iteratorNormalCompletion7 && _iterator7.return) {
+        _iterator7.return();
       }
     } finally {
-      if (_didIteratorError5) {
-        throw _iteratorError5;
+      if (_didIteratorError7) {
+        throw _iteratorError7;
       }
     }
   }
@@ -2126,13 +2202,13 @@ var stepAction = function stepAction(game, entity, decisionFunction) {
 //////////////////////////////////////////////////////////////////////////
 
 var updateTiledSprites = function updateTiledSprites(game) {
-  var _iteratorNormalCompletion6 = true;
-  var _didIteratorError6 = false;
-  var _iteratorError6 = undefined;
+  var _iteratorNormalCompletion8 = true;
+  var _didIteratorError8 = false;
+  var _iteratorError8 = undefined;
 
   try {
-    for (var _iterator6 = game.staleTiles[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-      var id = _step6.value;
+    for (var _iterator8 = game.staleTiles[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+      var id = _step8.value;
 
       var entity = game.entities[id];
       if (entity == null) {
@@ -2142,16 +2218,16 @@ var updateTiledSprites = function updateTiledSprites(game) {
       entity.dictIndexStr = getDictIndexStr(game, entity);
     }
   } catch (err) {
-    _didIteratorError6 = true;
-    _iteratorError6 = err;
+    _didIteratorError8 = true;
+    _iteratorError8 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion6 && _iterator6.return) {
-        _iterator6.return();
+      if (!_iteratorNormalCompletion8 && _iterator8.return) {
+        _iterator8.return();
       }
     } finally {
-      if (_didIteratorError6) {
-        throw _iteratorError6;
+      if (_didIteratorError8) {
+        throw _iteratorError8;
       }
     }
   }
@@ -5062,6 +5138,7 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
       break;
     case 'PRESS':
       entity.isPressed = curAction.payload.pressed;
+      if (!curAction.payload.firstTime) entity.wasPressed = true;
       // open corresponding doors
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
@@ -5073,7 +5150,7 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
 
           var door = game.entities[id];
           if (door.doorID == entity.doorID) {
-            queueAction(game, door, makeAction(game, door, 'OPEN', curAction.payload.pressed));
+            queueAction(game, door, makeAction(game, door, 'OPEN', curAction.payload));
           }
         }
       } catch (err) {
@@ -5093,10 +5170,10 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
 
       break;
     case 'OPEN':
-      entity.isOpen = curAction.payload;
+      entity.isOpen = curAction.payload.pressed;
       var mult = entity.isOpen ? 1 : -1;
       rotateEntity(game, entity, entity.theta + mult * Math.PI / 2);
-
+      if (entity.isOpen && !curAction.payload.firstTime) entity.wasOpened = true;
       break;
   }
 };
@@ -5470,7 +5547,7 @@ var _require7 = require('../simulation/pheromones'),
 var _require8 = require('../entities/registry'),
     Entities = _require8.Entities;
 
-var insertEntityInGrid = function insertEntityInGrid(game, entity) {
+var insertEntityInGrid = function insertEntityInGrid(game, entity, noPheromone) {
   var dir = thetaToDir(entity.theta);
   for (var x = 0; x < entity.width; x++) {
     for (var y = 0; y < entity.height; y++) {
@@ -5487,7 +5564,7 @@ var insertEntityInGrid = function insertEntityInGrid(game, entity) {
   }
 
   // for the worker
-  if (!game.pheromoneWorker) return;
+  if (!game.pheromoneWorker || noPheromone) return;
   if (game.time > 1) {
     game.pheromoneWorker.postMessage({ type: 'INSERT_IN_GRID', entity: entity });
   }
@@ -5604,7 +5681,7 @@ var insertEntityInGrid = function insertEntityInGrid(game, entity) {
   }
 };
 
-var removeEntityFromGrid = function removeEntityFromGrid(game, entity) {
+var removeEntityFromGrid = function removeEntityFromGrid(game, entity, noPheromone) {
   var position = entity.position;
   var dir = thetaToDir(entity.theta);
   if (entity.segmented) {
@@ -5651,7 +5728,7 @@ var removeEntityFromGrid = function removeEntityFromGrid(game, entity) {
   }
 
   // for the worker
-  if (!game.pheromoneWorker) return;
+  if (!game.pheromoneWorker || noPheromone) return;
   if (game.time > 1) {
     game.pheromoneWorker.postMessage({ type: 'REMOVE_FROM_GRID', entity: entity });
   }
@@ -5882,14 +5959,14 @@ var moveEntity = function moveEntity(game, entity, nextPos) {
   return game;
 };
 
-var rotateEntity = function rotateEntity(game, entity, nextTheta) {
+var rotateEntity = function rotateEntity(game, entity, nextTheta, noPheromone) {
   if (entity.width != entity.height) {
-    removeEntityFromGrid(game, entity);
+    removeEntityFromGrid(game, entity, noPheromone);
   }
   entity.prevTheta = entity.theta;
   entity.theta = nextTheta;
   if (entity.width != entity.height) {
-    insertEntityInGrid(game, entity);
+    insertEntityInGrid(game, entity, noPheromone);
   }
   return game;
 };

@@ -32,6 +32,8 @@ const make = (
     orientation,
     doorID,
     isOpen: false,
+    wasOpened: false,
+    passedThrough: false,
   };
 };
 
