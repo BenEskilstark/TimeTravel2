@@ -25,6 +25,7 @@
   - winning the level in levelEditor breaks down
   - playtesting:
     - hard to tell when you're gonna run out of steps or hit a door
+    - hard to tell when you're going to be in the line of sight of a previous self
 
 
 - - - - - - TODO - - - - - -

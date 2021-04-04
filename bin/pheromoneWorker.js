@@ -424,8 +424,8 @@ var config = {
   height: 2,
 
   REACHED: {
-    duration: 200,
-    effectIndex: 199,
+    duration: 10,
+    effectIndex: 9,
     spriteOrder: [1, 2, 3, 4]
   }
 };

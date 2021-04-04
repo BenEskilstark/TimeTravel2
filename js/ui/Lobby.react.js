@@ -27,7 +27,7 @@ function Lobby(props: Props): React.Node {
   const {dispatch, store} = props;
   const state = store.getState();
 
-  const [level, setLevel] = useState('test');
+  const [level, setLevel] = useState('justFindTarget');
   const [loading, setLoading] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
