@@ -7,7 +7,7 @@ const initSpriteSheetSystem = (store) => {
 
   loadSprite(dispatch, state, 'ANT', './img/Ant2.png');
   loadSprite(dispatch, state, 'WALL', './img/Wall1.png');
-  loadSprite(dispatch, state, 'CHARACTER', './img/character2.jpg');
+  loadSprite(dispatch, state, 'CHARACTER', './img/character4.png');
 
   loadSprite(dispatch, state, 'PHEROMONE', './img/Pheromones.png');
 

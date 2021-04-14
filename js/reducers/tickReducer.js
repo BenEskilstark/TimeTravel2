@@ -425,7 +425,28 @@ const keepControlledMoving = (game: Game): boolean => {
       && !isActionTypeQueued(game, controlledEntity, 'TURN')
     ) {
       doingMove = true;
+
+      // HACK: have character always move 2 spaces at a time
+      queueAction(
+        game, controlledEntity,
+        makeAction(
+          game, controlledEntity, 'MOVE',
+          {nextPos: add(nextPos, moveDir),
+            frameOffset: controlledEntity.frameOffset + 2
+          },
+        ),
+      );
     }
+  }
+
+  // HACK: needs to count as doingMove if you just finished the previous move action
+  // in a pair
+  if (
+    !doingMove && controlledEntity.actions.length == 1 &&
+    controlledEntity.actions[0].type == 'MOVE' &&
+    controlledEntity.actions[0].duration == controlledEntity.MOVE.duration - 1
+  ) {
+    doingMove = true;
   }
   return doingMove;
 }
@@ -583,7 +604,7 @@ const updateTiledSprites = (game): void => {
   for (const id of game.staleTiles) {
     const entity = game.entities[id];
     if (entity == null) {
-      console.log(id);
+      // console.log(id);
       continue;
     }
     entity.dictIndexStr = getDictIndexStr(game, entity);

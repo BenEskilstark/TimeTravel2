@@ -158,7 +158,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, agent) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../render/renderAgent":25,"../selectors/sprites":35,"../utils/vectors":82,"./makeEntity":7}],3:[function(require,module,exports){
+},{"../config":1,"../render/renderAgent":26,"../selectors/sprites":36,"../utils/vectors":83,"./makeEntity":7}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -195,7 +195,7 @@ var render = function render(ctx, game, bg) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":35,"./makeEntity":7}],4:[function(require,module,exports){
+},{"../selectors/sprites":36,"./makeEntity":7}],4:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -256,7 +256,7 @@ var render = function render(ctx, game, button) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../selectors/sprites":35,"./makeEntity":7}],5:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":36,"./makeEntity":7}],5:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -353,7 +353,7 @@ var render = function render(ctx, game, door) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../selectors/sprites":35,"./makeEntity":7}],7:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":36,"./makeEntity":7}],7:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -468,7 +468,7 @@ var render = function render(ctx, game, target) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../selectors/sprites":35,"./makeEntity":7}],10:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":36,"./makeEntity":7}],10:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -500,7 +500,7 @@ var render = function render(ctx, game, stone) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":35,"./makeEntity":7}],11:[function(require,module,exports){
+},{"../selectors/sprites":36,"./makeEntity":7}],11:[function(require,module,exports){
 'use strict';
 
 var _require = require('redux'),
@@ -529,21 +529,24 @@ function renderUI(store) {
     modal: state.modal
   }), document.getElementById('container'));
 }
-},{"./reducers/rootReducer":22,"./ui/Main.react":66,"react":118,"react-dom":115,"redux":119}],12:[function(require,module,exports){
+},{"./reducers/rootReducer":23,"./ui/Main.react":67,"react":119,"react-dom":116,"redux":120}],12:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":24},"width":25,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":22,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":1},"width":1,"height":14},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":22,"y":22},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":21},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":18},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":18},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":14},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":15},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":15},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":3},"width":1,"height":12},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":1},"width":1,"height":11},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":14},"width":1,"height":4}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":12},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":12},"width":1,"height":7},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":3},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":4},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":7},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":3},"width":1,"height":5},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":3},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":4},"width":2,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":3},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":4},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":5},"width":3,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":3},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":5},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":7},"width":4,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":3},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":9},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":12},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":13},"width":1,"height":6},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":19},"width":1,"height":3}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":21},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":19},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":13},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":15},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":3},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":9},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":6},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":1},"width":1,"height":1},"args":[2]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":7,"y":7},"width":1,"height":1},"args":[3]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":3},"width":1,"height":1},"args":[3,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":0},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":0},"width":1,"height":1},"args":[3,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":0},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":9,"y":0},"width":1,"height":1},"args":[1,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":9},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":12,"y":9},"width":1,"height":1},"args":[2,"vertical"]}]};
 },{}],13:[function(require,module,exports){
-module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":0},"width":1,"height":24},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":5},"width":2,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":1},"width":6,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":3},"width":4,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":3},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":5},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":7},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":23},"width":6,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":22},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":21},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":23},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":22},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":21},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":20},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":19},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":18},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":18,"y":11},"width":1,"height":1},"args":[]},{"type":"SET_MAX_STEPS","maxSteps":200},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":[0]},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":12},{"type":"SET_MAX_STEPS","maxSteps":20}]};
+module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":24},"width":25,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":0},"width":1,"height":24},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":-1},"width":24,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":1},"width":1,"height":10},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":22,"y":22},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":21},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":14},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":21},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":14},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":14},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":14},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":3},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":3},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":3},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":21},"width":7,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":18},"width":7,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":14},"width":2,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":3},"width":2,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":3},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":3},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":3},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":3},"width":6,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":4},"width":6,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":7},"width":6,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":10},"width":6,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":5},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":5,"y":4},"width":5,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":4},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":13},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":13},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":13},"width":4,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":13},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":11},"width":2,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":4,"y":1},"width":1,"height":1},"args":[2]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":1,"y":22},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":4,"y":8},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":9,"y":10},"width":1,"height":1},"args":[0,"vertical"]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":4,"y":18},"width":1,"height":1},"args":[1,"vertical"]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":9,"y":3},"width":1,"height":1},"args":[2,"vertical"]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":1},"width":1,"height":2},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":3},"width":2,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":19},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":19},"width":1,"height":2},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":19},"width":1,"height":2}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":19},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":17,"y":1},"width":1,"height":1},"args":[3]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":16,"y":11},"width":1,"height":1},"args":[3,"vertical"]}]};
 },{}],14:[function(require,module,exports){
-module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":21},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":22},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":20},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":19},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":19},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":13,"y":19},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":10},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":9},"width":2,"height":10},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":7},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":11},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":10},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":15,"y":9},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":15,"y":2},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":1},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":11,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":1,"y":22},"width":1,"height":1},"args":[0]}]};
+module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":0},"width":1,"height":24},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":5},"width":2,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":1},"width":6,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":3},"width":4,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":3},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":5},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":7},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":23},"width":6,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":22},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":21},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":23},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":22},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":21},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":20},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":19},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":18},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":18,"y":11},"width":1,"height":1},"args":[]},{"type":"SET_MAX_STEPS","maxSteps":200},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":[0]},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":12},{"type":"SET_MAX_STEPS","maxSteps":20}]};
 },{}],15:[function(require,module,exports){
-module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":6},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":9},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":17},"width":9,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":13},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":9},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":6},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":13},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":9},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":6},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":8},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":1},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":17},"width":14,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":18},"width":23,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":13,"y":3},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":7},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":9},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":6},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":1},"width":1,"height":5}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":7},"width":4,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":10},"width":6,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":4,"height":12},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":7},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":12},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":11},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":[0]},{"type":"SET_MAX_STEPS","maxSteps":64},{"type":"SET_MAX_STEPS","maxSteps":100}]};
+module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":21},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":22},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":20},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":19},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":19},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":13,"y":19},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":10},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":9},"width":2,"height":10},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":7},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":11},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":10},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":15,"y":9},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":15,"y":2},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":1},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":11,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":1,"y":22},"width":1,"height":1},"args":[0]}]};
 },{}],16:[function(require,module,exports){
+module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":6},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":9},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":17},"width":9,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":13},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":9},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":6},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":13},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":9},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":6},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":8},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":1},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":17},"width":14,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":18},"width":23,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":13,"y":3},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":7},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":9},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":6},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":1},"width":1,"height":5}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":7},"width":4,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":10},"width":6,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":4,"height":12},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":7},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":12},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":11},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":[0]},{"type":"SET_MAX_STEPS","maxSteps":64},{"type":"SET_MAX_STEPS","maxSteps":100}]};
+},{}],17:[function(require,module,exports){
 // @flow
 
 const levels = {
   justFindTargetLevel: require('./justFindTargetLevel'),
   extraDistanceLevel: require('./extraDistanceLevel'),
   firstDoorLevel: require('./firstDoorLevel'),
+  complicatedLevel: require('./complicatedLevel1'),
   testLevel: require('./testLevel'),
   adaptedLevel: require('./adaptedLevel'),
 }
@@ -551,9 +554,9 @@ const levels = {
 window.levels = levels;
 module.exports = levels;
 
-},{"./adaptedLevel":12,"./extraDistanceLevel":13,"./firstDoorLevel":14,"./justFindTargetLevel":15,"./testLevel":17}],17:[function(require,module,exports){
+},{"./adaptedLevel":12,"./complicatedLevel1":13,"./extraDistanceLevel":14,"./firstDoorLevel":15,"./justFindTargetLevel":16,"./testLevel":18}],18:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":24},"width":25,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":10},"width":1,"height":2}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":12},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":7,"y":12},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":3},"width":1,"height":10},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":6,"y":3},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":1,"y":19},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":8,"y":1},"width":1,"height":1},"args":[2,"vertical"]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":6,"y":5},"width":1,"height":1},"args":[2]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":8,"y":0},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":8,"y":1},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":19},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":19},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":0,"y":19},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":8,"y":0},"width":1,"height":1},"args":[2,"vertical"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":9},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":19},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":19},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":0,"y":9},"width":1,"height":1},"args":[1,"horizontal"]}]};
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -1022,7 +1025,7 @@ function createEntitiesReducer(game, action) {
 }
 
 module.exports = { gameReducer: gameReducer };
-},{"../config":1,"../entities/registry":8,"../render/render":24,"../selectors/pheromones":34,"../simulation/actionQueue":37,"../simulation/entityOperations":38,"../simulation/pheromones":40,"../thunks/reverseTimeThunks":50,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],19:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":25,"../selectors/pheromones":35,"../simulation/actionQueue":38,"../simulation/entityOperations":39,"../simulation/pheromones":41,"../thunks/reverseTimeThunks":51,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],20:[function(require,module,exports){
 'use strict';
 
 var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
@@ -1052,7 +1055,7 @@ var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
 };
 
 module.exports = { hotKeysReducer: hotKeysReducer };
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1076,7 +1079,7 @@ var modalReducer = function modalReducer(state, action) {
 };
 
 module.exports = { modalReducer: modalReducer };
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1111,7 +1114,7 @@ var mouseReducer = function mouseReducer(mouse, action) {
 };
 
 module.exports = { mouseReducer: mouseReducer };
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1554,7 +1557,7 @@ function upgradeReducer(state, action) {
 }
 
 module.exports = { rootReducer: rootReducer };
-},{"../levels/levels":16,"../simulation/entityOperations":38,"../state/gameState":41,"../state/state":42,"../utils/helpers":79,"./gameReducer":18,"./hotKeysReducer":19,"./modalReducer":20,"./mouseReducer":21,"./tickReducer":23}],23:[function(require,module,exports){
+},{"../levels/levels":17,"../simulation/entityOperations":39,"../state/gameState":42,"../state/state":43,"../utils/helpers":80,"./gameReducer":19,"./hotKeysReducer":20,"./modalReducer":21,"./mouseReducer":22,"./tickReducer":24}],24:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2166,8 +2169,20 @@ var keepControlledMoving = function keepControlledMoving(game) {
       queueAction(game, controlledEntity, entityAction);
       if (entityAction.type == 'MOVE' && canDoMove(game, controlledEntity, nextPos).result && !isActionTypeQueued(game, controlledEntity, 'TURN')) {
         doingMove = true;
+
+        // HACK: have character always move 2 spaces at a time
+        queueAction(game, controlledEntity, makeAction(game, controlledEntity, 'MOVE', { nextPos: add(nextPos, moveDir),
+          frameOffset: controlledEntity.frameOffset + 2
+        }));
       }
     }
+
+  // HACK: needs to count as doingMove if you just finished the previous move action
+  // in a pair
+  if (!doingMove && controlledEntity.actions.length == 1 && controlledEntity.actions[0].type == 'MOVE' && controlledEntity.actions[0].duration == controlledEntity.MOVE.duration - 1) {
+    console.log("triggered hack for doingMove");
+    doingMove = true;
+  }
   return doingMove;
 };
 
@@ -2318,7 +2333,7 @@ var updateTiledSprites = function updateTiledSprites(game) {
 
       var entity = game.entities[id];
       if (entity == null) {
-        console.log(id);
+        // console.log(id);
         continue;
       }
       entity.dictIndexStr = getDictIndexStr(game, entity);
@@ -2358,7 +2373,7 @@ var updateTicker = function updateTicker(game) {
 };
 
 module.exports = { tickReducer: tickReducer };
-},{"../config":1,"../entities/registry":8,"../render/render":24,"../selectors/buildings":29,"../selectors/collisions":30,"../selectors/misc":31,"../selectors/neighbors":33,"../selectors/pheromones":34,"../selectors/sprites":35,"../simulation/actionOperations":36,"../simulation/actionQueue.js":37,"../simulation/entityOperations":38,"../simulation/miscOperations":39,"../simulation/pheromones":40,"../thunks/reverseTimeThunks":50,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/slider":80,"../utils/stochastic":81,"../utils/vectors":82}],24:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":25,"../selectors/buildings":30,"../selectors/collisions":31,"../selectors/misc":32,"../selectors/neighbors":34,"../selectors/pheromones":35,"../selectors/sprites":36,"../simulation/actionOperations":37,"../simulation/actionQueue.js":38,"../simulation/entityOperations":39,"../simulation/miscOperations":40,"../simulation/pheromones":41,"../thunks/reverseTimeThunks":51,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/slider":81,"../utils/stochastic":82,"../utils/vectors":83}],25:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3011,7 +3026,7 @@ var renderPheromones = function renderPheromones(ctx, game) {
 };
 
 module.exports = { render: render };
-},{"../config":1,"../entities/registry":8,"../selectors/misc":31,"../selectors/mouseInteractionSelectors":32,"../selectors/neighbors":33,"../selectors/pheromones":34,"../selectors/sprites":35,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"./renderMinimap":27}],25:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../selectors/misc":32,"../selectors/mouseInteractionSelectors":33,"../selectors/neighbors":34,"../selectors/pheromones":35,"../selectors/sprites":36,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83,"./renderMinimap":28}],26:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3106,7 +3121,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"./renderHealthBar":26}],26:[function(require,module,exports){
+},{"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83,"./renderHealthBar":27}],27:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3148,7 +3163,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":78,"../utils/vectors":82}],27:[function(require,module,exports){
+},{"../utils/gridHelpers":79,"../utils/vectors":83}],28:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3641,7 +3656,7 @@ var onMinimap = function onMinimap(dims, entity) {
 module.exports = {
   renderMinimap: renderMinimap
 };
-},{"../entities/registry":8,"../selectors/misc":31,"../selectors/sprites":35,"../utils/gridHelpers":78,"../utils/vectors":82,"./renderSegmented":28}],28:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/misc":32,"../selectors/sprites":36,"../utils/gridHelpers":79,"../utils/vectors":83,"./renderSegmented":29}],29:[function(require,module,exports){
 'use strict';
 
 var _require = require('../selectors/sprites'),
@@ -3789,7 +3804,7 @@ module.exports = {
   renderSegmented: renderSegmented,
   renderWormCanvas: renderWormCanvas
 };
-},{"../selectors/misc":31,"../selectors/sprites":35,"../utils/vectors":82,"./renderHealthBar":26}],29:[function(require,module,exports){
+},{"../selectors/misc":32,"../selectors/sprites":36,"../utils/vectors":83,"./renderHealthBar":27}],30:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3826,7 +3841,7 @@ module.exports = {
   canAffordBuilding: canAffordBuilding,
   getModifiedCost: getModifiedCost
 };
-},{"../entities/registry":8}],30:[function(require,module,exports){
+},{"../entities/registry":8}],31:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/gridHelpers'),
@@ -3890,7 +3905,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":78}],31:[function(require,module,exports){
+},{"../utils/gridHelpers":79}],32:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4166,7 +4181,7 @@ module.exports = {
   isLit: isLit,
   inOtherLight: inOtherLight
 };
-},{"../selectors/collisions":30,"../selectors/neighbors":33,"../selectors/pheromones":34,"../simulation/actionQueue":37,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],32:[function(require,module,exports){
+},{"../selectors/collisions":31,"../selectors/neighbors":34,"../selectors/pheromones":35,"../simulation/actionQueue":38,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],33:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4261,7 +4276,7 @@ module.exports = {
   isNeighboringColonyPher: isNeighboringColonyPher,
   isAboveSomething: isAboveSomething
 };
-},{"../entities/registry":8,"../selectors/buildings":29,"../selectors/neighbors":33,"../selectors/pheromones":34,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],33:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/buildings":30,"../selectors/neighbors":34,"../selectors/pheromones":35,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],34:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -4528,7 +4543,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":30,"../utils/gridHelpers":78,"../utils/vectors":82}],34:[function(require,module,exports){
+},{"../selectors/collisions":31,"../utils/gridHelpers":79,"../utils/vectors":83}],35:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4755,7 +4770,7 @@ module.exports = {
   isPositionBlockingPheromone: isPositionBlockingPheromone,
   getAllPheromonesAtPosition: getAllPheromonesAtPosition
 };
-},{"../config":1,"../selectors/neighbors":33,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],35:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":34,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],36:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5111,7 +5126,7 @@ module.exports = {
   getBackgroundSprite: getBackgroundSprite,
   getMaxFrameOffset: getMaxFrameOffset
 };
-},{"../config":1,"../selectors/misc":31,"../selectors/neighbors":33,"../selectors/pheromones":34,"../simulation/actionQueue":37,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],36:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":32,"../selectors/neighbors":34,"../selectors/pheromones":35,"../simulation/actionQueue":38,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],37:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5362,7 +5377,7 @@ var entityDie = function entityDie(game, entity) {
 module.exports = {
   entityStartCurrentAction: entityStartCurrentAction
 };
-},{"../entities/registry":8,"../selectors/misc":31,"../selectors/sprites":35,"../simulation/actionQueue":37,"../simulation/entityOperations":38,"../utils/helpers":79,"../utils/vectors":82}],37:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/misc":32,"../selectors/sprites":36,"../simulation/actionQueue":38,"../simulation/entityOperations":39,"../utils/helpers":80,"../utils/vectors":83}],38:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5612,7 +5627,7 @@ module.exports = {
   getFrame: getFrame,
   isDoingAction: isDoingAction
 };
-},{"../selectors/pheromones":34,"../utils/helpers":79,"../utils/vectors":82}],38:[function(require,module,exports){
+},{"../selectors/pheromones":35,"../utils/helpers":80,"../utils/vectors":83}],39:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6286,7 +6301,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":33,"../selectors/pheromones":34,"../simulation/pheromones":40,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],39:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":34,"../selectors/pheromones":35,"../simulation/pheromones":41,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],40:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -6313,7 +6328,7 @@ var dealDamageToEntity = function dealDamageToEntity(game, entity, damage) {
 module.exports = {
   dealDamageToEntity: dealDamageToEntity
 };
-},{"../simulation/actionQueue":37,"../simulation/entityOperations":38}],40:[function(require,module,exports){
+},{"../simulation/actionQueue":38,"../simulation/entityOperations":39}],41:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -6685,7 +6700,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":33,"../selectors/pheromones":34,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],41:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":34,"../selectors/pheromones":35,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],42:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/makeEntity'),
@@ -6851,7 +6866,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 };
 
 module.exports = { initBaseState: initBaseState, initPlayer: initPlayer };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../simulation/entityOperations":38,"../utils/gridHelpers":78,"../utils/stochastic":81,"../utils/vectors":82}],42:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../simulation/entityOperations":39,"../utils/gridHelpers":79,"../utils/stochastic":82,"../utils/vectors":83}],43:[function(require,module,exports){
 'use strict';
 
 var initState = function initState() {
@@ -6866,7 +6881,7 @@ var initState = function initState() {
 };
 
 module.exports = { initState: initState };
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -6928,9 +6943,11 @@ var initGameOverSystem = function initGameOverSystem(store) {
     if (game.levelWon) {
       var nextLevelName = levelOrder[state.campaign.level];
       dispatch({ type: 'STOP_TICK' });
-      dispatch({ type: 'SET_CURRENT_LEVEL_WON' });
-      loadLevel(store, nextLevelName, [], true /* synchronous */);
-      dispatch({ type: 'START_TICK' });
+      if (state.screen != 'EDITOR') {
+        dispatch({ type: 'SET_CURRENT_LEVEL_WON' });
+        loadLevel(store, nextLevelName, [], true /* synchronous */);
+        dispatch({ type: 'START_TICK' });
+      }
     }
 
     // LOSS CONDITIONS
@@ -6995,17 +7012,18 @@ var handleGameLoss = function handleGameLoss(store, dispatch, state, reason) {
     }
   };
   var resetButton = {
-    label: 'Reset',
+    label: 'Restart Level',
     onClick: function onClick() {
       dispatch({ type: 'DISMISS_MODAL' });
-      dispatch({ type: 'SET_PLAYERS_AND_SIZE' });
-      render(store.getState().game); // HACK for level editor
+      dispatch({ type: 'SET_PLAYERS_AND_SIZE', synchronous: true });
+      if (state.screen == 'EDITOR') {
+        render(store.getState().game); // HACK for level editor
+      } else {
+        dispatch({ type: 'START_TICK' });
+      }
     }
   };
-  var buttons = [returnButton];
-  if (state.screen == 'EDITOR') {
-    buttons.push(resetButton);
-  }
+  var buttons = [resetButton, returnButton];
 
   var body = React.createElement(
     'div',
@@ -7072,7 +7090,7 @@ var handleGameWon = function handleGameWon(store, dispatch, state, reason) {
 };
 
 module.exports = { initGameOverSystem: initGameOverSystem };
-},{"../levels/levels":16,"../render/render":24,"../selectors/misc":31,"../thunks/levelThunks":48,"../ui/components/Button.react":69,"../ui/components/Divider.react":71,"../ui/components/Modal.react":73,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"axios":83,"react":118}],44:[function(require,module,exports){
+},{"../levels/levels":17,"../render/render":25,"../selectors/misc":32,"../thunks/levelThunks":49,"../ui/components/Button.react":70,"../ui/components/Divider.react":72,"../ui/components/Modal.react":74,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83,"axios":84,"react":119}],45:[function(require,module,exports){
 'use strict';
 
 var initKeyboardControlsSystem = function initKeyboardControlsSystem(store) {
@@ -7207,7 +7225,7 @@ var getUpDownLeftRight = function getUpDownLeftRight(ev) {
 };
 
 module.exports = { initKeyboardControlsSystem: initKeyboardControlsSystem };
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 'use strict';
 
 var _require = require('../config'),
@@ -7440,7 +7458,7 @@ var getMousePixel = function getMousePixel(ev, canvas) {
 };
 
 module.exports = { initMouseControlsSystem: initMouseControlsSystem };
-},{"../config":1,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],46:[function(require,module,exports){
+},{"../config":1,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],47:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -7533,7 +7551,7 @@ var initPheromoneWorkerSystem = function initPheromoneWorkerSystem(store) {
 };
 
 module.exports = { initPheromoneWorkerSystem: initPheromoneWorkerSystem };
-},{"../entities/registry":8,"../utils/helpers":79,"../utils/vectors":82}],47:[function(require,module,exports){
+},{"../entities/registry":8,"../utils/helpers":80,"../utils/vectors":83}],48:[function(require,module,exports){
 'use strict';
 
 var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
@@ -7544,7 +7562,7 @@ var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
 
   loadSprite(dispatch, state, 'ANT', './img/Ant2.png');
   loadSprite(dispatch, state, 'WALL', './img/Wall1.png');
-  loadSprite(dispatch, state, 'CHARACTER', './img/character2.jpg');
+  loadSprite(dispatch, state, 'CHARACTER', './img/character4.png');
 
   loadSprite(dispatch, state, 'PHEROMONE', './img/Pheromones.png');
 };
@@ -7567,7 +7585,7 @@ var loadSprite = function loadSprite(dispatch, state, name, src) {
 };
 
 module.exports = { initSpriteSheetSystem: initSpriteSheetSystem };
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 'use strict';
 
 var levels = require('../levels/levels');
@@ -7600,7 +7618,7 @@ function loadLevel(store, levelName, additionalUpgrades, synchronous) {
 module.exports = {
   loadLevel: loadLevel
 };
-},{"../levels/levels":16}],49:[function(require,module,exports){
+},{"../levels/levels":17}],50:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -7730,7 +7748,7 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 };
 
 module.exports = { handleCollect: handleCollect, handlePlace: handlePlace };
-},{"../entities/registry":8,"../selectors/buildings":29,"../selectors/mouseInteractionSelectors":32,"../selectors/neighbors":33,"../selectors/pheromones":34,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82}],50:[function(require,module,exports){
+},{"../entities/registry":8,"../selectors/buildings":30,"../selectors/mouseInteractionSelectors":33,"../selectors/neighbors":34,"../selectors/pheromones":35,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83}],51:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7803,7 +7821,7 @@ module.exports = {
   doReverseTime: doReverseTime,
   allAgentsDone: allAgentsDone
 };
-},{"../entities/registry":8,"../simulation/actionQueue":37,"../simulation/entityOperations":38}],51:[function(require,module,exports){
+},{"../entities/registry":8,"../simulation/actionQueue":38,"../simulation/entityOperations":39}],52:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -7831,7 +7849,7 @@ var BottomBar = function BottomBar(props) {
 };
 
 module.exports = BottomBar;
-},{"react":118}],52:[function(require,module,exports){
+},{"react":119}],53:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -7971,7 +7989,7 @@ function withPropsChecker(WrappedComponent) {
 }
 
 module.exports = React.memo(Canvas);
-},{"../config":1,"react":118}],53:[function(require,module,exports){
+},{"../config":1,"react":119}],54:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8059,7 +8077,7 @@ var AudioWidget = function AudioWidget(props) {
 };
 
 module.exports = AudioWidget;
-},{"./Button.react":54,"react":118}],54:[function(require,module,exports){
+},{"./Button.react":55,"react":119}],55:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8143,7 +8161,7 @@ function Button(props) {
 }
 
 module.exports = Button;
-},{"react":118}],55:[function(require,module,exports){
+},{"react":119}],56:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8183,7 +8201,7 @@ function Checkbox(props) {
 }
 
 module.exports = Checkbox;
-},{"react":118}],56:[function(require,module,exports){
+},{"react":119}],57:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8203,7 +8221,7 @@ function Divider(props) {
 }
 
 module.exports = Divider;
-},{"react":118}],57:[function(require,module,exports){
+},{"react":119}],58:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8244,7 +8262,7 @@ var Dropdown = function Dropdown(props) {
 };
 
 module.exports = Dropdown;
-},{"react":118}],58:[function(require,module,exports){
+},{"react":119}],59:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8318,7 +8336,7 @@ function Modal(props) {
 }
 
 module.exports = Modal;
-},{"../../utils/helpers":79,"./Button.react":54,"react":118}],59:[function(require,module,exports){
+},{"../../utils/helpers":80,"./Button.react":55,"react":119}],60:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8408,7 +8426,7 @@ var submitValue = function submitValue(onChange, nextVal, onlyInt) {
 };
 
 module.exports = NumberField;
-},{"react":118}],60:[function(require,module,exports){
+},{"react":119}],61:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -8497,7 +8515,7 @@ var RadioPicker = function (_React$Component) {
 }(React.Component);
 
 module.exports = RadioPicker;
-},{"react":118}],61:[function(require,module,exports){
+},{"react":119}],62:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -8568,7 +8586,7 @@ function Slider(props) {
 }
 
 module.exports = Slider;
-},{"./NumberField.react":59,"react":118}],62:[function(require,module,exports){
+},{"./NumberField.react":60,"react":119}],63:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -8747,7 +8765,7 @@ function ExperimentalSidebar(props) {
 }
 
 module.exports = ExperimentalSidebar;
-},{"./Components/Button.react":54,"./Components/Checkbox.react":55,"./Components/Divider.react":56,"./Components/Dropdown.react":57,"./Components/Slider.react":61,"react":118}],63:[function(require,module,exports){
+},{"./Components/Button.react":55,"./Components/Checkbox.react":56,"./Components/Divider.react":57,"./Components/Dropdown.react":58,"./Components/Slider.react":62,"react":119}],64:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8923,8 +8941,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'up',
     fn: function fn(s) {
-      var game = s.getState().game;
-      if (!game.tickInterval) {
+      var state = s.getState();
+      var game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         var moveAmount = Math.round(Math.max(1, game.gridHeight / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, { x: 0, y: moveAmount })
@@ -8937,8 +8956,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'down',
     fn: function fn(s) {
-      var game = s.getState().game;
-      if (!game.tickInterval) {
+      var state = s.getState();
+      var game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         var moveAmount = Math.round(Math.max(1, game.gridHeight / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, { x: 0, y: -1 * moveAmount })
@@ -8951,8 +8971,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'left',
     fn: function fn(s) {
-      var game = s.getState().game;
-      if (!game.tickInterval) {
+      var state = s.getState();
+      var game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         var moveAmount = Math.round(Math.max(1, game.gridWidth / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, { x: -1 * moveAmount, y: 0 })
@@ -8965,8 +8986,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'right',
     fn: function fn(s) {
-      var game = s.getState().game;
-      if (!game.tickInterval) {
+      var state = s.getState();
+      var game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         var moveAmount = Math.round(Math.max(1, game.gridWidth / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, { x: moveAmount, y: 0 })
@@ -9084,7 +9106,7 @@ function MiniTicker(props) {
 }
 
 module.exports = Game;
-},{"../config":1,"../render/render":24,"../selectors/misc":31,"../simulation/actionQueue":37,"../systems/gameOverSystem":43,"../systems/keyboardControlsSystem":44,"../systems/mouseControlsSystem":45,"../systems/pheromoneWorkerSystem":46,"../systems/spriteSheetSystem":47,"../thunks/mouseInteractions":49,"../utils/gridHelpers":78,"../utils/helpers":79,"../utils/vectors":82,"./BottomBar.react":51,"./Canvas.react":52,"./Components/Button.react":54,"./Components/Checkbox.react":55,"./Components/RadioPicker.react":60,"./ExperimentalSidebar.react":62,"./TopBar.react":67,"react":118}],64:[function(require,module,exports){
+},{"../config":1,"../render/render":25,"../selectors/misc":32,"../simulation/actionQueue":38,"../systems/gameOverSystem":44,"../systems/keyboardControlsSystem":45,"../systems/mouseControlsSystem":46,"../systems/pheromoneWorkerSystem":47,"../systems/spriteSheetSystem":48,"../thunks/mouseInteractions":50,"../utils/gridHelpers":79,"../utils/helpers":80,"../utils/vectors":83,"./BottomBar.react":52,"./Canvas.react":53,"./Components/Button.react":55,"./Components/Checkbox.react":56,"./Components/RadioPicker.react":61,"./ExperimentalSidebar.react":63,"./TopBar.react":68,"react":119}],65:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -9972,7 +9994,7 @@ function createEntityOptions(game, editor, setEditor) {
 }
 
 module.exports = LevelEditor;
-},{"../config":1,"../entities/registry":8,"../render/render":24,"../systems/mouseControlsSystem":45,"../utils/vectors":82,"./components/Button.react":69,"./components/Checkbox.react":70,"./components/Divider.react":71,"./components/Dropdown.react":72,"./components/NumberField.react":74,"./components/Slider.react":76,"react":118}],65:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../render/render":25,"../systems/mouseControlsSystem":46,"../utils/vectors":83,"./components/Button.react":70,"./components/Checkbox.react":71,"./components/Divider.react":72,"./components/Dropdown.react":73,"./components/NumberField.react":75,"./components/Slider.react":77,"react":119}],66:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10389,7 +10411,7 @@ function playLevel(store, levelName, setLoadingProgress, setIsLoaded) {
 }
 
 module.exports = Lobby;
-},{"../config":1,"../levels/levels":16,"../systems/spriteSheetSystem":47,"../thunks/levelThunks":48,"../ui/components/Modal.react":73,"../ui/components/QuitButton.react":75,"../utils/helpers":79,"./components/AudioWidget.react":68,"./components/Button.react":69,"./components/Checkbox.react":70,"./components/Divider.react":71,"./components/Dropdown.react":72,"axios":83,"react":118}],66:[function(require,module,exports){
+},{"../config":1,"../levels/levels":17,"../systems/spriteSheetSystem":48,"../thunks/levelThunks":49,"../ui/components/Modal.react":74,"../ui/components/QuitButton.react":76,"../utils/helpers":80,"./components/AudioWidget.react":69,"./components/Button.react":70,"./components/Checkbox.react":71,"./components/Divider.react":72,"./components/Dropdown.react":73,"axios":84,"react":119}],67:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10439,7 +10461,7 @@ function Main(props) {
 }
 
 module.exports = Main;
-},{"./Game.react":63,"./LevelEditor.react":64,"./Lobby.react":65,"react":118}],67:[function(require,module,exports){
+},{"./Game.react":64,"./LevelEditor.react":65,"./Lobby.react":66,"react":119}],68:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10646,21 +10668,21 @@ function dismissModal(dispatch) {
 }
 
 module.exports = TopBar;
-},{"../config":1,"../entities/registry":8,"../ui/components/QuitButton.react":75,"../utils/helpers":79,"./Components/AudioWidget.react":53,"./Components/Button.react":54,"./Components/Divider.react":56,"./Components/Modal.react":58,"react":118}],68:[function(require,module,exports){
-arguments[4][53][0].apply(exports,arguments)
-},{"./Button.react":69,"dup":53,"react":118}],69:[function(require,module,exports){
+},{"../config":1,"../entities/registry":8,"../ui/components/QuitButton.react":76,"../utils/helpers":80,"./Components/AudioWidget.react":54,"./Components/Button.react":55,"./Components/Divider.react":57,"./Components/Modal.react":59,"react":119}],69:[function(require,module,exports){
 arguments[4][54][0].apply(exports,arguments)
-},{"dup":54,"react":118}],70:[function(require,module,exports){
+},{"./Button.react":70,"dup":54,"react":119}],70:[function(require,module,exports){
 arguments[4][55][0].apply(exports,arguments)
-},{"dup":55,"react":118}],71:[function(require,module,exports){
+},{"dup":55,"react":119}],71:[function(require,module,exports){
 arguments[4][56][0].apply(exports,arguments)
-},{"dup":56,"react":118}],72:[function(require,module,exports){
+},{"dup":56,"react":119}],72:[function(require,module,exports){
 arguments[4][57][0].apply(exports,arguments)
-},{"dup":57,"react":118}],73:[function(require,module,exports){
+},{"dup":57,"react":119}],73:[function(require,module,exports){
 arguments[4][58][0].apply(exports,arguments)
-},{"../../utils/helpers":79,"./Button.react":69,"dup":58,"react":118}],74:[function(require,module,exports){
+},{"dup":58,"react":119}],74:[function(require,module,exports){
 arguments[4][59][0].apply(exports,arguments)
-},{"dup":59,"react":118}],75:[function(require,module,exports){
+},{"../../utils/helpers":80,"./Button.react":70,"dup":59,"react":119}],75:[function(require,module,exports){
+arguments[4][60][0].apply(exports,arguments)
+},{"dup":60,"react":119}],76:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10749,11 +10771,11 @@ var quitGameModal = function quitGameModal(dispatch) {
 };
 
 module.exports = QuitButton;
-},{"../../utils/helpers":79,"./Button.react":69,"./Modal.react":73,"react":118}],76:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"./NumberField.react":74,"dup":61,"react":118}],77:[function(require,module,exports){
-arguments[4][61][0].apply(exports,arguments)
-},{"./NumberField.react":74,"dup":61,"react":118}],78:[function(require,module,exports){
+},{"../../utils/helpers":80,"./Button.react":70,"./Modal.react":74,"react":119}],77:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"./NumberField.react":75,"dup":62,"react":119}],78:[function(require,module,exports){
+arguments[4][62][0].apply(exports,arguments)
+},{"./NumberField.react":75,"dup":62,"react":119}],79:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -10881,7 +10903,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":79,"../utils/vectors":82}],79:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":80,"../utils/vectors":83}],80:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -11051,7 +11073,7 @@ module.exports = {
   isElectron: isElectron,
   deepCopy: deepCopy
 };
-},{"./vectors":82}],80:[function(require,module,exports){
+},{"./vectors":83}],81:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11128,7 +11150,7 @@ var slider = function slider(value, props) {
 window.values = allValues;
 
 module.exports = { slider: slider };
-},{"../ui/components/slider.react":77,"react":118,"react-dom":115}],81:[function(require,module,exports){
+},{"../ui/components/slider.react":78,"react":119,"react-dom":116}],82:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -11183,7 +11205,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],82:[function(require,module,exports){
+},{}],83:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -11392,9 +11414,9 @@ module.exports = {
   abs: abs,
   clampMagnitude: clampMagnitude
 };
-},{}],83:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":85}],84:[function(require,module,exports){
+},{"./lib/axios":86}],85:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -11575,7 +11597,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../core/buildFullPath":91,"../core/createError":92,"./../core/settle":96,"./../helpers/buildURL":100,"./../helpers/cookies":102,"./../helpers/isURLSameOrigin":105,"./../helpers/parseHeaders":107,"./../utils":109}],85:[function(require,module,exports){
+},{"../core/buildFullPath":92,"../core/createError":93,"./../core/settle":97,"./../helpers/buildURL":101,"./../helpers/cookies":103,"./../helpers/isURLSameOrigin":106,"./../helpers/parseHeaders":108,"./../utils":110}],86:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -11633,7 +11655,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":86,"./cancel/CancelToken":87,"./cancel/isCancel":88,"./core/Axios":89,"./core/mergeConfig":95,"./defaults":98,"./helpers/bind":99,"./helpers/isAxiosError":104,"./helpers/spread":108,"./utils":109}],86:[function(require,module,exports){
+},{"./cancel/Cancel":87,"./cancel/CancelToken":88,"./cancel/isCancel":89,"./core/Axios":90,"./core/mergeConfig":96,"./defaults":99,"./helpers/bind":100,"./helpers/isAxiosError":105,"./helpers/spread":109,"./utils":110}],87:[function(require,module,exports){
 'use strict';
 
 /**
@@ -11654,7 +11676,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],87:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -11713,14 +11735,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":86}],88:[function(require,module,exports){
+},{"./Cancel":87}],89:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],89:[function(require,module,exports){
+},{}],90:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -11817,7 +11839,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":100,"./../utils":109,"./InterceptorManager":90,"./dispatchRequest":93,"./mergeConfig":95}],90:[function(require,module,exports){
+},{"../helpers/buildURL":101,"./../utils":110,"./InterceptorManager":91,"./dispatchRequest":94,"./mergeConfig":96}],91:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -11871,7 +11893,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":109}],91:[function(require,module,exports){
+},{"./../utils":110}],92:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -11893,7 +11915,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":101,"../helpers/isAbsoluteURL":103}],92:[function(require,module,exports){
+},{"../helpers/combineURLs":102,"../helpers/isAbsoluteURL":104}],93:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -11913,7 +11935,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":94}],93:[function(require,module,exports){
+},{"./enhanceError":95}],94:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -11994,7 +12016,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":88,"../defaults":98,"./../utils":109,"./transformData":97}],94:[function(require,module,exports){
+},{"../cancel/isCancel":89,"../defaults":99,"./../utils":110,"./transformData":98}],95:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12038,7 +12060,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],95:[function(require,module,exports){
+},{}],96:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -12127,7 +12149,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":109}],96:[function(require,module,exports){
+},{"../utils":110}],97:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -12154,7 +12176,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":92}],97:[function(require,module,exports){
+},{"./createError":93}],98:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12176,7 +12198,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":109}],98:[function(require,module,exports){
+},{"./../utils":110}],99:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -12278,7 +12300,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this)}).call(this,require('_process'))
-},{"./adapters/http":84,"./adapters/xhr":84,"./helpers/normalizeHeaderName":106,"./utils":109,"_process":128}],99:[function(require,module,exports){
+},{"./adapters/http":85,"./adapters/xhr":85,"./helpers/normalizeHeaderName":107,"./utils":110,"_process":129}],100:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -12291,7 +12313,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],100:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12363,7 +12385,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":109}],101:[function(require,module,exports){
+},{"./../utils":110}],102:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12379,7 +12401,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],102:[function(require,module,exports){
+},{}],103:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12434,7 +12456,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":109}],103:[function(require,module,exports){
+},{"./../utils":110}],104:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12450,7 +12472,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],104:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12463,7 +12485,7 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],105:[function(require,module,exports){
+},{}],106:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12533,7 +12555,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":109}],106:[function(require,module,exports){
+},{"./../utils":110}],107:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -12547,7 +12569,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":109}],107:[function(require,module,exports){
+},{"../utils":110}],108:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -12602,7 +12624,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":109}],108:[function(require,module,exports){
+},{"./../utils":110}],109:[function(require,module,exports){
 'use strict';
 
 /**
@@ -12631,7 +12653,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],109:[function(require,module,exports){
+},{}],110:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -12984,7 +13006,7 @@ module.exports = {
   stripBOM: stripBOM
 };
 
-},{"./helpers/bind":99}],110:[function(require,module,exports){
+},{"./helpers/bind":100}],111:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -13076,7 +13098,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],111:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -13182,7 +13204,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this)}).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":112,"_process":128}],112:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":113,"_process":129}],113:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -13196,7 +13218,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],113:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.14.0
  * react-dom.development.js
@@ -38212,7 +38234,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"object-assign":110,"prop-types/checkPropTypes":111,"react":118,"scheduler":124,"scheduler/tracing":125}],114:[function(require,module,exports){
+},{"_process":129,"object-assign":111,"prop-types/checkPropTypes":112,"react":119,"scheduler":125,"scheduler/tracing":126}],115:[function(require,module,exports){
 /** @license React v16.14.0
  * react-dom.production.min.js
  *
@@ -38506,7 +38528,7 @@ exports.flushSync=function(a,b){if((W&(fj|gj))!==V)throw Error(u(187));var c=W;W
 exports.unmountComponentAtNode=function(a){if(!gk(a))throw Error(u(40));return a._reactRootContainer?(Nj(function(){ik(null,null,a,!1,function(){a._reactRootContainer=null;a[Od]=null})}),!0):!1};exports.unstable_batchedUpdates=Mj;exports.unstable_createPortal=function(a,b){return kk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!gk(c))throw Error(u(200));if(null==a||void 0===a._reactInternalFiber)throw Error(u(38));return ik(a,b,c,!1,d)};exports.version="16.14.0";
 
-},{"object-assign":110,"react":118,"scheduler":124}],115:[function(require,module,exports){
+},{"object-assign":111,"react":119,"scheduler":125}],116:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -38548,7 +38570,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":113,"./cjs/react-dom.production.min.js":114,"_process":128}],116:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":114,"./cjs/react-dom.production.min.js":115,"_process":129}],117:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.14.0
  * react.development.js
@@ -40464,7 +40486,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"object-assign":110,"prop-types/checkPropTypes":111}],117:[function(require,module,exports){
+},{"_process":129,"object-assign":111,"prop-types/checkPropTypes":112}],118:[function(require,module,exports){
 /** @license React v16.14.0
  * react.production.min.js
  *
@@ -40491,7 +40513,7 @@ key:d,ref:g,props:e,_owner:k}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:A,_ctor:a,_status:-1,_result:null}};exports.memo=function(a,b){return{$$typeof:z,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return Z().useCallback(a,b)};exports.useContext=function(a,b){return Z().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return Z().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return Z().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return Z().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return Z().useMemo(a,b)};exports.useReducer=function(a,b,c){return Z().useReducer(a,b,c)};exports.useRef=function(a){return Z().useRef(a)};exports.useState=function(a){return Z().useState(a)};exports.version="16.14.0";
 
-},{"object-assign":110}],118:[function(require,module,exports){
+},{"object-assign":111}],119:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -40502,7 +40524,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":116,"./cjs/react.production.min.js":117,"_process":128}],119:[function(require,module,exports){
+},{"./cjs/react.development.js":117,"./cjs/react.production.min.js":118,"_process":129}],120:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -41180,7 +41202,7 @@ exports.compose = compose;
 exports.createStore = createStore;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128,"symbol-observable":126}],120:[function(require,module,exports){
+},{"_process":129,"symbol-observable":127}],121:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.19.1
  * scheduler-tracing.development.js
@@ -41533,7 +41555,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128}],121:[function(require,module,exports){
+},{"_process":129}],122:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler-tracing.production.min.js
  *
@@ -41545,7 +41567,7 @@ exports.unstable_wrap = unstable_wrap;
 
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],122:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.19.1
  * scheduler.development.js
@@ -42407,7 +42429,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":128}],123:[function(require,module,exports){
+},{"_process":129}],124:[function(require,module,exports){
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
@@ -42430,7 +42452,7 @@ exports.unstable_getCurrentPriorityLevel=function(){return R};exports.unstable_g
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();if("object"===typeof c&&null!==c){var e=c.delay;e="number"===typeof e&&0<e?d+e:d;c="number"===typeof c.timeout?c.timeout:Y(a)}else c=Y(a),e=d;c=e+c;a={id:P++,callback:b,priorityLevel:a,startTime:e,expirationTime:c,sortIndex:-1};e>d?(a.sortIndex=e,J(O,a),null===L(N)&&a===L(O)&&(U?h():U=!0,g(W,e-d))):(a.sortIndex=c,J(N,a),T||S||(T=!0,f(X)));return a};
 exports.unstable_shouldYield=function(){var a=exports.unstable_now();V(a);var b=L(N);return b!==Q&&null!==Q&&null!==b&&null!==b.callback&&b.startTime<=a&&b.expirationTime<Q.expirationTime||k()};exports.unstable_wrapCallback=function(a){var b=R;return function(){var c=R;R=b;try{return a.apply(this,arguments)}finally{R=c}}};
 
-},{}],124:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -42441,7 +42463,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":122,"./cjs/scheduler.production.min.js":123,"_process":128}],125:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":123,"./cjs/scheduler.production.min.js":124,"_process":129}],126:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -42452,7 +42474,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":120,"./cjs/scheduler-tracing.production.min.js":121,"_process":128}],126:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":121,"./cjs/scheduler-tracing.production.min.js":122,"_process":129}],127:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
 
@@ -42484,7 +42506,7 @@ if (typeof self !== 'undefined') {
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ponyfill.js":127}],127:[function(require,module,exports){
+},{"./ponyfill.js":128}],128:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42508,7 +42530,7 @@ function symbolObservablePonyfill(root) {
 
 	return result;
 };
-},{}],128:[function(require,module,exports){
+},{}],129:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

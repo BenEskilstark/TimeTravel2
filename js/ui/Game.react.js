@@ -148,8 +148,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'up',
     fn: (s) => {
-      const game = s.getState().game;
-      if (!game.tickInterval) {
+      const state = s.getState();
+      const game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         let moveAmount = Math.round(Math.max(1, game.gridHeight / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, {x: 0, y: moveAmount}),
@@ -162,8 +163,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'down',
     fn: (s) => {
-      const game = s.getState().game;
-      if (!game.tickInterval) {
+      const state = s.getState();
+      const game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         let moveAmount = Math.round(Math.max(1, game.gridHeight / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, {x: 0, y: -1 * moveAmount}),
@@ -176,8 +178,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'left',
     fn: (s) => {
-      const game = s.getState().game;
-      if (!game.tickInterval) {
+      const state = s.getState();
+      const game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         let moveAmount = Math.round(Math.max(1, game.gridWidth / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, {x: -1 * moveAmount, y: 0}),
@@ -190,8 +193,9 @@ function registerHotkeys(dispatch) {
     type: 'SET_HOTKEY', press: 'onKeyDown',
     key: 'right',
     fn: (s) => {
-      const game = s.getState().game;
-      if (!game.tickInterval) {
+      const state = s.getState();
+      const game = state.game;
+      if (!game.tickInterval && state.screen == 'EDITOR') {
         let moveAmount = Math.round(Math.max(1, game.gridWidth / 30));
         dispatch({
           type: 'SET_VIEW_POS', viewPos: add(game.viewPos, {x: moveAmount, y: 0}),

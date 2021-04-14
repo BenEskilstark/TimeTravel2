@@ -19,19 +19,35 @@
 
 
 - - - - - - ISSUES - - - - - -
+  - disallow zooming in regular game
   - doors on the edge of the map opening/closing in fog is briefly visible
-  - don't register arrow keys outside of editor (on game loss, modals that pause the game)
-  - add restart level button to game over modal
-  - winning the level in levelEditor breaks down
+  - add modal for when you win the level
   - playtesting:
     - hard to tell when you're gonna run out of steps or hit a door
     - hard to tell when you're going to be in the line of sight of a previous self
+    - may need to limit number of time reversals or else when you go through the
+      last door you can just reverse time every two steps and never have to open that door
+    - hard to tell where you should even go
+      - implies mazes should be linear
+      - OR that you should be able to see the map at the start
+      - OR that levels are designed such that you can go the wrong way and have a chance
+  - moving 2x per button press
+    - skips 3rd history entry
+    - renders entity moving the wrong way briefly at the start of the reverse time
 
 
 - - - - - - TODO - - - - - -
+  - need to make moves the same distance as player size
+    - queue up 2 moves
+      - display numActionIndex / 2 as number of steps
+      - design all levels around having 2-wide moves
+      - doors are now half as wide as character
+    - OR shrink character
+      - doors are now twice as long as character
+    - should add little grid outlines to background for counting steps?
+
   - get level progression working on main play
     - add in more of the original levels
-    - add in action to win the level
     - store level progress in local storage
 
 

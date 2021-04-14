@@ -47,9 +47,11 @@ const initGameOverSystem = (store) => {
     if (game.levelWon) {
       const nextLevelName = levelOrder[state.campaign.level];
       dispatch({type: 'STOP_TICK'});
-      dispatch({type: 'SET_CURRENT_LEVEL_WON'});
-      loadLevel(store, nextLevelName, [], true /* synchronous */);
-      dispatch({type: 'START_TICK'});
+      if (state.screen != 'EDITOR') {
+        dispatch({type: 'SET_CURRENT_LEVEL_WON'});
+        loadLevel(store, nextLevelName, [], true /* synchronous */);
+        dispatch({type: 'START_TICK'});
+      }
     }
 
     // LOSS CONDITIONS
@@ -93,17 +95,18 @@ const handleGameLoss = (store, dispatch, state, reason): void => {
     }
   };
   const resetButton = {
-    label: 'Reset',
+    label: 'Restart Level',
     onClick: () => {
       dispatch({type: 'DISMISS_MODAL'});
-      dispatch({type: 'SET_PLAYERS_AND_SIZE'});
-      render(store.getState().game); // HACK for level editor
+      dispatch({type: 'SET_PLAYERS_AND_SIZE', synchronous: true});
+      if (state.screen == 'EDITOR') {
+        render(store.getState().game); // HACK for level editor
+      } else {
+        dispatch({type: 'START_TICK'});
+      }
     },
   };
-  const buttons = [returnButton];
-  if (state.screen == 'EDITOR') {
-    buttons.push(resetButton);
-  }
+  const buttons = [resetButton, returnButton];
 
   const body = (
     <div>
