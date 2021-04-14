@@ -1,53 +1,42 @@
 
 
 - - - - - - TO THINK ABOUT - - - - - -
-  - how to manage when doors close based on time travel
-    - how to explain this in game?
-      - you can forget you went through a door
-        - need to indicate buttons that need to be pressed?
-      - can't tell the difference between an open door and a closed door
-      - can hit issues going through the closed path of a door since it opens
-        at a different tick on the next run through
-        - ie: 1. go through open door
-              2. door closes at step 1 and you go through the path it blocked when open
-                 and then press the button to open the door
-              3. door now closes at a later step than it did the first time so 2 becomes
-                 impossible
-  - grandfather? / what is the goal in the maze?
+  - grandfather? / WHAT IS THE GOAL IN THE MAZE?
   - doodads:
     - lanterns that have their own light
 
 
 - - - - - - ISSUES - - - - - -
-  - disallow zooming in regular game
   - doors on the edge of the map opening/closing in fog is briefly visible
-  - add modal for when you win the level
+
+  - issues with OG demo version of once-through-then-close-all-doors
+    - don't have the time machine at the start
+      - could just say all doors close after first time travel
+    - why is the player going through the maze? What is the goal?
+    - lantern light doesn't do as much if you can already sorta see the level
+
   - playtesting:
-    - hard to tell when you're gonna run out of steps or hit a door
+    - hard to tell when you're going to run out of steps
+      - make steps bigger, blink or buzz it when you have fewer steps left
+      - perhaps pause your movement with 1 step left?
+    - hard to tell when you will hit a door
+      - have the character on its way to a door blink an exclam?
     - hard to tell when you're going to be in the line of sight of a previous self
-    - may need to limit number of time reversals or else when you go through the
-      last door you can just reverse time every two steps and never have to open that door
+      - don't show their light, only yours?
+      - make it so it's only based on collision?
+
+  - issues with total fog at the start
     - hard to tell where you should even go
       - implies mazes should be linear
       - OR that you should be able to see the map at the start
       - OR that levels are designed such that you can go the wrong way and have a chance
-  - moving 2x per button press
-    - skips 3rd history entry
-    - renders entity moving the wrong way briefly at the start of the reverse time
+    - could have lanterns or buttons/doors pre-lit
 
 
 - - - - - - TODO - - - - - -
-  - need to make moves the same distance as player size
-    - queue up 2 moves
-      - display numActionIndex / 2 as number of steps
-      - design all levels around having 2-wide moves
-      - doors are now half as wide as character
-    - OR shrink character
-      - doors are now twice as long as character
-    - should add little grid outlines to background for counting steps?
-
+  - add modal for when you win the level
   - get level progression working on main play
-    - add in more of the original levels
+    - re-add in more of the original levels
     - store level progress in local storage
 
 
@@ -91,6 +80,20 @@
     - effect is that turn theta can end up undefined in reverseHistory
     - undefined turns get inserted when the entity fails to reverse correctly the first time
     - appears to be moveturn that is the problem
+  - issues with doors-only-close-after-passing-through
+    - may need to limit number of time reversals or else when you go through the
+      last door you can just reverse time every two steps and never have to open that door
+    - how to explain this in game?
+      - you can forget you went through a door
+        - need to indicate buttons that need to be pressed?
+      - can't tell the difference between an open door and a closed door
+      - can hit issues going through the closed path of a door since it opens
+        at a different tick on the next run through
+        - ie: 1. go through open door
+              2. door closes at step 1 and you go through the path it blocked when open
+                 and then press the button to open the door
+              3. door now closes at a later step than it did the first time so 2 becomes
+                 impossible
 
 
 - - - - - - - REFACTORS - - - - - - -

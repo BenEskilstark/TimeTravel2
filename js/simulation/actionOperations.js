@@ -72,8 +72,9 @@ const entityStartCurrentAction = (
 
       const wasSuccessful = agentDoMove(game, entity, curAction.payload.nextPos);
       if (
-        wasSuccessful && entity.history.length <= game.actionIndex &&
-        !game.isTimeReversed
+        wasSuccessful && !game.isTimeReversed &&
+        curAction.payload.isControlledEntity
+        // entity.history.length <= game.actionIndex &&
       ) {
         entity.history.push({...curAction.payload.nextPos});
       }

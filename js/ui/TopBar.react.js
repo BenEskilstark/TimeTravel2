@@ -65,7 +65,7 @@ function InfoStack(props) {
         verticalAlign: 'top',
       }}
     >
-      Steps Remaining: {maxSteps - steps}
+      Steps Remaining: {Math.floor((maxSteps - steps) / 2)}
     </div>
   );
 }

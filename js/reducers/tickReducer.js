@@ -102,23 +102,35 @@ const doTick = (game: Game): Game => {
     game.isTimeReversed = false;
     game.actionIndex = 0;
     game.time = 1;
+
     // close all doors and press all buttons that have already been passed through
     // BUT only if they haven't had their button pressed, as that in-game pressing
     // will deal with closing the door from now on
-    for (const id of game.DOOR) {
-      const door = game.entities[id];
-      if (door.passedThrough) {
-        for (const id of game.BUTTON) {
-          const button = game.entities[id];
-          if (button.doorID == door.doorID) {
-            if (!button.wasPressed) {
-              queueAction(
-                game, button,
-                makeAction(game, button, 'PRESS', {pressed: false}),
-              );
-            }
-          }
-        }
+    // for (const id of game.DOOR) {
+    //   const door = game.entities[id];
+    //   if (door.passedThrough) {
+    //     for (const id of game.BUTTON) {
+    //       const button = game.entities[id];
+    //       if (button.doorID == door.doorID) {
+    //         if (!button.wasPressed) {
+    //           queueAction(
+    //             game, button,
+    //             makeAction(game, button, 'PRESS', {pressed: false}),
+    //           );
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    // close all doors and unpress all buttons
+    if (game.numTimeReversals == 1) {
+      for (const id of game.BUTTON) {
+        const button = game.entities[id];
+          queueAction(
+            game, button,
+            makeAction(game, button, 'PRESS', {pressed: false}),
+          );
       }
     }
 
@@ -397,6 +409,7 @@ const keepControlledMoving = (game: Game): boolean => {
       {
         nextPos,
         frameOffset: controlledEntity.frameOffset,
+        isControlledEntity: true,
       },
     );
     if (!closeTo(nextTheta, controlledEntity.theta)) {
@@ -432,7 +445,8 @@ const keepControlledMoving = (game: Game): boolean => {
         makeAction(
           game, controlledEntity, 'MOVE',
           {nextPos: add(nextPos, moveDir),
-            frameOffset: controlledEntity.frameOffset + 2
+            frameOffset: controlledEntity.frameOffset + 2,
+            isControlledEntity: true,
           },
         ),
       );

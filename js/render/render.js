@@ -171,7 +171,7 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
     }
   } else {
     // background
-    ctx.fillStyle = '#87CEFA';
+    ctx.fillStyle = '#BDB76B';
     if (isMini) {
       ctx.fillRect(
         dims.viewPos.x, dims.viewPos.y, dims.viewWidth, dims.viewHeight,
@@ -181,6 +181,20 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
         0, 0, game.gridWidth, game.gridHeight,
       );
     }
+    // render grid
+    for (let x = 0; x < game.gridWidth; x += 2) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, game.gridHeight);
+      ctx.stroke();
+    }
+    for (let y = 1; y < game.gridWidth; y += 2) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(game.gridWidth, y);
+      ctx.stroke();
+    }
+
     // render not-animated entities
     for (const id in game.NOT_ANIMATED) {
       renderEntity(ctx, game, game.entities[id], true);
@@ -220,9 +234,9 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
         if (!onScreen(game, {position: {x, y}, width: 1, height: 1})) continue;
         let opacity = 1;
         if (!isLit(game, {x, y})) {
-          if (game.grid[x][y].seenBefore) {
+          // if (game.grid[x][y].seenBefore) {
             opacity = 0.8;
-          }
+          // }
         } else {
           // if we ARE lit, then adjust opacity if we are in the light of the
           // controlledEntity
@@ -233,7 +247,7 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
             opacity = 0.2;
           }
           // HACK: we are updating the game inside of render!
-          game.grid[x][y].seenBefore = true;
+          // game.grid[x][y].seenBefore = true;
         }
         if (opacity != 0) {
           ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';

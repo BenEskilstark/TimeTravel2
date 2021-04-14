@@ -208,55 +208,13 @@ function registerHotkeys(dispatch) {
 
 function configureMouseHandlers(game) {
   const handlers = {
-    mouseMove: (state, dispatch, gridPos) => {
-      const dim = inLine(gridPos, state.game.mouse.prevPos);
-      if (dim) {
-        let firstCollectedSucceeded = false;
-        for (let i = 1; i <= dim.dist; i++) {
-          const pos = {...state.game.mouse.prevPos};
-          pos[dim.dim] += (i * dim.mult)
-          if (state.game.mouse.isLeftDown) {
-            const success = handleCollect(
-              state, dispatch,
-              pos, false,
-              i > 1 && firstCollectedSucceeded, /* ignore colony */
-            );
-            if (success && i == 1) {
-              firstCollectedSucceeded = true;
-            }
-          } else if (state.game.mouse.isRightDown) {
-            handlePlace(state, dispatch, pos);
-          }
-        }
-      } else {
-        if (state.game.mouse.isLeftDown) {
-          handleCollect(state, dispatch, gridPos);
-        } else if (state.game.mouse.isRightDown) {
-          handlePlace(state, dispatch, gridPos);
-        }
-      }
-    },
-    leftDown: (state, dispatch, gridPos) => {
-      handleCollect(state, dispatch, gridPos, true /* ignore prevPos */);
-    },
-    rightDown: (state, dispatch, gridPos) => {
-      handlePlace(state, dispatch, gridPos, true /* ignore prevPos */);
-    },
     scroll: (state, dispatch, zoom) => {
-      dispatch({type: 'INCREMENT_ZOOM', zoom});
+      if (state.screen == 'EDITOR') {
+        dispatch({type: 'INCREMENT_ZOOM', zoom});
+      }
     },
   }
   return handlers;
-}
-
-function inLine(pos, prevPos) {
-  if (pos.x == prevPos.x && Math.abs(pos.y - prevPos.y) > 1) {
-    return {dim: 'y', dist: Math.abs(pos.y - prevPos.y), mult: pos.y > prevPos.y ? 1 : -1};
-  }
-  if (pos.y == prevPos.y && Math.abs(pos.x - prevPos.x) > 1) {
-    return {dim: 'x', dist: Math.abs(pos.x - prevPos.x), mult: pos.x > prevPos.x ? 1 : -1};
-  }
-  return false;
 }
 
 function Ticker(props) {
