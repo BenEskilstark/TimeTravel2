@@ -24,6 +24,8 @@
     - hard to tell when you're going to be in the line of sight of a previous self
       - don't show their light, only yours?
       - make it so it's only based on collision?
+    - hard to tell if you're going to go back in time and immediately lose
+      - especially with line-of-sight loss condition
 
   - issues with total fog at the start
     - hard to tell where you should even go
