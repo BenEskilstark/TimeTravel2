@@ -20,6 +20,8 @@ const Entities = {
   WALL: require('./wall.js'),
   BUTTON: require('./button.js'),
   DOOR: require('./door.js'),
+  GATE: require('./gate.js'),
+  OPEN_GATE: require('./openGate.js'),
 
   AGENT: require('./agent.js'),
   TARGET: require('./target.js'),

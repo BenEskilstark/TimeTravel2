@@ -21,12 +21,12 @@ const config = {
 const make = (
   game: Game,
   position: Vector,
-  doorID: number,
+  buttonID: number,
 ): Button => {
 	return {
     ...makeEntity('BUTTON', position, config.width, config.height),
     ...config,
-    doorID,
+    buttonID,
     isPressed: false,
     isStoodOn: false,
     wasPressed: false,
@@ -41,9 +41,17 @@ const render = (ctx, game, button): void => {
   );
 
   ctx.strokeStyle = "black";
-  ctx.fillStyle = globalConfig.config.doorColors[button.doorID];
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
+  ctx.fillStyle = globalConfig.config.doorColors[button.buttonID];
+  ctx.beginPath();
+  const radius = button.width / 2;
+  ctx.arc(
+    button.width / 2,
+    button.height / 2,
+    radius, 0, Math.PI * 2,
+  );
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fill();
   ctx.restore();
 
   // const obj = getTileSprite(game, button);

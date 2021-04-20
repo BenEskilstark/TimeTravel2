@@ -221,6 +221,9 @@ const addEntity = (game: Game, entity: Entity): Game => {
   if (entity.isHistorical) {
     game.HISTORICAL[entity.id] = true;
   }
+  if (entity.linkedToButton) {
+    game.LINKED_TO_BUTTON[entity.id] = true;
+  }
 
   // NOTE: special case for missiles
   if (entity.warhead) {
@@ -266,6 +269,9 @@ const removeEntity = (game: Game, entity: Entity): Game => {
   }
   if (game.HISTORICAL[entity.id]) {
     delete game.HISTORICAL[entity.id];
+  }
+  if (game.LINKED_TO_BUTTON[entity.id]) {
+    delete game.LINKED_TO_BUTTON[entity.id];
   }
 
   delete game.entities[entity.id];

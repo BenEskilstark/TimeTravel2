@@ -111,7 +111,7 @@ const doTick = (game: Game): Game => {
     //   if (door.passedThrough) {
     //     for (const id of game.BUTTON) {
     //       const button = game.entities[id];
-    //       if (button.doorID == door.doorID) {
+    //       if (button.buttonID == door.buttonID) {
     //         if (!button.wasPressed) {
     //           queueAction(
     //             game, button,

@@ -119,6 +119,7 @@ function Game(props: Props): React.Node {
         isMuted={state.isMuted}
         steps={state.game.actionIndex}
         maxSteps={state.game.maxSteps}
+        isTimeReversed={state.game.isTimeReversed}
       />
       <BottomBar dispatch={dispatch}
         game={game}

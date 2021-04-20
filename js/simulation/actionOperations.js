@@ -102,10 +102,10 @@ const entityStartCurrentAction = (
     case 'PRESS':
       entity.isPressed = curAction.payload.pressed;
       if (!curAction.payload.firstTime) entity.wasPressed = true;
-      // open corresponding doors
-      for (const id of game.DOOR) {
+      // open corresponding doors/gates
+      for (const id in game.LINKED_TO_BUTTON) {
         const door = game.entities[id];
-        if (door.doorID == entity.doorID) {
+        if (door.buttonID == entity.buttonID) {
           queueAction(
             game, door,
             makeAction(game, door, 'OPEN', curAction.payload),
@@ -115,9 +115,17 @@ const entityStartCurrentAction = (
       break;
     case 'OPEN':
       entity.isOpen = curAction.payload.pressed;
-      const mult = entity.isOpen ? 1 : -1;
-      rotateEntity(game, entity, entity.theta + mult * Math.PI / 2);
+      if (entity.type == 'DOOR') {
+        const mult = entity.isOpen ? 1 : -1;
+        rotateEntity(game, entity, entity.theta + mult * Math.PI / 2);
+      } else if (entity.type == 'GATE') {
+        changeEntityType(game, entity, 'GATE', 'OPEN_GATE');
+      } else if (entity.type == 'OPEN_GATE') {
+        changeEntityType(game, entity, 'OPEN_GATE', 'GATE');
+      }
+
       if (entity.isOpen && !curAction.payload.firstTime) entity.wasOpened = true;
+
       break;
     case 'REACHED':
       game.levelWon = true;

@@ -53,7 +53,7 @@ function LevelEditor(props: Props): React.Node {
     // entity creation mode
     deleteMode: false,
     entityType: 'WALL',
-    doorID: 1,
+    buttonID: 1,
     doorDir: 'horizontal',
     subdividing: false,
     pheromoneType: 'LIGHT',
@@ -683,10 +683,14 @@ function createEntities(game, dispatch, editor, rect): void {
       args = [editor.playerID];
       break;
     case 'BUTTON':
-      args = [editor.doorID];
+      args = [editor.buttonID];
       break;
     case 'DOOR':
-      args = [editor.doorID, editor.doorDir];
+      args = [editor.buttonID, editor.doorDir];
+      break;
+    case 'GATE':
+    case 'OPEN_GATE':
+      args = [editor.buttonID];
       break;
     case 'TARGET':
       args = [];
@@ -735,15 +739,17 @@ function createEntityOptions(game, editor, setEditor): React.Node {
         />
       </span>);
       break;
+    case 'GATE':
+    case 'OPEN_GATE':
     case 'BUTTON':
       options.push(<span>
-        Door ID:
+        Button ID:
         <Dropdown
           options={globalConfig.config.doorColors}
-          selected={globalConfig.config.doorColors[editor.doorID]}
+          selected={globalConfig.config.doorColors[editor.buttonID]}
           onChange={(doorColor) => {
-            const doorID = globalConfig.config.doorColors.indexOf(doorColor);
-            setEditor({...editor, doorID})
+            const buttonID = globalConfig.config.doorColors.indexOf(doorColor);
+            setEditor({...editor, buttonID})
           }}
         />
       </span>);
@@ -759,10 +765,10 @@ function createEntityOptions(game, editor, setEditor): React.Node {
         Door Color:
         <Dropdown
           options={globalConfig.config.doorColors}
-          selected={globalConfig.config.doorColors[editor.doorID]}
+          selected={globalConfig.config.doorColors[editor.buttonID]}
           onChange={(doorColor) => {
-            const doorID = globalConfig.config.doorColors.indexOf(doorColor);
-            setEditor({...editor, doorID})
+            const buttonID = globalConfig.config.doorColors.indexOf(doorColor);
+            setEditor({...editor, buttonID})
           }}
         />
       </span>);

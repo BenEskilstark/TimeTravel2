@@ -7,7 +7,7 @@ const Modal = require('./Components/Modal.react');
 const QuitButton = require('../ui/components/QuitButton.react');
 const globalConfig = require('../config');
 const {getDisplayTime, isElectron} = require('../utils/helpers');
-const {memo} = React;
+const {memo, useState, useEffect, useMemo} = React;
 const {Entities} = require('../entities/registry');
 
 function TopBar(props) {
@@ -18,6 +18,7 @@ function TopBar(props) {
     tickInterval,
     canvasWidth,
     isMuted,
+    isTimeReversed,
   } = props;
 
   if (isExperimental && tickInterval == null) {
@@ -35,7 +36,7 @@ function TopBar(props) {
         position: 'absolute',
         top: topPadding,
         height,
-        width: '100%',
+        width: isExperimental ? '1200px' : '100%',
         zIndex: 2,
         textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff',
       }}
@@ -56,16 +57,36 @@ function InfoStack(props) {
     isMuted,
     steps,
     maxSteps,
+    isTimeReversed,
   } = props;
+
+  const [flickerIndex, setFlickerIndex] = useState(0);
+  const stepsRemaining = Math.floor((maxSteps - steps) / 2);
+
+  useEffect(() => {
+    const flickerFunc = (f) => {
+      setFlickerIndex(f - 1);
+      if (f > 1) {
+        setTimeout(() => flickerFunc(f - 1), 100);
+      }
+    }
+    if (stepsRemaining <= 2 && !isTimeReversed) {
+      flickerFunc(8);
+    }
+  }, [stepsRemaining, isTimeReversed]);
 
   return (
     <div
       style={{
         display: 'inline-block',
         verticalAlign: 'top',
+        fontSize: flickerIndex % 2 == 0 ? '35' : '38',
+        marginLeft: '25%',
+        marginTop: '25',
+        color: flickerIndex % 2 == 0 ? 'black' : 'red',
       }}
     >
-      Steps Remaining: {Math.floor((maxSteps - steps) / 2)}
+      Steps Remaining: {stepsRemaining}
     </div>
   );
 }
@@ -95,19 +116,6 @@ function ButtonStack(props) {
           label="Instructions"
           onClick={() => {
             instructionsModal(dispatch);
-          }}
-        />
-      </div>
-      <div>
-        <Button
-          label={tickInterval ? 'Pause' : 'Play'}
-          disabled={modal != null}
-          onClick={() => {
-            if (tickInterval != null) {
-              dispatch({type: 'STOP_TICK'});
-            } else {
-              dispatch({type: 'START_TICK'});
-            }
           }}
         />
       </div>

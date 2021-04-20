@@ -25,7 +25,7 @@ const config = {
 };
 
 const pheromoneBlockingTypes = [
-  'WALL', 'DOODAD', 'DOOR',
+  'WALL', 'DOODAD', 'DOOR', 'GATE',
 ];
 
 // "dynamically" generate 100 sets of pheromones

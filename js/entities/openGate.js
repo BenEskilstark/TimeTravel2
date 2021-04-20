@@ -7,12 +7,11 @@ const {makeEntity} = require('./makeEntity');
 const globalConfig = require('../config');
 
 const config = {
-  width: 3,
-  height: 1,
+  width: 2,
+  height: 2,
 
   linkedToButton: true, // property of being activated by a corresponding button
 
-  notBlocked: true, // when creating entities w/marquee it can go on top of things
   OPEN: {
     duration: 20,
     spriteOrder: [1, 2, 3, 4],
@@ -23,19 +22,13 @@ const make = (
   game: Game,
   position: Vector,
   buttonID: number,
-  orientation: string,
-): Stone => {
-  let width = orientation == 'horizontal' ? config.width : config.height;
-  let height = orientation == 'horizontal' ? config.height : config.width;
+): Gate => {
 	return {
-    ...makeEntity('DOOR', position, width, height),
+    ...makeEntity('OPEN_GATE', position, config.width, config.height),
     ...config,
-    width, height,
-    orientation,
     buttonID,
     isOpen: false,
     wasOpened: false,
-    passedThrough: false,
   };
 };
 
@@ -50,6 +43,7 @@ const render = (ctx, game, door): void => {
   ctx.translate(-0.5, -0.5);
 
   ctx.strokeStyle = "black";
+  ctx.globalAlpha = 0.4;
   ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
   ctx.fillRect(0, 0, width, height);
   ctx.strokeRect(0, 0, width, height);

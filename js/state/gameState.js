@@ -133,6 +133,7 @@ const initBaseState = (
     NOT_ANIMATED: {}, // entities that don't animate every tick
     PHEROMONE_EMITTER: {}, // entities that emit a pheromone
     HISTORICAL: {}, // entities that play back their history
+    LINKED_TO_BUTTON: {},
 
     // time travel-specific properties
     isTimeReversed: false,

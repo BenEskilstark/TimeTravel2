@@ -18,7 +18,7 @@ const config = {
   // agent properties
   isAgent: true,
   blockingTypes: [
-    'DOODAD', 'WALL', 'DOOR',
+    'DOODAD', 'WALL', 'DOOR', 'GATE',
   ],
 
   isHistorical: true,

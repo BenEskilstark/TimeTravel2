@@ -18,7 +18,7 @@ var config = {
   audioFiles: [{ path: 'audio/Song Oct. 9.wav', type: 'wav' }]
 };
 
-var pheromoneBlockingTypes = ['WALL', 'DOODAD', 'DOOR'];
+var pheromoneBlockingTypes = ['WALL', 'DOODAD', 'DOOR', 'GATE'];
 
 // "dynamically" generate 100 sets of pheromones
 var pheromones = {};
@@ -67,7 +67,7 @@ var config = {
 
   // agent properties
   isAgent: true,
-  blockingTypes: ['DOODAD', 'WALL', 'DOOR'],
+  blockingTypes: ['DOODAD', 'WALL', 'DOOR', 'GATE'],
 
   isHistorical: true,
   pheromoneEmitter: true,
@@ -158,7 +158,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, agent) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../render/renderAgent":12,"../selectors/sprites":18,"../utils/vectors":25,"./makeEntity":7}],3:[function(require,module,exports){
+},{"../config":1,"../render/renderAgent":14,"../selectors/sprites":20,"../utils/vectors":27,"./makeEntity":8}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -195,7 +195,7 @@ var render = function render(ctx, game, bg) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":18,"./makeEntity":7}],4:[function(require,module,exports){
+},{"../selectors/sprites":20,"./makeEntity":8}],4:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -220,9 +220,9 @@ var config = {
   }
 };
 
-var make = function make(game, position, doorID) {
+var make = function make(game, position, buttonID) {
   return _extends({}, makeEntity('BUTTON', position, config.width, config.height), config, {
-    doorID: doorID,
+    buttonID: buttonID,
     isPressed: false,
     isStoodOn: false,
     wasPressed: false
@@ -239,9 +239,13 @@ var render = function render(ctx, game, button) {
   ctx.translate(position.x, position.y);
 
   ctx.strokeStyle = "black";
-  ctx.fillStyle = globalConfig.config.doorColors[button.doorID];
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
+  ctx.fillStyle = globalConfig.config.doorColors[button.buttonID];
+  ctx.beginPath();
+  var radius = button.width / 2;
+  ctx.arc(button.width / 2, button.height / 2, radius, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fill();
   ctx.restore();
 
   // const obj = getTileSprite(game, button);
@@ -256,7 +260,7 @@ var render = function render(ctx, game, button) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../selectors/sprites":18,"./makeEntity":7}],5:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":20,"./makeEntity":8}],5:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -287,7 +291,7 @@ var render = function render(ctx, game, doodad) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"./makeEntity":7}],6:[function(require,module,exports){
+},{"./makeEntity":8}],6:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -304,6 +308,8 @@ var config = {
   width: 3,
   height: 1,
 
+  linkedToButton: true, // property of being activated by a corresponding button
+
   notBlocked: true, // when creating entities w/marquee it can go on top of things
   OPEN: {
     duration: 20,
@@ -311,13 +317,13 @@ var config = {
   }
 };
 
-var make = function make(game, position, doorID, orientation) {
+var make = function make(game, position, buttonID, orientation) {
   var width = orientation == 'horizontal' ? config.width : config.height;
   var height = orientation == 'horizontal' ? config.height : config.width;
   return _extends({}, makeEntity('DOOR', position, width, height), config, {
     width: width, height: height,
     orientation: orientation,
-    doorID: doorID,
+    buttonID: buttonID,
     isOpen: false,
     wasOpened: false,
     passedThrough: false
@@ -336,7 +342,7 @@ var render = function render(ctx, game, door) {
   ctx.translate(-0.5, -0.5);
 
   ctx.strokeStyle = "black";
-  ctx.fillStyle = globalConfig.config.doorColors[door.doorID];
+  ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
   ctx.fillRect(0, 0, width, height);
   ctx.strokeRect(0, 0, width, height);
   ctx.restore();
@@ -353,7 +359,69 @@ var render = function render(ctx, game, door) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../selectors/sprites":18,"./makeEntity":7}],7:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":20,"./makeEntity":8}],7:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _require = require('../selectors/sprites'),
+    getTileSprite = _require.getTileSprite;
+
+var _require2 = require('./makeEntity'),
+    makeEntity = _require2.makeEntity;
+
+var globalConfig = require('../config');
+
+var config = {
+  width: 2,
+  height: 2,
+
+  linkedToButton: true, // property of being activated by a corresponding button
+
+  OPEN: {
+    duration: 20,
+    spriteOrder: [1, 2, 3, 4]
+  }
+};
+
+var make = function make(game, position, buttonID) {
+  return _extends({}, makeEntity('GATE', position, config.width, config.height), config, {
+    buttonID: buttonID,
+    isOpen: false,
+    wasOpened: false
+  });
+};
+
+var render = function render(ctx, game, door) {
+  var position = door.position,
+      width = door.width,
+      height = door.height,
+      theta = door.theta;
+
+  ctx.save();
+  ctx.translate(position.x + 0.5, position.y + 0.5);
+  ctx.rotate(theta);
+  ctx.translate(-0.5, -0.5);
+
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
+  ctx.fillRect(0, 0, width, height);
+  ctx.strokeRect(0, 0, width, height);
+  ctx.restore();
+
+  // const obj = getTileSprite(game, door);
+  // if (obj == null || obj.img == null) return;
+  // ctx.drawImage(
+  //   obj.img,
+  //   obj.x, obj.y, obj.width, obj.height,
+  //   door.position.x, door.position.y, door.width, door.height,
+  // );
+};
+
+module.exports = {
+  make: make, render: render, config: config
+};
+},{"../config":1,"../selectors/sprites":20,"./makeEntity":8}],8:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -376,7 +444,70 @@ var makeEntity = function makeEntity(type, position, width, height) {
 module.exports = {
 	makeEntity: makeEntity
 };
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _require = require('../selectors/sprites'),
+    getTileSprite = _require.getTileSprite;
+
+var _require2 = require('./makeEntity'),
+    makeEntity = _require2.makeEntity;
+
+var globalConfig = require('../config');
+
+var config = {
+  width: 2,
+  height: 2,
+
+  linkedToButton: true, // property of being activated by a corresponding button
+
+  OPEN: {
+    duration: 20,
+    spriteOrder: [1, 2, 3, 4]
+  }
+};
+
+var make = function make(game, position, buttonID) {
+  return _extends({}, makeEntity('OPEN_GATE', position, config.width, config.height), config, {
+    buttonID: buttonID,
+    isOpen: false,
+    wasOpened: false
+  });
+};
+
+var render = function render(ctx, game, door) {
+  var position = door.position,
+      width = door.width,
+      height = door.height,
+      theta = door.theta;
+
+  ctx.save();
+  ctx.translate(position.x + 0.5, position.y + 0.5);
+  ctx.rotate(theta);
+  ctx.translate(-0.5, -0.5);
+
+  ctx.strokeStyle = "black";
+  ctx.globalAlpha = 0.4;
+  ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
+  ctx.fillRect(0, 0, width, height);
+  ctx.strokeRect(0, 0, width, height);
+  ctx.restore();
+
+  // const obj = getTileSprite(game, door);
+  // if (obj == null || obj.img == null) return;
+  // ctx.drawImage(
+  //   obj.img,
+  //   obj.x, obj.y, obj.width, obj.height,
+  //   door.position.x, door.position.y, door.width, door.height,
+  // );
+};
+
+module.exports = {
+  make: make, render: render, config: config
+};
+},{"../config":1,"../selectors/sprites":20,"./makeEntity":8}],10:[function(require,module,exports){
 'use strict';
 
 var globalConfig = require('../config');
@@ -398,6 +529,8 @@ var Entities = {
   WALL: require('./wall.js'),
   BUTTON: require('./button.js'),
   DOOR: require('./door.js'),
+  GATE: require('./gate.js'),
+  OPEN_GATE: require('./openGate.js'),
 
   AGENT: require('./agent.js'),
   TARGET: require('./target.js')
@@ -406,7 +539,7 @@ var Entities = {
 module.exports = {
   Entities: Entities
 };
-},{"../config":1,"./agent.js":2,"./background.js":3,"./button.js":4,"./doodad.js":5,"./door.js":6,"./target.js":9,"./wall.js":10}],9:[function(require,module,exports){
+},{"../config":1,"./agent.js":2,"./background.js":3,"./button.js":4,"./doodad.js":5,"./door.js":6,"./gate.js":7,"./openGate.js":9,"./target.js":11,"./wall.js":12}],11:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -468,7 +601,7 @@ var render = function render(ctx, game, target) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../selectors/sprites":18,"./makeEntity":7}],10:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":20,"./makeEntity":8}],12:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -500,7 +633,7 @@ var render = function render(ctx, game, stone) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":18,"./makeEntity":7}],11:[function(require,module,exports){
+},{"../selectors/sprites":20,"./makeEntity":8}],13:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1381,7 +1514,7 @@ var updateDispersingPheromones = function updateDispersingPheromones(game) {
   return nextDispersingPheromones;
 };
 
-},{"./config":1,"./selectors/neighbors":16,"./selectors/pheromones":17,"./simulation/entityOperations":20,"./simulation/pheromones":21,"./utils/gridHelpers":22,"./utils/helpers":23,"./utils/stochastic":24,"./utils/vectors":25}],12:[function(require,module,exports){
+},{"./config":1,"./selectors/neighbors":18,"./selectors/pheromones":19,"./simulation/entityOperations":22,"./simulation/pheromones":23,"./utils/gridHelpers":24,"./utils/helpers":25,"./utils/stochastic":26,"./utils/vectors":27}],14:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -1476,7 +1609,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":22,"../utils/helpers":23,"../utils/vectors":25,"./renderHealthBar":13}],13:[function(require,module,exports){
+},{"../utils/gridHelpers":24,"../utils/helpers":25,"../utils/vectors":27,"./renderHealthBar":15}],15:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -1518,7 +1651,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":22,"../utils/vectors":25}],14:[function(require,module,exports){
+},{"../utils/gridHelpers":24,"../utils/vectors":27}],16:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/gridHelpers'),
@@ -1582,7 +1715,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":22}],15:[function(require,module,exports){
+},{"../utils/gridHelpers":24}],17:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1858,7 +1991,7 @@ module.exports = {
   isLit: isLit,
   inOtherLight: inOtherLight
 };
-},{"../selectors/collisions":14,"../selectors/neighbors":16,"../selectors/pheromones":17,"../simulation/actionQueue":19,"../utils/gridHelpers":22,"../utils/helpers":23,"../utils/vectors":25}],16:[function(require,module,exports){
+},{"../selectors/collisions":16,"../selectors/neighbors":18,"../selectors/pheromones":19,"../simulation/actionQueue":21,"../utils/gridHelpers":24,"../utils/helpers":25,"../utils/vectors":27}],18:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -2125,7 +2258,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":14,"../utils/gridHelpers":22,"../utils/vectors":25}],17:[function(require,module,exports){
+},{"../selectors/collisions":16,"../utils/gridHelpers":24,"../utils/vectors":27}],19:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2352,7 +2485,7 @@ module.exports = {
   isPositionBlockingPheromone: isPositionBlockingPheromone,
   getAllPheromonesAtPosition: getAllPheromonesAtPosition
 };
-},{"../config":1,"../selectors/neighbors":16,"../utils/gridHelpers":22,"../utils/helpers":23,"../utils/vectors":25}],18:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":18,"../utils/gridHelpers":24,"../utils/helpers":25,"../utils/vectors":27}],20:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -2708,7 +2841,7 @@ module.exports = {
   getBackgroundSprite: getBackgroundSprite,
   getMaxFrameOffset: getMaxFrameOffset
 };
-},{"../config":1,"../selectors/misc":15,"../selectors/neighbors":16,"../selectors/pheromones":17,"../simulation/actionQueue":19,"../utils/gridHelpers":22,"../utils/helpers":23,"../utils/vectors":25}],19:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":17,"../selectors/neighbors":18,"../selectors/pheromones":19,"../simulation/actionQueue":21,"../utils/gridHelpers":24,"../utils/helpers":25,"../utils/vectors":27}],21:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2958,7 +3091,7 @@ module.exports = {
   getFrame: getFrame,
   isDoingAction: isDoingAction
 };
-},{"../selectors/pheromones":17,"../utils/helpers":23,"../utils/vectors":25}],20:[function(require,module,exports){
+},{"../selectors/pheromones":19,"../utils/helpers":25,"../utils/vectors":27}],22:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3323,6 +3456,9 @@ var addEntity = function addEntity(game, entity) {
   if (entity.isHistorical) {
     game.HISTORICAL[entity.id] = true;
   }
+  if (entity.linkedToButton) {
+    game.LINKED_TO_BUTTON[entity.id] = true;
+  }
 
   // NOTE: special case for missiles
   if (entity.warhead) {
@@ -3371,6 +3507,9 @@ var removeEntity = function removeEntity(game, entity) {
   }
   if (game.HISTORICAL[entity.id]) {
     delete game.HISTORICAL[entity.id];
+  }
+  if (game.LINKED_TO_BUTTON[entity.id]) {
+    delete game.LINKED_TO_BUTTON[entity.id];
   }
 
   delete game.entities[entity.id];
@@ -3632,7 +3771,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":7,"../entities/registry":8,"../selectors/neighbors":16,"../selectors/pheromones":17,"../simulation/pheromones":21,"../utils/gridHelpers":22,"../utils/helpers":23,"../utils/vectors":25}],21:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":8,"../entities/registry":10,"../selectors/neighbors":18,"../selectors/pheromones":19,"../simulation/pheromones":23,"../utils/gridHelpers":24,"../utils/helpers":25,"../utils/vectors":27}],23:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4004,7 +4143,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":16,"../selectors/pheromones":17,"../utils/gridHelpers":22,"../utils/helpers":23,"../utils/vectors":25}],22:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":18,"../selectors/pheromones":19,"../utils/gridHelpers":24,"../utils/helpers":25,"../utils/vectors":27}],24:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -4132,7 +4271,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":23,"../utils/vectors":25}],23:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":25,"../utils/vectors":27}],25:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -4302,7 +4441,7 @@ module.exports = {
   isElectron: isElectron,
   deepCopy: deepCopy
 };
-},{"./vectors":25}],24:[function(require,module,exports){
+},{"./vectors":27}],26:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -4357,7 +4496,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4566,4 +4705,4 @@ module.exports = {
   abs: abs,
   clampMagnitude: clampMagnitude
 };
-},{}]},{},[11]);
+},{}]},{},[13]);
