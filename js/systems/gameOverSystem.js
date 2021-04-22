@@ -51,12 +51,15 @@ const initGameOverSystem = (store) => {
         dispatch({type: 'SET_CURRENT_LEVEL_WON'});
         loadLevel(store, nextLevelName, [], true /* synchronous */);
         dispatch({type: 'START_TICK'});
+      } else {
+        console.log("level won");
       }
     }
 
     // LOSS CONDITIONS
 
     // entity hit a paradox trying to go through a door
+    // OR got stuck in a door that closed on it
     let reason = '';
     let paradoxEntity = null;
     for (const id of game.AGENT) {
@@ -64,6 +67,9 @@ const initGameOverSystem = (store) => {
       if (agent.hitParadox) {
         paradoxEntity = agent;
         reason = 'Your former self hit a paradox trying to go through a locked door';
+      } else if (agent.stuckInGate) {
+        paradoxEntity = agent;
+        reason = 'You went back in time into a closed gate!';
       }
     }
 
@@ -75,6 +81,9 @@ const initGameOverSystem = (store) => {
     let noMoreSteps = game.actionIndex > game.maxSteps;
     if (noMoreSteps) reason = 'You ran out of steps';
 
+    // TODO: each loss condition should queue an action to animate the paradox
+    // Then that action will have a large effectIndex that will flip a flag
+    // that THIS condition checks for
     if (paradoxEntity || wasSeen || noMoreSteps) {
       handleGameLoss(store, dispatch, state, reason);
     }

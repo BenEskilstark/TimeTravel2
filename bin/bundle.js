@@ -564,7 +564,9 @@ var config = {
 };
 
 var make = function make(game, position) {
-  return _extends({}, makeEntity('TARGET', position, config.width, config.height), config);
+  return _extends({}, makeEntity('TARGET', position, config.width, config.height), config, {
+    numTimesReached: 0
+  });
 };
 
 var render = function render(ctx, game, target) {
@@ -669,7 +671,7 @@ module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"a
 },{}],16:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":0},"width":1,"height":24},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":1,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":5},"width":2,"height":19},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":1},"width":6,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":3},"width":4,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":3},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":5},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":7},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":23},"width":6,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":22},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":21},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":23},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":22},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":21},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":20},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":21,"y":19},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":18},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":18,"y":11},"width":1,"height":1},"args":[]},{"type":"SET_MAX_STEPS","maxSteps":200},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":[0]},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":40},{"type":"SET_MAX_STEPS","maxSteps":12},{"type":"SET_MAX_STEPS","maxSteps":20},{"type":"DELETE_ENTITIES","rect":{"position":{"x":2,"y":2},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":3},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":1},"width":1,"height":23},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":23},"width":10,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":1},"width":4,"height":20},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":1},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":3},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":5},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":7},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":19},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":21},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":23},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":14,"y":23},"width":2,"height":1},"args":["STONE",1,1]}]};
 },{}],17:[function(require,module,exports){
-module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":21},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":22},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":20},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":19},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":19},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":13,"y":19},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":10},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":9},"width":2,"height":10},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":7},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":11},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":10},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":15,"y":9},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":15,"y":2},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":1},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":11,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":1,"y":22},"width":1,"height":1},"args":[0]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":21},"width":13,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":22},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":23},"width":15,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":21},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":3},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":7},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":8},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":10},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":11},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":12},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":13},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":15},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":13},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":12},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":10},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":8},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":18},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":14},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":14},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":5},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":8},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":8},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":5},"width":1,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":3},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":9},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":16,"y":11},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":14,"y":11},"width":1,"height":1},"args":[]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":11},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":1},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":16,"y":1},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":2},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":2},"width":3,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":10,"y":12},"width":4,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":19},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":17},"width":6,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":11},"width":4,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":15},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":11},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":11},"width":4,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":17},"width":3,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":17},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":11},"width":4,"height":6},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":11},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":14,"y":9},"width":1,"height":1},"args":[]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":17},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":18},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"GATE","rect":{"position":{"x":14,"y":19},"width":1,"height":1},"args":[1]}]};
+module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":26},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":21},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":22},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":20},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":19},"width":13,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":19},"width":8,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":13,"y":19},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":13,"y":10},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":9},"width":2,"height":10},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":7},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":6},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":4},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":14},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":5},"width":3,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":11},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":10},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":15,"y":9},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":15,"y":2},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":1},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":11,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":1,"y":22},"width":1,"height":1},"args":[0]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":21},"width":13,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":22},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":23},"width":15,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":21},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":21},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":3},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":7},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":8},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":10},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":11},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":12},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":13},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":15},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":17},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":13},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":12},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":10},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":8},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":2,"y":4},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":2},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":18},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":14},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":14},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":5},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":8},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":8},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":5},"width":1,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":3},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":9},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":16,"y":11},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":14,"y":11},"width":1,"height":1},"args":[]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":11},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":1},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":16,"y":1},"width":1,"height":1},"args":[1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":2},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":2},"width":3,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":10,"y":12},"width":4,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":19},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DOOR","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":[1,"horizontal"]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":17},"width":6,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":11},"width":4,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":15},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":11},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":11},"width":4,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":17},"width":3,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":17},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":11},"width":4,"height":6},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":11},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":14,"y":9},"width":1,"height":1},"args":[]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":17},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":18},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":18},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"GATE","rect":{"position":{"x":14,"y":19},"width":1,"height":1},"args":[1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":10},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":14,"y":13},"width":1,"height":1},"args":[]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":1},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BUTTON","rect":{"position":{"x":16,"y":5},"width":1,"height":1},"args":[1]}]};
 },{}],18:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":0,"y":0},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":24},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":24,"y":-1},"width":1,"height":25},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":0},"width":24,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":6},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":3,"y":9},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":17},"width":9,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":13},"width":4,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":13},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":9},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":9,"y":6},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":13},"width":8,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":9},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":16,"y":8},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":6},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":6},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":9},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":8},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":1},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":10,"y":17},"width":14,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":18},"width":23,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"TARGET","rect":{"position":{"x":13,"y":3},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":1},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":7},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":17,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":9},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":6},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":1},"width":1,"height":5}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":6,"y":1},"width":2,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":7},"width":4,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":10},"width":6,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":20,"y":1},"width":4,"height":12},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":19,"y":7},"width":1,"height":6},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":18,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":12},"width":2,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":13,"y":11},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":2},"width":1,"height":1},"args":[0]},{"type":"SET_MAX_STEPS","maxSteps":64},{"type":"SET_MAX_STEPS","maxSteps":100},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":2},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":2,"y":1},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":1,"y":1},"width":1,"height":16},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":9},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":10,"y":9},"width":1,"height":5}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":5,"y":14},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":12,"y":11},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":15,"y":11},"width":1,"height":4},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":8,"y":5},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":4,"y":5},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":5,"y":1},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":1},"width":1,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":6},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":6},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":8,"y":1},"width":2,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":9},"width":1,"height":5}},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":14},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":23,"y":15},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"WALL","rect":{"position":{"x":22,"y":16},"width":1,"height":1},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":5},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":2,"y":18},"width":5,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":2,"y":22},"width":5,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":21},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":19},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":20},"width":4,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":19},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":22},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":23},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":23},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":23},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":15,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":19},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":22},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":22},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":19},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":20,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":23},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":20,"y":23},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":23},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":23},"width":1,"height":1}}]};
 },{}],19:[function(require,module,exports){
@@ -1978,6 +1980,7 @@ var doTick = function doTick(game) {
   var doingMove = keepControlledMoving(game);
   updateButtons(game);
   updateDoors(game);
+  updateGates(game);
   updateHistoricals(game, doingMove);
 
   updateTargets(game);
@@ -2004,6 +2007,8 @@ var doTick = function doTick(game) {
 //////////////////////////////////////////////////////////////////////////
 
 var updateTargets = function updateTargets(game) {
+  if (game.isTimeReversed) return;
+
   var _iteratorNormalCompletion4 = true;
   var _didIteratorError4 = false;
   var _iteratorError4 = undefined;
@@ -2014,8 +2019,16 @@ var updateTargets = function updateTargets(game) {
 
       var target = game.entities[id];
       var collisions = collidesWith(game, target, ['AGENT']);
-      if (collisions.length > 0) {
-        queueAction(game, target, makeAction(game, target, 'REACHED', {}));
+
+      // only count a collision with the target if:
+      //  - you collide with it
+      //  - you have the exact same position as it
+      //  - you haven't already queued REACHED action
+      //  - you either haven't reached the target before, or if you have,
+      //    then you have also reversed time
+      //  - if you've been reached before, then it's the same agent reaching it the second time
+      if (collisions.length > 0 && !isActionTypeQueued(game, target, 'REACHED') && equals(collisions[0].position, target.position) && (target.numTimesReached == 0 || target.numTimesReached == 1 && game.numTimeReversals > 0 && target.reachedID == collisions[0].id)) {
+        queueAction(game, target, makeAction(game, target, 'REACHED', { reachedID: collisions[0].id }));
       }
     }
   } catch (err) {
@@ -2077,14 +2090,47 @@ var updateButtons = function updateButtons(game) {
   }
 };
 
-var updateDoors = function updateDoors(game) {
+var updateGates = function updateGates(game) {
+  if (game.isTimeReversed) return;
+
   var _iteratorNormalCompletion6 = true;
   var _didIteratorError6 = false;
   var _iteratorError6 = undefined;
 
   try {
-    for (var _iterator6 = game.DOOR[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+    for (var _iterator6 = game.GATE[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
       var id = _step6.value;
+
+      var gate = game.entities[id];
+      var collisions = collidesWith(game, gate, ['AGENT']);
+      if (collisions.length > 0) {
+        collisions[0].stuckInGate = true;
+      }
+    }
+  } catch (err) {
+    _didIteratorError6 = true;
+    _iteratorError6 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion6 && _iterator6.return) {
+        _iterator6.return();
+      }
+    } finally {
+      if (_didIteratorError6) {
+        throw _iteratorError6;
+      }
+    }
+  }
+};
+
+var updateDoors = function updateDoors(game) {
+  var _iteratorNormalCompletion7 = true;
+  var _didIteratorError7 = false;
+  var _iteratorError7 = undefined;
+
+  try {
+    for (var _iterator7 = game.DOOR[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+      var id = _step7.value;
 
       var door = game.entities[id];
       // if the door has not been opened before, then check if an agent is passing through
@@ -2105,16 +2151,16 @@ var updateDoors = function updateDoors(game) {
       }
     }
   } catch (err) {
-    _didIteratorError6 = true;
-    _iteratorError6 = err;
+    _didIteratorError7 = true;
+    _iteratorError7 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion6 && _iterator6.return) {
-        _iterator6.return();
+      if (!_iteratorNormalCompletion7 && _iterator7.return) {
+        _iterator7.return();
       }
     } finally {
-      if (_didIteratorError6) {
-        throw _iteratorError6;
+      if (_didIteratorError7) {
+        throw _iteratorError7;
       }
     }
   }
@@ -2199,13 +2245,13 @@ var updateActors = function updateActors(game) {
 };
 
 var updateAgents = function updateAgents(game) {
-  var _iteratorNormalCompletion7 = true;
-  var _didIteratorError7 = false;
-  var _iteratorError7 = undefined;
+  var _iteratorNormalCompletion8 = true;
+  var _didIteratorError8 = false;
+  var _iteratorError8 = undefined;
 
   try {
-    for (var _iterator7 = game.AGENT[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-      var id = _step7.value;
+    for (var _iterator8 = game.AGENT[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+      var id = _step8.value;
 
       var agent = game.entities[id];
       if (agent == null) {
@@ -2220,16 +2266,16 @@ var updateAgents = function updateAgents(game) {
       }
     }
   } catch (err) {
-    _didIteratorError7 = true;
-    _iteratorError7 = err;
+    _didIteratorError8 = true;
+    _iteratorError8 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion7 && _iterator7.return) {
-        _iterator7.return();
+      if (!_iteratorNormalCompletion8 && _iterator8.return) {
+        _iterator8.return();
       }
     } finally {
-      if (_didIteratorError7) {
-        throw _iteratorError7;
+      if (_didIteratorError8) {
+        throw _iteratorError8;
       }
     }
   }
@@ -2448,13 +2494,13 @@ var stepAction = function stepAction(game, entity, decisionFunction) {
 //////////////////////////////////////////////////////////////////////////
 
 var updateTiledSprites = function updateTiledSprites(game) {
-  var _iteratorNormalCompletion8 = true;
-  var _didIteratorError8 = false;
-  var _iteratorError8 = undefined;
+  var _iteratorNormalCompletion9 = true;
+  var _didIteratorError9 = false;
+  var _iteratorError9 = undefined;
 
   try {
-    for (var _iterator8 = game.staleTiles[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-      var id = _step8.value;
+    for (var _iterator9 = game.staleTiles[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+      var id = _step9.value;
 
       var entity = game.entities[id];
       if (entity == null) {
@@ -2464,16 +2510,16 @@ var updateTiledSprites = function updateTiledSprites(game) {
       entity.dictIndexStr = getDictIndexStr(game, entity);
     }
   } catch (err) {
-    _didIteratorError8 = true;
-    _iteratorError8 = err;
+    _didIteratorError9 = true;
+    _iteratorError9 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion8 && _iterator8.return) {
-        _iterator8.return();
+      if (!_iteratorNormalCompletion9 && _iterator9.return) {
+        _iterator9.return();
       }
     } finally {
-      if (_didIteratorError8) {
-        throw _iteratorError8;
+      if (_didIteratorError9) {
+        throw _iteratorError9;
       }
     }
   }
@@ -5424,7 +5470,12 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
 
       break;
     case 'REACHED':
-      game.levelWon = true;
+      // You win the level after the second time you reach the target
+      if (entity.numTimesReached == 1 && game.numTimeReversals > 0 && entity.reachedID == curAction.payload.reachedID) {
+        game.levelWon = true;
+      }
+      entity.numTimesReached += 1;
+      entity.reachedID = curAction.payload.reachedID;
       break;
   }
 };
@@ -7081,12 +7132,15 @@ var initGameOverSystem = function initGameOverSystem(store) {
         dispatch({ type: 'SET_CURRENT_LEVEL_WON' });
         loadLevel(store, nextLevelName, [], true /* synchronous */);
         dispatch({ type: 'START_TICK' });
+      } else {
+        console.log("level won");
       }
     }
 
     // LOSS CONDITIONS
 
     // entity hit a paradox trying to go through a door
+    // OR got stuck in a door that closed on it
     var reason = '';
     var paradoxEntity = null;
     var _iteratorNormalCompletion = true;
@@ -7101,6 +7155,9 @@ var initGameOverSystem = function initGameOverSystem(store) {
         if (agent.hitParadox) {
           paradoxEntity = agent;
           reason = 'Your former self hit a paradox trying to go through a locked door';
+        } else if (agent.stuckInGate) {
+          paradoxEntity = agent;
+          reason = 'You went back in time into a closed gate!';
         }
       }
 
@@ -7127,6 +7184,9 @@ var initGameOverSystem = function initGameOverSystem(store) {
     var noMoreSteps = game.actionIndex > game.maxSteps;
     if (noMoreSteps) reason = 'You ran out of steps';
 
+    // TODO: each loss condition should queue an action to animate the paradox
+    // Then that action will have a large effectIndex that will flip a flag
+    // that THIS condition checks for
     if (paradoxEntity || wasSeen || noMoreSteps) {
       handleGameLoss(store, dispatch, state, reason);
     }

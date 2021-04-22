@@ -24,6 +24,7 @@ const make = (
 	return {
     ...makeEntity('TARGET', position, config.width, config.height),
     ...config,
+    numTimesReached: 0,
   };
 };
 

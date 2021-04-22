@@ -564,7 +564,9 @@ var config = {
 };
 
 var make = function make(game, position) {
-  return _extends({}, makeEntity('TARGET', position, config.width, config.height), config);
+  return _extends({}, makeEntity('TARGET', position, config.width, config.height), config, {
+    numTimesReached: 0
+  });
 };
 
 var render = function render(ctx, game, target) {

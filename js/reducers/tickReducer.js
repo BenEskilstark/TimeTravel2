@@ -174,6 +174,7 @@ const doTick = (game: Game): Game => {
   const doingMove = keepControlledMoving(game);
   updateButtons(game);
   updateDoors(game);
+  updateGates(game);
   updateHistoricals(game, doingMove);
 
   updateTargets(game);
@@ -200,11 +201,30 @@ const doTick = (game: Game): Game => {
 //////////////////////////////////////////////////////////////////////////
 
 const updateTargets = (game): void => {
+  if (game.isTimeReversed) return;
+
   for (const id of game.TARGET) {
     const target = game.entities[id];
     const collisions = collidesWith(game, target, ['AGENT']);
-    if (collisions.length > 0) {
-      queueAction(game, target, makeAction(game, target, 'REACHED', {}));
+
+    // only count a collision with the target if:
+    //  - you collide with it
+    //  - you have the exact same position as it
+    //  - you haven't already queued REACHED action
+    //  - you either haven't reached the target before, or if you have,
+    //    then you have also reversed time
+    //  - if you've been reached before, then it's the same agent reaching it the second time
+    if (
+      (collisions.length > 0 && !isActionTypeQueued(game, target, 'REACHED')) &&
+      (equals(collisions[0].position, target.position)) &&
+      (target.numTimesReached == 0 ||
+        (target.numTimesReached == 1 && game.numTimeReversals > 0 &&
+          target.reachedID == collisions[0].id))
+    ) {
+      queueAction(
+        game, target,
+        makeAction(game, target, 'REACHED', {reachedID: collisions[0].id}),
+      );
     }
   }
 };
@@ -235,6 +255,18 @@ const updateButtons = (game): void => {
       button.isStoodOn = false;
     }
 
+  }
+};
+
+const updateGates = (game): void => {
+  if (game.isTimeReversed) return;
+
+  for (const id of game.GATE) {
+    const gate = game.entities[id];
+    const collisions = collidesWith(game, gate, ['AGENT']);
+    if (collisions.length > 0) {
+      collisions[0].stuckInGate = true;
+    }
   }
 };
 

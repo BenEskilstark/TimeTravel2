@@ -128,7 +128,15 @@ const entityStartCurrentAction = (
 
       break;
     case 'REACHED':
-      game.levelWon = true;
+      // You win the level after the second time you reach the target
+      if (
+        entity.numTimesReached == 1 && game.numTimeReversals > 0 &&
+        entity.reachedID == curAction.payload.reachedID
+      ) {
+        game.levelWon = true;
+      }
+      entity.numTimesReached += 1;
+      entity.reachedID = curAction.payload.reachedID;
       break;
   }
 };

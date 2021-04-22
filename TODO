@@ -8,14 +8,20 @@
 
 - - - - - - ISSUES - - - - - -
   - level editor:
-    - doesn't properly center steps remaining
-
-  - gates:
-    - can't hit a button and then immediately go back in time if the
-      agent passes through gate right then because it will be stuck
 
   - playtesting:
 
+
+- - - - - - TODO - - - - - -
+  - doors -> gates
+    - change levels to have gates instead of doors
+
+  - add modal for when you win the level
+  - get level progression working on main play
+    - re-add in more of the original levels
+
+
+- - - - - - FOLLOW UP - - - - - - - -
   - hard to tell when you're gonna lose
     - hard to tell when you're going to run out of steps
       - perhaps pause your movement with 1 step left?
@@ -27,24 +33,6 @@
     - hard to tell if you're going to go back in time and immediately lose
       - especially with line-of-sight loss condition
 
-  - target
-    - don't win the level win you hit the target, instead reverse time
-      - should just have a pre-recording for this first trip?
-    - don't trigger hitting the target until you're fully on it instead of a half-step
-
-
-- - - - - - TODO - - - - - -
-  - doors -> gates
-    - change levels to have gates instead of doors
-    - add paradox type for going back in time on top of a gate
-
-  - add modal for when you win the level
-  - get level progression working on main play
-    - re-add in more of the original levels
-    - store level progress in local storage
-
-
-- - - - - - FOLLOW UP - - - - - - - -
   - UI
     - add topBar
       - instructions
@@ -54,6 +42,13 @@
       - button for going back in time
       - buttons for movements (mobile support)
 
+  - features:
+    - pre-record first run-through of the maze to the target
+    - auto-finish out once you open all the doors
+    - store level progress in local storage
+      - allow resuming where you left off
+      - OR choosing from already-completed levels?
+
   - animations:
     - show preview of going back in time if prev agent is about to do that
     - upon hitting a loss condition, need to animate before popping modal, etc
@@ -61,8 +56,10 @@
 
   - deployment:
     - set up unique player tracking (and per level)
+    - react native?
 
-  - tutorials:
+  - tutorials/modals:
+    - pop a modal when you hit the target the first time
 
 
 - - - - - - NICE-TO-HAVE - - - - - - - -
@@ -122,6 +119,8 @@
 
 - - - - - - - REFACTORS - - - - - - -
   - tickReducer "systems" are checking waaay more often than they need to
+    - could stop tick if no actions are queued
+    - then start tick when a button is pressed or something is triggered?
   - instead of checking for existence of pheromoneWorker in insert/removeFromGrid
     entity functions, instead just rely on the noPheromone flag
 
