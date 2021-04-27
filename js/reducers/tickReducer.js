@@ -477,7 +477,7 @@ const keepControlledMoving = (game: Game): boolean => {
         makeAction(
           game, controlledEntity, 'MOVE',
           {nextPos: add(nextPos, moveDir),
-            frameOffset: controlledEntity.frameOffset + 2,
+            frameOffset: controlledEntity.frameOffset,
             isControlledEntity: true,
           },
         ),

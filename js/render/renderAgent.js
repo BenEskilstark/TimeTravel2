@@ -9,7 +9,9 @@ const {
 const {renderHealthBar} = require('./renderHealthBar');
 const {thetaToDir} = require('../utils/helpers');
 
-const renderAgent = (ctx, game, agent: Agent, spriteRenderFn: () => {}): void => {
+const renderAgent = (
+  ctx, game, agent: Agent, spriteRenderFn: () => {}, noRotate: ?boolean,
+): void => {
 	ctx.save();
 
 	// render relative to top left of grid square,
@@ -27,15 +29,19 @@ const renderAgent = (ctx, game, agent: Agent, spriteRenderFn: () => {}): void =>
     position.x + width / 2,
     position.y + height / 2,
   );
-  ctx.rotate(agent.theta);
+  if (!noRotate) {
+    ctx.rotate(agent.theta);
+  }
   ctx.translate(-agent.width / 2, -agent.height / 2);
 
   // render the specific agent here:
   spriteRenderFn(ctx, game, agent);
 
-  ctx.translate(width / 2, height / 2);
-  ctx.rotate(Math.PI / 2);
-  ctx.translate(-width / 2, -height / 2);
+  if (!noRotate) {
+    ctx.translate(width / 2, height / 2);
+    ctx.rotate(Math.PI / 2);
+    ctx.translate(-width / 2, -height / 2);
+  }
 
   // render hp bar
   // if (Math.ceil(agent.hp) < config[agent.playerID][agent.caste].hp) {

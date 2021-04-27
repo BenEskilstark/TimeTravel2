@@ -52,11 +52,18 @@ var _require2 = require('../utils/vectors'),
     rotate = _require2.rotate,
     floor = _require2.floor;
 
-var _require3 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require3.getAntSpriteAndOffset;
+var _require3 = require('../utils/helpers'),
+    thetaToDir = _require3.thetaToDir;
 
-var _require4 = require('../render/renderAgent'),
-    renderAgent = _require4.renderAgent;
+var _require4 = require('../selectors/sprites'),
+    getAntSpriteAndOffset = _require4.getAntSpriteAndOffset,
+    getInterpolatedIndex = _require4.getInterpolatedIndex;
+
+var _require5 = require('../simulation/actionQueue'),
+    getFrame = _require5.getFrame;
+
+var _require6 = require('../render/renderAgent'),
+    renderAgent = _require6.renderAgent;
 
 var globalConfig = require('../config');
 
@@ -75,7 +82,7 @@ var config = {
   // action params
   MOVE: {
     duration: 10,
-    spriteOrder: [1, 2],
+    spriteOrder: [0, 1],
     maxFrameOffset: 2,
     frameStep: 2
   },
@@ -83,15 +90,15 @@ var config = {
     duration: 10,
     spriteOrder: [1, 2]
   },
-  MOVE_TURN: {
-    duration: 12,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
+  // MOVE_TURN: {
+  //   duration: 12,
+  //   spriteOrder: [1, 2],
+  //   maxFrameOffset: 2,
+  //   frameStep: 2,
+  // },
   TURN: {
     duration: 6,
-    spriteOrder: [1, 2, 3, 4]
+    spriteOrder: [0, 1, 2]
   },
   TIME_TRAVEL: {
     duration: 10,
@@ -122,43 +129,47 @@ var make = function make(game, position) {
 };
 
 var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
+  renderAgent(ctx, game, agent, spriteRenderFn, true /* no rotate */);
 };
 
 var spriteRenderFn = function spriteRenderFn(ctx, game, agent) {
-  // const sprite = getAntSpriteAndOffset(game, agent);
-  // if (sprite.img != null) {
-  //   ctx.save();
-  //   ctx.translate(
-  //     agent.width / 2, agent.height / 2,
-  //   );
-  //   ctx.rotate(-1 * Math.PI / 2);
-  //   ctx.translate(-agent.width / 2, -agent.height / 2);
-
-  //   if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
-  //     ctx.globalAlpha = 0.5;
-  //   }
-
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, agent.width, agent.height,
-  //   );
-  //   ctx.restore();
-  // }
-
   var img = game.sprites.CHARACTER;
+
   ctx.save();
   if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
     ctx.globalAlpha = 0.5;
   }
-  ctx.drawImage(img, 0, 0, agent.width, agent.height);
+
+  var obj = {
+    x: 0,
+    y: 0,
+    width: 90,
+    height: 90
+  };
+  var dir = thetaToDir(agent.theta);
+  if (dir == 'right') {
+    obj.y = obj.height * 1;
+  } else if (dir == 'down') {
+    obj.y = obj.height * 2;
+  } else if (dir == 'up') {
+    obj.y = obj.height * 3;
+  }
+
+  var index = getInterpolatedIndex(game, agent);
+  var frame = getFrame(game, agent, index);
+  obj.x = frame * obj.width;
+  // if (dir == 'left' || dir == 'right') {
+  //   obj.x *= 2;
+  // }
+
+  ctx.drawImage(img, obj.x, obj.y, obj.width, obj.height, 0, 0, agent.width, agent.height);
   ctx.restore();
 };
 
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../config":1,"../render/renderAgent":14,"../selectors/sprites":20,"../utils/vectors":27,"./makeEntity":8}],3:[function(require,module,exports){
+},{"../config":1,"../render/renderAgent":14,"../selectors/sprites":20,"../simulation/actionQueue":21,"../utils/helpers":25,"../utils/vectors":27,"./makeEntity":8}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1538,7 +1549,7 @@ var _require3 = require('./renderHealthBar'),
 var _require4 = require('../utils/helpers'),
     thetaToDir = _require4.thetaToDir;
 
-var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
+var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn, noRotate) {
   ctx.save();
 
   // render relative to top left of grid square,
@@ -1553,15 +1564,19 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
   //   position = agent.contPos;
   // }
   ctx.translate(position.x + width / 2, position.y + height / 2);
-  ctx.rotate(agent.theta);
+  if (!noRotate) {
+    ctx.rotate(agent.theta);
+  }
   ctx.translate(-agent.width / 2, -agent.height / 2);
 
   // render the specific agent here:
   spriteRenderFn(ctx, game, agent);
 
-  ctx.translate(width / 2, height / 2);
-  ctx.rotate(Math.PI / 2);
-  ctx.translate(-width / 2, -height / 2);
+  if (!noRotate) {
+    ctx.translate(width / 2, height / 2);
+    ctx.rotate(Math.PI / 2);
+    ctx.translate(-width / 2, -height / 2);
+  }
 
   // render hp bar
   // if (Math.ceil(agent.hp) < config[agent.playerID][agent.caste].hp) {
@@ -2754,8 +2769,8 @@ var tileDict = {
 
 var getTileSprite = function getTileSprite(game, entity) {
   var entityType = entity.type;
-  var width = 16;
-  var height = 16;
+  var width = 48.75;
+  var height = 48.75;
   var spriteType = entityType.subtType != null ? entity.subType : entityType;
   spriteType = spriteType == null ? entityType : spriteType;
   var img = game.sprites[spriteType];
@@ -3049,7 +3064,15 @@ var getDuration = function getDuration(game, entity, actionType) {
 
 var getFrame = function getFrame(game, entity, index) {
   var config = entity;
-  if (entity.actions.length == 0) return 0;
+  if (entity.actions.length == 0) {
+    // HACK: set standing-still frame for agent
+    if (entity.type == 'AGENT') {
+      var dir = thetaToDir(entity.theta);
+      return dir == 'left' || dir == 'right' ? 4 : 2;
+    } else {
+      return 0;
+    }
+  }
   var actionType = entity.actions[0].type;
 
   // compute hacky frameOffset
@@ -3061,7 +3084,7 @@ var getFrame = function getFrame(game, entity, index) {
     }
 
   // compute caste-specific overrides
-  var spriteOrder = 1;
+  var spriteOrder = [0];
   if (config[actionType] != null) {
     spriteOrder = config[actionType].spriteOrder;
   } else {

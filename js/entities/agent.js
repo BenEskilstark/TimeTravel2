@@ -5,8 +5,12 @@ const {
   subtract, add, makeVector, vectorTheta, round, rotate, floor,
 } = require('../utils/vectors');
 const {
-  getAntSpriteAndOffset
+  thetaToDir,
+} = require('../utils/helpers');
+const {
+  getAntSpriteAndOffset, getInterpolatedIndex,
 } = require('../selectors/sprites');
+const {getFrame} = require('../simulation/actionQueue');
 const {renderAgent} = require('../render/renderAgent');
 const globalConfig = require('../config');
 
@@ -28,7 +32,7 @@ const config = {
   // action params
   MOVE: {
     duration: 10,
-    spriteOrder: [1, 2],
+    spriteOrder: [0, 1],
     maxFrameOffset: 2,
     frameStep: 2,
   },
@@ -36,15 +40,15 @@ const config = {
     duration: 10,
     spriteOrder: [1, 2],
   },
-  MOVE_TURN: {
-    duration: 12,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2,
-  },
+  // MOVE_TURN: {
+  //   duration: 12,
+  //   spriteOrder: [1, 2],
+  //   maxFrameOffset: 2,
+  //   frameStep: 2,
+  // },
   TURN: {
     duration: 6,
-    spriteOrder: [1, 2, 3, 4],
+    spriteOrder: [0, 1, 2],
   },
   TIME_TRAVEL: {
     duration: 10,
@@ -83,37 +87,43 @@ const make = (
 };
 
 const render = (ctx, game: Game, agent: Agent): void => {
-  renderAgent(ctx, game, agent, spriteRenderFn);
+  renderAgent(ctx, game, agent, spriteRenderFn, true /* no rotate */);
 }
 
 const spriteRenderFn = (ctx, game, agent) => {
-  // const sprite = getAntSpriteAndOffset(game, agent);
-  // if (sprite.img != null) {
-  //   ctx.save();
-  //   ctx.translate(
-  //     agent.width / 2, agent.height / 2,
-  //   );
-  //   ctx.rotate(-1 * Math.PI / 2);
-  //   ctx.translate(-agent.width / 2, -agent.height / 2);
-
-  //   if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
-  //     ctx.globalAlpha = 0.5;
-  //   }
-
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, agent.width, agent.height,
-  //   );
-  //   ctx.restore();
-  // }
-
   const img = game.sprites.CHARACTER;
+
   ctx.save();
   if (game.controlledEntity == null || game.controlledEntity.id != agent.id) {
     ctx.globalAlpha = 0.5;
   }
+
+  const obj = {
+    x: 0,
+    y: 0,
+    width: 90,
+    height: 90,
+  };
+  const dir = thetaToDir(agent.theta);
+  if (dir == 'right') {
+    obj.y = obj.height * 1;
+  } else if (dir == 'down') {
+    obj.y = obj.height * 2;
+  } else if (dir == 'up') {
+    obj.y = obj.height * 3;
+  }
+
+  const index = getInterpolatedIndex(game, agent);
+  const frame = getFrame(game, agent, index);
+  obj.x = frame * obj.width;
+  // if (dir == 'left' || dir == 'right') {
+  //   obj.x *= 2;
+  // }
+
   ctx.drawImage(
-    img, 0, 0, agent.width, agent.height,
+    img,
+    obj.x, obj.y, obj.width, obj.height,
+    0, 0, agent.width, agent.height,
   );
   ctx.restore();
 }

@@ -190,7 +190,15 @@ const getDuration = (game: Game, entity: Entity, actionType: string): boolean =>
 
 const getFrame = (game: Game, entity: Entity, index: number): number => {
   const config = entity;
-  if (entity.actions.length == 0) return 0;
+  if (entity.actions.length == 0) {
+    // HACK: set standing-still frame for agent
+    if (entity.type == 'AGENT') {
+      const dir = thetaToDir(entity.theta);
+      return (dir == 'left' || dir == 'right') ? 4 : 2;
+    } else {
+      return 0;
+    }
+  }
   const actionType = entity.actions[0].type;
 
   // compute hacky frameOffset
@@ -204,7 +212,7 @@ const getFrame = (game: Game, entity: Entity, index: number): number => {
   }
 
   // compute caste-specific overrides
-  let spriteOrder = 1;
+  let spriteOrder = [0];
   if (config[actionType] != null) {
     spriteOrder = config[actionType].spriteOrder;
   } else {
