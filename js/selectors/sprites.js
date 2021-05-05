@@ -224,8 +224,8 @@ const tileDict = {
 
 const getTileSprite = (game: Game, entity: Entity): Object => {
   let entityType = entity.type;
-  let width = 48.75;
-  let height = 48.75;
+  let width = 47.25;
+  let height = 47.25;
   let spriteType = entityType.subtType != null ? entity.subType : entityType;
   spriteType = spriteType == null ? entityType : spriteType;
   let img = game.sprites[spriteType];

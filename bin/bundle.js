@@ -5237,8 +5237,8 @@ var tileDict = {
 
 var getTileSprite = function getTileSprite(game, entity) {
   var entityType = entity.type;
-  var width = 48.75;
-  var height = 48.75;
+  var width = 47.25;
+  var height = 47.25;
   var spriteType = entityType.subtType != null ? entity.subType : entityType;
   spriteType = spriteType == null ? entityType : spriteType;
   var img = game.sprites[spriteType];
@@ -7777,12 +7777,14 @@ var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
 
   var state = store.getState();
 
-  loadSprite(dispatch, state, 'WALL', './img/wall2.png');
+  loadSprite(dispatch, state, 'WALL', './img/Wall3.png');
   // loadSprite(dispatch, state, 'CHARACTER', './img/character4.png');
   loadSprite(dispatch, state, 'CHARACTER', './img/characterSheet1.png');
   loadSprite(dispatch, state, 'FLOOR', './img/floorSheet1.png');
-  loadSprite(dispatch, state, 'BUTTON', './img/buttonSheet1.png');
-  loadSprite(dispatch, state, 'PRESSED_BUTTON', './img/pressedSheet1.png');
+  loadSprite(dispatch, state, 'BUTTON', './img/buttonSheet2.png');
+  loadSprite(dispatch, state, 'PRESSED_BUTTON', './img/pressedSheet2.png');
+  loadSprite(dispatch, state, 'EXCLAMATION', './img/Exclamations1.png');
+  loadSprite(dispatch, state, 'GATE', './img/Gate1.png');
 
   loadSprite(dispatch, state, 'ANT', './img/Ant2.png');
   loadSprite(dispatch, state, 'PHEROMONE', './img/Pheromones.png');

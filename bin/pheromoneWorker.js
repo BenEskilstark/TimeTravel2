@@ -2769,8 +2769,8 @@ var tileDict = {
 
 var getTileSprite = function getTileSprite(game, entity) {
   var entityType = entity.type;
-  var width = 48.75;
-  var height = 48.75;
+  var width = 47.25;
+  var height = 47.25;
   var spriteType = entityType.subtType != null ? entity.subType : entityType;
   spriteType = spriteType == null ? entityType : spriteType;
   var img = game.sprites[spriteType];

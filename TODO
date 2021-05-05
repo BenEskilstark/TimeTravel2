@@ -11,11 +11,22 @@
 
 
 - - - - - - TODO - - - - - -
+  - fix wall sprite positioning
+  - add button sprites
+    - different place in spritesheet for each color
+    - other spritesheet when depressed
+  - add in exclamation
+    - detect when the agent is about to hit a paradox
+      - hit a door
+      - go into vision
+      - run out of steps
+    - spritesheet
   - walk animations
     - disallow diagonal moves
     - get turn working
   - doors -> gates
     - change levels to have gates instead of doors
+    - gate opening animation by sliding down
 
   - add modal for when you win the level
   - get level progression working on main play
