@@ -13,7 +13,7 @@ var config = {
   cellWidth: 30,
   cellHeight: 30,
 
-  doorColors: ['steelblue', 'purple', 'red', 'brown'],
+  doorColors: ['red', 'teal', 'green', 'pink', 'orange', 'blue', 'maroon', 'tan', 'purple'],
 
   audioFiles: [{ path: 'audio/Song Oct. 9.wav', type: 'wav' }]
 };
@@ -212,7 +212,7 @@ module.exports = {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
+    getButtonSprite = _require.getButtonSprite;
 
 var _require2 = require('./makeEntity'),
     makeEntity = _require2.makeEntity;
@@ -243,29 +243,18 @@ var make = function make(game, position, buttonID) {
 var render = function render(ctx, game, button) {
   var position = button.position,
       width = button.width,
-      height = button.height,
-      theta = button.theta;
+      height = button.height;
 
-  ctx.save();
-  ctx.translate(position.x, position.y);
 
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = globalConfig.config.doorColors[button.buttonID];
-  ctx.beginPath();
-  var radius = button.width / 2;
-  ctx.arc(button.width / 2, button.height / 2, radius, 0, Math.PI * 2);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-  ctx.restore();
-
-  // const obj = getTileSprite(game, button);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   button.position.x, button.position.y, button.width, button.height,
-  // );
+  var obj = getButtonSprite(game, button);
+  if (obj == null || obj.img == null) return;
+  var yOffset = 0;
+  if (button.isPressed) {
+    if (obj.y == 0) yOffset = 0.3;
+    if (obj.y == obj.height) yOffset = 0.1;
+    if (obj.y == obj.height * 2) yOffset = -0.1;
+  }
+  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, button.position.x, button.position.y + yOffset, button.width, button.height);
 };
 
 module.exports = {
@@ -376,7 +365,7 @@ module.exports = {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
+    getGateSprite = _require.getGateSprite;
 
 var _require2 = require('./makeEntity'),
     makeEntity = _require2.makeEntity;
@@ -403,30 +392,14 @@ var make = function make(game, position, buttonID) {
   });
 };
 
-var render = function render(ctx, game, door) {
-  var position = door.position,
-      width = door.width,
-      height = door.height,
-      theta = door.theta;
+var render = function render(ctx, game, gate) {
+  var position = gate.position,
+      width = gate.width,
+      height = gate.height;
 
-  ctx.save();
-  ctx.translate(position.x + 0.5, position.y + 0.5);
-  ctx.rotate(theta);
-  ctx.translate(-0.5, -0.5);
-
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const obj = getTileSprite(game, door);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   door.position.x, door.position.y, door.width, door.height,
-  // );
+  var obj = getGateSprite(game, gate);
+  if (obj == null || obj.img == null) return;
+  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, gate.position.x + 0.1, gate.position.y, gate.width, gate.height);
 };
 
 module.exports = {
@@ -461,7 +434,7 @@ module.exports = {
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
+    getGateSprite = _require.getGateSprite;
 
 var _require2 = require('./makeEntity'),
     makeEntity = _require2.makeEntity;
@@ -483,36 +456,27 @@ var config = {
 var make = function make(game, position, buttonID) {
   return _extends({}, makeEntity('OPEN_GATE', position, config.width, config.height), config, {
     buttonID: buttonID,
-    isOpen: false,
+    isOpen: true,
     wasOpened: false
   });
 };
 
-var render = function render(ctx, game, door) {
-  var position = door.position,
-      width = door.width,
-      height = door.height,
-      theta = door.theta;
+var render = function render(ctx, game, gate) {
+  var position = gate.position,
+      width = gate.width,
+      height = gate.height;
 
-  ctx.save();
-  ctx.translate(position.x + 0.5, position.y + 0.5);
-  ctx.rotate(theta);
-  ctx.translate(-0.5, -0.5);
 
-  ctx.strokeStyle = "black";
-  ctx.globalAlpha = 0.4;
-  ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
+  var obj = getGateSprite(game, gate);
+  if (obj == null || obj.img == null) return;
 
-  // const obj = getTileSprite(game, door);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   door.position.x, door.position.y, door.width, door.height,
-  // );
+  var yOffset = 0;
+  ctx.globalAlpha = 0.7;
+  yOffset = 1.6;
+
+  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height * 0.4, gate.position.x + 0.1, gate.position.y + yOffset, gate.width, 0.4);
+
+  ctx.globalAlpha = 1;
 };
 
 module.exports = {
@@ -2590,7 +2554,8 @@ var _require5 = require('../selectors/sprites'),
     getSpriteAndOffset = _require5.getSpriteAndOffset,
     getInterpolatedTheta = _require5.getInterpolatedTheta,
     getPheromoneSprite = _require5.getPheromoneSprite,
-    getTileSprite = _require5.getTileSprite;
+    getTileSprite = _require5.getTileSprite,
+    getFloorSprite = _require5.getFloorSprite;
 
 var _require6 = require('./renderMinimap'),
     renderMinimap = _require6.renderMinimap;
@@ -2749,17 +2714,32 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
     } else {
       ctx.fillRect(0, 0, game.gridWidth, game.gridHeight);
     }
+
+    // render floor
+    var floorObj = getFloorSprite(game);
+    var floorWidth = 3;
+    var floorHeight = 3;
+    for (var x = 0; x < game.gridWidth; x += floorWidth) {
+      for (var y = 0; y < game.gridHeight; y += floorHeight) {
+        var width = x + floorWidth - game.gridWidth - 1;
+        if (width < 0) width = floorWidth;
+        var height = y + floorHeight - game.gridHeight - 1;
+        if (height < 0) height = floorHeight;
+        ctx.drawImage(floorObj.img, floorObj.x, floorObj.y, floorObj.width, floorObj.height, x, y, width, height);
+      }
+    }
+
     // render grid
-    for (var x = 0; x < game.gridWidth; x += 2) {
+    for (var _x = 0; _x < game.gridWidth; _x += 2) {
       ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, game.gridHeight);
+      ctx.moveTo(_x, 0);
+      ctx.lineTo(_x, game.gridHeight);
       ctx.stroke();
     }
-    for (var y = 1; y < game.gridWidth; y += 2) {
+    for (var _y = 1; _y < game.gridWidth; _y += 2) {
       ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(game.gridWidth, y);
+      ctx.moveTo(0, _y);
+      ctx.lineTo(game.gridWidth, _y);
       ctx.stroke();
     }
 
@@ -2810,11 +2790,11 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
 
   // Fog:
   if (game.showFog && game.controlledEntity) {
-    for (var _x = Math.max(0, Math.floor(game.viewPos.x)); _x < Math.min(game.viewPos.x + game.viewWidth, game.gridWidth); _x++) {
-      for (var _y = Math.max(0, Math.floor(game.viewPos.y)); _y < Math.min(game.viewPos.y + game.viewHeight, game.gridHeight); _y++) {
-        if (!onScreen(game, { position: { x: _x, y: _y }, width: 1, height: 1 })) continue;
+    for (var _x2 = Math.max(0, Math.floor(game.viewPos.x)); _x2 < Math.min(game.viewPos.x + game.viewWidth, game.gridWidth); _x2++) {
+      for (var _y2 = Math.max(0, Math.floor(game.viewPos.y)); _y2 < Math.min(game.viewPos.y + game.viewHeight, game.gridHeight); _y2++) {
+        if (!onScreen(game, { position: { x: _x2, y: _y2 }, width: 1, height: 1 })) continue;
         var opacity = 1;
-        if (!isLit(game, { x: _x, y: _y })) {
+        if (!isLit(game, { x: _x2, y: _y2 })) {
           // if (game.grid[x][y].seenBefore) {
           opacity = 0.8;
           // }
@@ -2822,7 +2802,7 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
           // if we ARE lit, then adjust opacity if we are in the light of the
           // controlledEntity
           var cType = game.controlledEntity.pheromoneType;
-          if (getPheromoneAtPosition(game, { x: _x, y: _y }, cType, 1) > 0) {
+          if (getPheromoneAtPosition(game, { x: _x2, y: _y2 }, cType, 1) > 0) {
             opacity = 0;
           } else {
             opacity = 0.2;
@@ -2832,7 +2812,7 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
         }
         if (opacity != 0) {
           ctx.fillStyle = 'rgba(0, 0, 0, ' + opacity + ')';
-          ctx.fillRect(_x - px / 12, _y - px / 12, 1 + px / 12, 1 + pxy / 12);
+          ctx.fillRect(_x2 - px / 12, _y2 - px / 12, 1 + px / 12, 1 + pxy / 12);
         }
       }
     }
@@ -3149,11 +3129,11 @@ var renderEntity = function renderEntity(ctx, game, entity, alwaysOnScreen) {
     try {
       for (var _iterator6 = entityPositions[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
         var _pos2 = _step6.value;
-        var _x2 = _pos2.x,
-            _y2 = _pos2.y;
+        var _x3 = _pos2.x,
+            _y3 = _pos2.y;
 
         ctx.strokeStyle = 'red';
-        ctx.strokeRect(_x2, _y2, 1, 1);
+        ctx.strokeRect(_x3, _y3, 1, 1);
       }
     } catch (err) {
       _didIteratorError6 = true;
@@ -5098,6 +5078,56 @@ var getMaxFrameOffset = function getMaxFrameOffset(entity) {
 };
 
 //////////////////////////////////////////////////////////////////////
+// Buttons, Gates
+/////////////////////////////////////////////////////////////////////
+
+var getButtonSprite = function getButtonSprite(game, button) {
+  var width = 94.5;
+  var height = button.isPressed ? 88 : 94.3;
+  var img = button.isPressed ? game.sprites.PRESSED_BUTTON : game.sprites.BUTTON;
+
+  var obj = {
+    img: img,
+    x: button.buttonID % 3 * width,
+    y: Math.floor(button.buttonID / 3) * height,
+    width: width,
+    height: height
+  };
+
+  return obj;
+};
+
+var getGateSprite = function getGateSprite(game, gate) {
+  var width = 97.5;
+  var height = 97.5;
+  var img = game.sprites.GATE;
+  var obj = {
+    img: img,
+    x: 0,
+    y: height,
+    width: width,
+    height: height
+  };
+
+  return obj;
+};
+
+var getFloorSprite = function getFloorSprite(game) {
+  var width = 180;
+  var height = 172;
+  var img = game.sprites.FLOOR;
+  var obj = {
+    img: img,
+    x: 0,
+    y: 0,
+    width: width,
+    height: height
+  };
+
+  return obj;
+};
+
+//////////////////////////////////////////////////////////////////////
 // Ant-specific
 //////////////////////////////////////////////////////////////////////
 
@@ -5321,6 +5351,9 @@ module.exports = {
   getInterpolatedIndex: getInterpolatedIndex,
   getAntSpriteAndOffset: getAntSpriteAndOffset,
   getTileSprite: getTileSprite,
+  getButtonSprite: getButtonSprite,
+  getGateSprite: getGateSprite,
+  getFloorSprite: getFloorSprite,
   getPheromoneSprite: getPheromoneSprite,
   getDictIndexStr: getDictIndexStr,
   getBackgroundSprite: getBackgroundSprite,

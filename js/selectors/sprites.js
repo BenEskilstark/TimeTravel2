@@ -102,6 +102,58 @@ const getMaxFrameOffset = (entity: Entity): number => {
   };
 };
 
+//////////////////////////////////////////////////////////////////////
+// Buttons, Gates
+/////////////////////////////////////////////////////////////////////
+
+const getButtonSprite = (game: Game, button: Button): Object => {
+  let width = 94.5;
+  let height = button.isPressed ? 88 : 94.3;
+  let img = button.isPressed
+    ? game.sprites.PRESSED_BUTTON
+    : game.sprites.BUTTON;
+
+  const obj = {
+    img,
+    x: (button.buttonID % 3) * width,
+    y: Math.floor(button.buttonID / 3) * height,
+    width,
+    height,
+  };
+
+  return obj;
+};
+
+const getGateSprite = (game: Game, gate: Gate): Object => {
+  let width = 97.5;
+  let height = 97.5;
+  const img = game.sprites.GATE;
+  const obj = {
+    img,
+    x: 0,
+    y: height,
+    width,
+    height,
+  };
+
+  return obj;
+};
+
+const getFloorSprite = (game: Game): Object => {
+  let width = 180;
+  let height = 172;
+  const img = game.sprites.FLOOR;
+  const obj = {
+    img,
+    x: 0,
+    y: 0,
+    width,
+    height,
+  };
+
+  return obj;
+};
+
 
 //////////////////////////////////////////////////////////////////////
 // Ant-specific
@@ -303,6 +355,9 @@ module.exports = {
   getInterpolatedIndex,
   getAntSpriteAndOffset,
   getTileSprite,
+  getButtonSprite,
+  getGateSprite,
+  getFloorSprite,
   getPheromoneSprite,
   getDictIndexStr,
   getBackgroundSprite,

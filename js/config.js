@@ -13,10 +13,15 @@ const config = {
   cellHeight: 30,
 
   doorColors: [
-    'steelblue',
-    'purple',
     'red',
-    'brown',
+    'teal',
+    'green',
+    'pink',
+    'orange',
+    'blue',
+    'maroon',
+    'tan',
+    'purple',
   ],
 
   audioFiles: [

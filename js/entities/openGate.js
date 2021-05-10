@@ -1,7 +1,7 @@
 // @flow
 
 const {
-  getTileSprite,
+  getGateSprite,
 } = require('../selectors/sprites');
 const {makeEntity} = require('./makeEntity');
 const globalConfig = require('../config');
@@ -27,35 +27,28 @@ const make = (
     ...makeEntity('OPEN_GATE', position, config.width, config.height),
     ...config,
     buttonID,
-    isOpen: false,
+    isOpen: true,
     wasOpened: false,
   };
 };
 
-const render = (ctx, game, door): void => {
-  const {position, width, height, theta} = door;
-  ctx.save();
-  ctx.translate(
-    position.x + 0.5,
-    position.y + 0.5,
+const render = (ctx, game, gate): void => {
+  const {position, width, height} = gate;
+
+  const obj = getGateSprite(game, gate);
+  if (obj == null || obj.img == null) return;
+
+  let yOffset = 0;
+  ctx.globalAlpha = 0.7;
+  yOffset = 1.6;
+
+  ctx.drawImage(
+    obj.img,
+    obj.x, obj.y, obj.width, obj.height * 0.4,
+    gate.position.x + 0.1, gate.position.y + yOffset, gate.width, 0.4,
   );
-  ctx.rotate(theta);
-  ctx.translate(-0.5, -0.5);
 
-  ctx.strokeStyle = "black";
-  ctx.globalAlpha = 0.4;
-  ctx.fillStyle = globalConfig.config.doorColors[door.buttonID];
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const obj = getTileSprite(game, door);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   door.position.x, door.position.y, door.width, door.height,
-  // );
+  ctx.globalAlpha = 1;
 };
 
 module.exports = {

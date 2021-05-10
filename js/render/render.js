@@ -14,7 +14,7 @@ const {
 const globalConfig = require('../config');
 const {
   getInterpolatedPos, getSpriteAndOffset, getInterpolatedTheta,
-  getPheromoneSprite, getTileSprite,
+  getPheromoneSprite, getTileSprite, getFloorSprite,
 } = require('../selectors/sprites');
 const {renderMinimap} = require('./renderMinimap');
 const {Entities} = require('../entities/registry');
@@ -181,6 +181,25 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
         0, 0, game.gridWidth, game.gridHeight,
       );
     }
+
+    // render floor
+    const floorObj = getFloorSprite(game);
+    const floorWidth = 3;
+    const floorHeight = 3;
+    for (let x = 0; x < game.gridWidth; x += floorWidth) {
+      for (let y = 0; y < game.gridHeight; y += floorHeight) {
+        let width = x + floorWidth - game.gridWidth - 1;
+        if (width < 0) width = floorWidth
+        let height = y + floorHeight - game.gridHeight - 1;
+        if (height < 0) height = floorHeight
+        ctx.drawImage(
+          floorObj.img,
+          floorObj.x, floorObj.y, floorObj.width, floorObj.height,
+          x, y, width, height,
+        );
+      }
+    }
+
     // render grid
     for (let x = 0; x < game.gridWidth; x += 2) {
       ctx.beginPath();

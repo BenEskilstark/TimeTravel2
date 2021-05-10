@@ -1,7 +1,7 @@
 // @flow
 
 const {
-  getTileSprite,
+  getButtonSprite,
 } = require('../selectors/sprites');
 const {makeEntity} = require('./makeEntity');
 const globalConfig = require('../config');
@@ -34,33 +34,21 @@ const make = (
 };
 
 const render = (ctx, game, button): void => {
-  const {position, width, height, theta} = button;
-  ctx.save();
-  ctx.translate(
-    position.x, position.y,
-  );
+  const {position, width, height} = button;
 
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = globalConfig.config.doorColors[button.buttonID];
-  ctx.beginPath();
-  const radius = button.width / 2;
-  ctx.arc(
-    button.width / 2,
-    button.height / 2,
-    radius, 0, Math.PI * 2,
+  const obj = getButtonSprite(game, button);
+  if (obj == null || obj.img == null) return;
+  let yOffset = 0;
+  if (button.isPressed) {
+    if (obj.y == 0) yOffset = 0.3;
+    if (obj.y == obj.height) yOffset = 0.1;
+    if (obj.y == obj.height * 2) yOffset = -0.1;
+  }
+  ctx.drawImage(
+    obj.img,
+    obj.x, obj.y, obj.width, obj.height,
+    button.position.x, button.position.y + yOffset, button.width, button.height,
   );
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-  ctx.restore();
-
-  // const obj = getTileSprite(game, button);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   button.position.x, button.position.y, button.width, button.height,
-  // );
 };
 
 module.exports = {
