@@ -2164,7 +2164,6 @@ var updateHistoricals = function updateHistoricals(game, doingMove) {
     }
     return;
   }
-
   game.actionIndex++;
 
   for (var _id3 in game.HISTORICAL) {
@@ -2317,10 +2316,34 @@ var keepControlledMoving = function keepControlledMoving(game) {
         doingMove = true;
 
         // HACK: have character always move 2 spaces at a time
-        queueAction(game, controlledEntity, makeAction(game, controlledEntity, 'MOVE', { nextPos: add(nextPos, moveDir),
+        var nextNextPos = add(nextPos, moveDir);
+        queueAction(game, controlledEntity, makeAction(game, controlledEntity, 'MOVE', { nextPos: nextNextPos,
           frameOffset: controlledEntity.frameOffset,
           isControlledEntity: true
         }));
+
+        // nextNextPos = add(nextNextPos, moveDir);
+        // queueAction(
+        //   game, controlledEntity,
+        //   makeAction(
+        //     game, controlledEntity, 'MOVE',
+        //     {nextPos: nextNextPos,
+        //       frameOffset: controlledEntity.frameOffset,
+        //       isControlledEntity: true,
+        //     },
+        //   ),
+        // );
+        // nextNextPos = add(nextNextPos, moveDir);
+        // queueAction(
+        //   game, controlledEntity,
+        //   makeAction(
+        //     game, controlledEntity, 'MOVE',
+        //     {nextPos: nextNextPos,
+        //       frameOffset: controlledEntity.frameOffset,
+        //       isControlledEntity: true,
+        //     },
+        //   ),
+        // );
       }
     }
 
@@ -2730,13 +2753,13 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
     }
 
     // render grid
-    for (var _x = 0; _x < game.gridWidth; _x += 2) {
+    for (var _x = 0; _x < game.gridWidth; _x += 4) {
       ctx.beginPath();
       ctx.moveTo(_x, 0);
       ctx.lineTo(_x, game.gridHeight);
       ctx.stroke();
     }
-    for (var _y = 1; _y < game.gridWidth; _y += 2) {
+    for (var _y = 1; _y < game.gridWidth; _y += 4) {
       ctx.beginPath();
       ctx.moveTo(0, _y);
       ctx.lineTo(game.gridWidth, _y);
@@ -4090,6 +4113,8 @@ module.exports = {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var _require = require('../utils/gridHelpers'),
     lookupInGrid = _require.lookupInGrid,
     getEntityPositions = _require.getEntityPositions,
@@ -4215,6 +4240,7 @@ var canDoMove = function canDoMove(game, entity, nextPos) {
   }
 
   if (!containsVector(getNeighborPositions(game, entity), nextPos)) {
+    console.log(nextPos, entity.position, [].concat(_toConsumableArray(entity.history)));
     return { result: false, reason: 'TOO_FAR' };
   }
 
@@ -6374,98 +6400,6 @@ var addSegmentToEntity = function addSegmentToEntity(game, entity, segmentPositi
 };
 
 ///////////////////////////////////////////////////////////////////////////
-// Entity Subdivision
-///////////////////////////////////////////////////////////////////////////
-
-var subdivideEntity = function subdivideEntity(game, entity) {
-  var subdivisions = [];
-  var quadrantPositions = [{ x: entity.position.x, y: entity.position.y }];
-  if (entity.width > 1) {
-    quadrantPositions.push({ x: Math.floor(entity.position.x + entity.width / 2), y: entity.position.y });
-  }
-  if (entity.height > 1) {
-    quadrantPositions.push({ x: entity.position.x, y: Math.floor(entity.position.y + entity.height / 2) });
-  }
-  if (entity.width > 1 && entity.height > 1) {
-    quadrantPositions.push({
-      x: Math.floor(entity.position.x + entity.width / 2),
-      y: Math.floor(entity.position.y + entity.height / 2)
-    });
-  }
-  var _iteratorNormalCompletion6 = true;
-  var _didIteratorError6 = false;
-  var _iteratorError6 = undefined;
-
-  try {
-    for (var _iterator6 = quadrantPositions[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-      var pos = _step6.value;
-
-      var width = pos.x != entity.position.x ? entity.width - (pos.x - entity.position.x) : Math.max(1, Math.floor(entity.position.x + entity.width / 2) - pos.x);
-      var height = pos.y != entity.position.y ? entity.height - (pos.y - entity.position.y) : Math.max(1, Math.floor(entity.position.y + entity.height / 2) - pos.y);
-      // console.log(pos.x, pos.y, width, height);
-      var quadrantEntity = _extends({}, entity, makeEntity(entity.type, pos, width, height));
-      subdivisions.push(quadrantEntity);
-    }
-  } catch (err) {
-    _didIteratorError6 = true;
-    _iteratorError6 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion6 && _iterator6.return) {
-        _iterator6.return();
-      }
-    } finally {
-      if (_didIteratorError6) {
-        throw _iteratorError6;
-      }
-    }
-  }
-
-  return subdivisions;
-};
-
-var continuouslySubdivide = function continuouslySubdivide(game, entity, pickupPos) {
-  var subdivisions = subdivideEntity(game, entity);
-  var toSub = null;
-  var _iteratorNormalCompletion7 = true;
-  var _didIteratorError7 = false;
-  var _iteratorError7 = undefined;
-
-  try {
-    for (var _iterator7 = subdivisions[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-      var sub = _step7.value;
-
-      // check if pickupPos is inside this sub
-      if (pickupPos.x >= sub.position.x && pickupPos.x < sub.position.x + sub.width && pickupPos.y >= sub.position.y && pickupPos.y < sub.position.y + sub.height) {
-        toSub = sub;
-      } else {
-        addEntity(game, sub);
-      }
-    }
-  } catch (err) {
-    _didIteratorError7 = true;
-    _iteratorError7 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion7 && _iterator7.return) {
-        _iterator7.return();
-      }
-    } finally {
-      if (_didIteratorError7) {
-        throw _iteratorError7;
-      }
-    }
-  }
-
-  if (toSub.width > 1 || toSub.height > 1) {
-    return continuouslySubdivide(game, toSub, pickupPos);
-  } else {
-    addEntity(game, toSub);
-    return toSub;
-  }
-};
-
-///////////////////////////////////////////////////////////////////////////
 // Pickup/Putdown
 ///////////////////////////////////////////////////////////////////////////
 
@@ -6474,16 +6408,7 @@ var pickupEntity = function pickupEntity(game, entity, pickupPos) {
   removeEntityFromGrid(game, entity);
 
   entity.prevPosition = entity.position;
-  // do the subdivision if entity is bigger
-  if (pickupPos != null && (entity.width > 1 || entity.height > 1)) {
-    var sub = continuouslySubdivide(game, entity, pickupPos);
-    removeEntityFromGrid(game, sub);
-    sub.position = null;
-    toPickup = sub;
-    removeEntity(game, entity);
-  } else {
-    entity.position = null;
-  }
+  entity.position = null;
 
   return toPickup;
 };

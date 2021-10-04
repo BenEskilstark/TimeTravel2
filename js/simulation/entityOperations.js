@@ -379,75 +379,6 @@ const addSegmentToEntity = (
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Entity Subdivision
-///////////////////////////////////////////////////////////////////////////
-
-const subdivideEntity = (game: Game, entity: Entity): Array<Entity> => {
-  const subdivisions = [];
-  const quadrantPositions = [
-    {x: entity.position.x, y: entity.position.y},
-  ];
-  if (entity.width > 1) {
-    quadrantPositions.push(
-      {x: Math.floor(entity.position.x + entity.width / 2), y: entity.position.y},
-    );
-  }
-  if (entity.height > 1) {
-    quadrantPositions.push(
-      {x: entity.position.x, y: Math.floor(entity.position.y + entity.height / 2)},
-    );
-  }
-  if (entity.width > 1 && entity.height > 1) {
-    quadrantPositions.push(
-      {
-        x: Math.floor(entity.position.x + entity.width / 2),
-        y: Math.floor(entity.position.y + entity.height / 2),
-      },
-    );
-  }
-  for (const pos of quadrantPositions) {
-    const width = pos.x != entity.position.x
-      ? entity.width - (pos.x - entity.position.x)
-      : Math.max(1, Math.floor(entity.position.x + entity.width / 2) - pos.x);
-    const height = pos.y != entity.position.y
-      ? entity.height - (pos.y - entity.position.y)
-      : Math.max(1, Math.floor(entity.position.y + entity.height / 2) - pos.y);
-    // console.log(pos.x, pos.y, width, height);
-    const quadrantEntity = {
-      ...entity, // carry over other properties beside pos/dimensions
-      ...makeEntity(entity.type, pos, width, height),
-    };
-    subdivisions.push(quadrantEntity);
-  }
-  return subdivisions;
-}
-
-const continuouslySubdivide = (
-  game: Game, entity: Entity, pickupPos: Vector,
-): Entity => {
-  const subdivisions = subdivideEntity(game, entity);
-  let toSub = null;
-  for (const sub of subdivisions) {
-    // check if pickupPos is inside this sub
-    if (
-      pickupPos.x >= sub.position.x && pickupPos.x < sub.position.x + sub.width &&
-      pickupPos.y >= sub.position.y && pickupPos.y < sub.position.y + sub.height
-    ) {
-      toSub = sub;
-    } else {
-      addEntity(game, sub);
-    }
-  }
-  if (toSub.width > 1 || toSub.height > 1) {
-    return continuouslySubdivide(game, toSub, pickupPos);
-  } else {
-    addEntity(game, toSub);
-    return toSub;
-  }
-}
-
-
-///////////////////////////////////////////////////////////////////////////
 // Pickup/Putdown
 ///////////////////////////////////////////////////////////////////////////
 
@@ -456,16 +387,7 @@ const pickupEntity = (game: Game, entity: Entity, pickupPos: Vector): Entity => 
   removeEntityFromGrid(game, entity);
 
   entity.prevPosition = entity.position;
-  // do the subdivision if entity is bigger
-  if (pickupPos != null && (entity.width > 1 || entity.height > 1)) {
-    const sub = continuouslySubdivide(game, entity, pickupPos);
-    removeEntityFromGrid(game, sub);
-    sub.position = null;
-    toPickup = sub;
-    removeEntity(game, entity);
-  } else {
-    entity.position = null;
-  }
+  entity.position = null;
 
   return toPickup
 };

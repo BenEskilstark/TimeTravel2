@@ -118,6 +118,7 @@ const canDoMove = (game: Game, entity: Entity, nextPos: Vector): boolean => {
   }
 
   if (!containsVector(getNeighborPositions(game, entity), nextPos)) {
+    console.log(nextPos, entity.position, [...entity.history]);
     return {result: false, reason: 'TOO_FAR'};
   }
 

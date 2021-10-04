@@ -201,13 +201,13 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
     }
 
     // render grid
-    for (let x = 0; x < game.gridWidth; x += 2) {
+    for (let x = 0; x < game.gridWidth; x += 4) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, game.gridHeight);
       ctx.stroke();
     }
-    for (let y = 1; y < game.gridWidth; y += 2) {
+    for (let y = 1; y < game.gridWidth; y += 4) {
       ctx.beginPath();
       ctx.moveTo(0, y);
       ctx.lineTo(game.gridWidth, y);

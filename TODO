@@ -7,11 +7,22 @@
 
 
 - - - - - - ISSUES - - - - - -
+  - make walls as part of the border of every square
+    - player needs to be centered and move 4 spaces every step
+      - issue where actionIndex counts up half as often as it needs to
+        (updateHistoricals called twice when it needs to be called 4x?)
+  - set up react native
+    - level editor in desktop-only version
+    - add joystick
+
+  - in message to Amanda
+    - fix wall sprite positioning
+    - mobile first
+
   - playtesting:
 
 
 - - - - - - TODO - - - - - -
-  - fix wall sprite positioning
   - add button sprites
     - different place in spritesheet for each color
     - other spritesheet when depressed

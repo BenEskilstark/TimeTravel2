@@ -315,7 +315,6 @@ const updateHistoricals = (game, doingMove): void => {
     }
     return;
   }
-
   game.actionIndex++;
 
   for (const id in game.HISTORICAL) {
@@ -472,16 +471,40 @@ const keepControlledMoving = (game: Game): boolean => {
       doingMove = true;
 
       // HACK: have character always move 2 spaces at a time
+      let nextNextPos = add(nextPos, moveDir);
       queueAction(
         game, controlledEntity,
         makeAction(
           game, controlledEntity, 'MOVE',
-          {nextPos: add(nextPos, moveDir),
+          {nextPos: nextNextPos,
             frameOffset: controlledEntity.frameOffset,
             isControlledEntity: true,
           },
         ),
       );
+
+      // nextNextPos = add(nextNextPos, moveDir);
+      // queueAction(
+      //   game, controlledEntity,
+      //   makeAction(
+      //     game, controlledEntity, 'MOVE',
+      //     {nextPos: nextNextPos,
+      //       frameOffset: controlledEntity.frameOffset,
+      //       isControlledEntity: true,
+      //     },
+      //   ),
+      // );
+      // nextNextPos = add(nextNextPos, moveDir);
+      // queueAction(
+      //   game, controlledEntity,
+      //   makeAction(
+      //     game, controlledEntity, 'MOVE',
+      //     {nextPos: nextNextPos,
+      //       frameOffset: controlledEntity.frameOffset,
+      //       isControlledEntity: true,
+      //     },
+      //   ),
+      // );
     }
   }
 
